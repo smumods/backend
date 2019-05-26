@@ -1,0 +1,4 @@
+class SampleGraphqlProjectSchema < GraphQL::Schema
+  mutation(Types::MutationType)
+  query(Types::QueryType)
+end
