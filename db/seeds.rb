@@ -8,7 +8,11 @@
 
 if (User.all.length == 0)
     (0..10).each do |i|
-        user = User.create(name: Faker::Name.unique.name, email: "#{i}@example.com")
+        user = User.create(
+            name: Faker::Name.unique.name, 
+            email: "#{i}@example.com", 
+            password_digest: BCrypt::Password.create('password')
+        )
         Book.create(title: Faker::Company.bs.titleize, user: user)
     end
 end
