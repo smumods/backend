@@ -1,6 +1,7 @@
 module Types
   class QueryType < Types::BaseObject
     field :users, [Types::UserType], null: false
+    field :all_links, [LinkType], null: false
 
     def users
       User.all
@@ -13,5 +14,9 @@ module Types
     def user(id:)
       User.find(id)
     end    
+
+    def all_links
+      Link.all
+    end
   end
 end
