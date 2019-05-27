@@ -16,7 +16,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Backend / APIs etc
 gem 'graphql'
-gem 'graphiql-rails'
 
 # User Auth
 gem 'bcrypt'
@@ -27,6 +26,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
+  gem 'graphiql-rails'
 end
 
 group :development do
