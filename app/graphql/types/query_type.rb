@@ -3,6 +3,13 @@ module Types
     field :users, [Types::UserType], null: false
     field :all_links, [LinkType], null: false
 
+    # Hello World example 
+    field :hello_world, String, null: false
+
+    def hello_world
+      "Hello Vera!"
+    end
+
     def users
       User.all
     end
