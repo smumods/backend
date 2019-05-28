@@ -8,10 +8,16 @@
 
 if (User.all.length == 0)
     (0..10).each do |i|
+        unique_name = Faker::Name.unique.name.split(" ")
+        first_name = unique_name[0]
+        unique_name.delete_at(0)
+        last_name = unique_name.join(" ")
         user = User.create(
-            name: Faker::Name.unique.name, 
+            first_name: first_name, 
+            last_name: last_name,
             email: "#{i}@example.com", 
-            password_digest: BCrypt::Password.create('password')
+            password: "password",
+            password_confirmation: "password"
         )
         Book.create(title: Faker::Company.bs.titleize, user: user)
     end
