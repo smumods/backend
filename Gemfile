@@ -16,6 +16,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Backend / APIs etc
 gem 'graphql'
+gem 'rack-cors'
 
 # User Auth
 gem 'bcrypt'
