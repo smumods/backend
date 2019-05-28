@@ -19,6 +19,7 @@ gem 'graphql'
 gem 'rack-cors'
 
 # User Auth
+gem 'devise'
 gem 'bcrypt'
 
 # Data Generators
