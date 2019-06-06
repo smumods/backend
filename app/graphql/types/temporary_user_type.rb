@@ -3,5 +3,7 @@ module Types
     field :id, ID, null: false # remove this later on to prevent anyone from knowing how many temporary users we have
     field :session_token, String, null: false
     field :telegram_id, String, null: true
+    field :created_at, String, null: false
+    field :updated_at, String, null: false
   end
 end

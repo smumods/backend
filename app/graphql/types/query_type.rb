@@ -19,7 +19,7 @@ module Types
     end
     
     def user(id:)
-      User.find(id)
+      User.find(id) 
     end    
     
     # All Links
@@ -30,10 +30,10 @@ module Types
 
     # TemporaryUser
     field :temporary_user, Types::TemporaryUserType, null: false do
-      argument :session_token, String, required: true
+      argument :client_verifier, String, required: true
     end
-    def temporary_user(session_token:)
-      TemporaryUser.find_by_session_token(session_token)
+    def temporary_user(client_verifier:)
+      TemporaryUser.find_by_client_verifier(client_verifier)
     end
   end
 end
