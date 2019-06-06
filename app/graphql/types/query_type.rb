@@ -1,11 +1,7 @@
 module Types
   class QueryType < Types::BaseObject
-    
-    # Hello World example 
-    field :hello_world, String, null: false
-    def hello_world
-      "Hello Vera!"
-    end
+
+    field :hello_world, resolver: Queries::HelloWorld
     
     # All Users
     field :users, [Types::UserType], null: false
@@ -29,7 +25,7 @@ module Types
     end
 
     # TemporaryUser
-    field :temporary_user, Types::TemporaryUserType, null: false do
+    field :temporary_user, String, null: false do
       argument :client_verifier, String, required: true
     end
     def temporary_user(client_verifier:)
