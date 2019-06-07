@@ -4,6 +4,7 @@ class CreateTemporaryUsers < ActiveRecord::Migration[5.2]
       t.string :ip_address
       t.string :session_token
       t.string :telegram_id
+      t.string :client_verifier
 
       t.timestamps
     end

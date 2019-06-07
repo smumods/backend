@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_101627) do
     t.string "ip_address"
     t.string "session_token"
     t.string "telegram_id"
+    t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

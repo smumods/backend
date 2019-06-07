@@ -1,0 +1,10 @@
+image: ruby:2.6.1
+
+staging:
+  stage: deploy
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=arcane-fortress-92800 --api-key=$HEROKU_STAGING_API_KEY
+  only:
+  - master
+
