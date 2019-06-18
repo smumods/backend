@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_090017) do
+ActiveRecord::Schema.define(version: 2019_06_18_092413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,24 @@ ActiveRecord::Schema.define(version: 2019_06_18_090017) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "professor_review"
+    t.text "module_review"
+    t.boolean "is_anonymous", default: false
+    t.integer "marking_score"
+    t.integer "engagement_score"
+    t.integer "fairness_score"
+    t.integer "workload_score"
+    t.bigint "user_id"
+    t.bigint "professor_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["professor_id"], name: "index_reviews_on_professor_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "temporary_users", force: :cascade do |t|
     t.string "ip_address"
     t.string "session_token"
@@ -79,4 +97,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_090017) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "reviews", "courses"
+  add_foreign_key "reviews", "professors"
+  add_foreign_key "reviews", "users"
 end

@@ -52,3 +52,30 @@ if (Professor.all.length == 0)
         )
     end
 end
+
+if (Review.all.length == 0)
+    (0..30).each do |i|
+        with_professor = rand(2) == 1
+        if with_professor
+            Review.create(
+                professor_review: Faker::Lorem.paragraph ,
+                module_review: Faker::Lorem.paragraph,
+                is_anonymous: [true, false][rand(2)],
+                marking_score: rand(6),
+                engagement_score: rand(6),
+                fairness_score: rand(6),
+                workload_score: rand(6),
+                user: User.find(User.all.ids[rand(User.all.ids.count)]),
+                professor: Professor.find(Professor.all.ids[rand(Professor.all.ids.count)]),
+                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
+            )
+        else
+            Review.create(
+                module_review: Faker::Lorem.paragraph,
+                is_anonymous: [true, false][rand(2)],
+                user: User.find(User.all.ids[rand(User.all.ids.count)]),
+                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
+            )
+        end
+    end
+end
