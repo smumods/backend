@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_101627) do
+ActiveRecord::Schema.define(version: 2019_06_18_083823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 2019_06_02_101627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "career"
+    t.string "grading_basis"
+    t.string "course_components"
+    t.string "campus"
+    t.string "academic_group"
+    t.string "academic_organization"
+    t.string "module_code"
+    t.float "credit_units"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "links", force: :cascade do |t|
@@ -34,7 +49,6 @@ ActiveRecord::Schema.define(version: 2019_06_02_101627) do
     t.string "ip_address"
     t.string "session_token"
     t.string "telegram_id"
-    t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

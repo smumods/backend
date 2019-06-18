@@ -28,3 +28,19 @@ if (Link.all.length == 0)
     Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client'
 end
 
+if (Course.all.length == 0)
+    (0..20).each do |i|
+        Course.create(
+            name: Faker::FunnyName.name,
+            career: "Undergraduate",
+            grading_basis: "Graded",
+            course_components: "Seminar Required",
+            campus: "Main Campus",
+            academic_group: "School Of Social Sciences",
+            academic_organization: "School of Social Sciences",
+            module_code: "IS202",
+            credit_units: 1.0,
+            description: Faker::Books::Lovecraft.paragraph(2)
+        )
+    end
+end
