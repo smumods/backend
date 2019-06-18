@@ -44,3 +44,11 @@ if (Course.all.length == 0)
         )
     end
 end
+
+if (Professor.all.length == 0)
+    (0..30).each do |i|
+        Professor.create(
+            name: Faker::GreekPhilosophers.name
+        )
+    end
+end
