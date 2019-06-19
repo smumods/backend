@@ -11,8 +11,10 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.string :module_code
       t.float :credit_units
       t.text :description
+      t.string :term
 
       t.timestamps
     end
+    add_index :courses, [:term, :module_code], unique: true
   end
 end

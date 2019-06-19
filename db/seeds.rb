@@ -30,7 +30,7 @@ end
 
 if (Course.all.length == 0)
     (0..20).each do |i|
-        Course.create(
+        Course.create!(
             name: Faker::FunnyName.name,
             career: "Undergraduate",
             grading_basis: "Graded",
@@ -38,9 +38,10 @@ if (Course.all.length == 0)
             campus: "Main Campus",
             academic_group: "School Of Social Sciences",
             academic_organization: "School of Social Sciences",
-            module_code: "IS202",
+            module_code: "IS2#{i.to_s.rjust(2, '0')}",
             credit_units: 1.0,
-            description: Faker::Books::Lovecraft.paragraph(2)
+            description: Faker::Books::Lovecraft.paragraph(rand(9)),
+            term: "2018-19 Term 1"
         )
     end
 end
