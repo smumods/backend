@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_101627) do
+ActiveRecord::Schema.define(version: 2019_06_19_181554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,54 @@ ActiveRecord::Schema.define(version: 2019_06_02_101627) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "career"
+    t.string "grading_basis"
+    t.string "course_components"
+    t.string "campus"
+    t.string "academic_group"
+    t.string "academic_organization"
+    t.string "module_code"
+    t.float "credit_units"
+    t.text "description"
+    t.string "term"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "url"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
+  create_table "professors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "professor_review"
+    t.text "module_review"
+    t.boolean "is_anonymous", default: false
+    t.integer "marking_score"
+    t.integer "engagement_score"
+    t.integer "fairness_score"
+    t.integer "workload_score"
+    t.bigint "user_id"
+    t.bigint "professor_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["professor_id"], name: "index_reviews_on_professor_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "temporary_users", force: :cascade do |t|
@@ -59,4 +102,8 @@ ActiveRecord::Schema.define(version: 2019_06_02_101627) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "links", "users"
+  add_foreign_key "reviews", "courses"
+  add_foreign_key "reviews", "professors"
+  add_foreign_key "reviews", "users"
 end

@@ -2,7 +2,7 @@ module Mutations
     module Users
         class LogInUser < Mutations::BaseMutation
             null true
-            
+
             argument :email, String, required: true
             argument :password, String, required: true
 
@@ -18,6 +18,7 @@ module Mutations
                     return unless user.valid_password?(password) 
                     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
                     token = crypt.encrypt_and_sign("user-id:#{ user.id }")
+                    context[:session][:token] = token
                     { user: user, token: token }
                 rescue ActiveRecord::RecordInvalid => invalid
                     GraphQL::ExecutionError.new("Invalid Attributes for #{invalid.record.class.name}: #{invalid.record.errors.full_messages.join(', ')}")
