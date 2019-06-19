@@ -29,20 +29,31 @@ if (Link.all.length == 0)
 end
 
 if (Course.all.length == 0)
-    (0..20).each do |i|
-        Course.create!(
-            name: Faker::FunnyName.name,
-            career: "Undergraduate",
-            grading_basis: "Graded",
-            course_components: "Seminar Required",
-            campus: "Main Campus",
-            academic_group: "School Of Social Sciences",
-            academic_organization: "School of Social Sciences",
-            module_code: "IS2#{i.to_s.rjust(2, '0')}",
-            credit_units: 1.0,
-            description: Faker::Books::Lovecraft.paragraph(rand(9)),
-            term: "2018-19 Term 1"
-        )
+    puts "== load_courses_data =="
+    data_directory_location = "db/seeds/data"
+    term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
+    term_files.each do |term_file_name|
+        File.open("#{data_directory_location}/#{term_file_name}") do |term_file|
+            term_file_contents = term_file.read
+            courses_data = JSON.parse(term_file_contents)
+            courses_data.keys.each do |term|
+                courses_data[term].keys.each do |module_code|
+                    Course.create!({
+                        module_code: module_code,
+                        name: courses_data[term][module_code]["name"],
+                        career: courses_data[term][module_code]["info_career"],
+                        grading_basis: courses_data[term][module_code]["info_grading_basis"],
+                        course_components: courses_data[term][module_code]["info_course_components"],
+                        campus: courses_data[term][module_code]["info_campus"],
+                        academic_group: courses_data[term][module_code]["info_academic_group"],
+                        academic_organization: courses_data[term][module_code]["info_academic_organization"],
+                        credit_units: courses_data[term][module_code]["info_units"],
+                        description: courses_data[term][module_code]["info_description"],
+                        term: term
+                    })
+                end
+            end
+        end
     end
 end
 
