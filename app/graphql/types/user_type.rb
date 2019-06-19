@@ -3,7 +3,6 @@ module Types
     field :id, ID, null: false
     field :firstName, String, null: true
     field :lastName, String, null: true
-    field :email, String, null: true
     field :books, [Types::BookType], null: true
     field :books_count, Integer, null: true
 
