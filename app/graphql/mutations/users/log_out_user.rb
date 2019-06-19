@@ -8,7 +8,6 @@ module Mutations
             field :is_logged_out, String, null: true
 
             def resolve(token: nil)
-                binding.pry
                 return unless token
                 if context[:session][:token] == token
                     context[:session][:token] = nil
