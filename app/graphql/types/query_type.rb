@@ -6,5 +6,6 @@ module Types
     field :all_links, resolver: Queries::Links::Links
     field :temporary_user, resolver: Queries::TemporaryUsers::TemporaryUser
     field :all_courses, resolver: Queries::Courses::Courses
+    field :course, resolver: Queries::Courses::Course
   end
 end
