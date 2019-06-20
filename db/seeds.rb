@@ -41,14 +41,14 @@ if (Course.all.length == 0)
                     Course.create!({
                         module_code: module_code,
                         name: courses_data[term][module_code]["name"],
-                        career: courses_data[term][module_code]["info_career"],
-                        grading_basis: courses_data[term][module_code]["info_grading_basis"],
-                        course_components: courses_data[term][module_code]["info_course_components"],
-                        campus: courses_data[term][module_code]["info_campus"],
-                        academic_group: courses_data[term][module_code]["info_academic_group"],
-                        academic_organization: courses_data[term][module_code]["info_academic_organization"],
-                        credit_units: courses_data[term][module_code]["info_units"],
-                        description: courses_data[term][module_code]["info_description"],
+                        career: courses_data[term][module_code]["data"]["info_career"],
+                        grading_basis: courses_data[term][module_code]["data"]["info_grading_basis"],
+                        course_components: courses_data[term][module_code]["data"]["info_course_components"],
+                        campus: courses_data[term][module_code]["data"]["info_campus"],
+                        academic_group: courses_data[term][module_code]["data"]["info_academic_group"],
+                        academic_organization: courses_data[term][module_code]["data"]["info_academic_organization"],
+                        credit_units: courses_data[term][module_code]["data"]["info_units"],
+                        description: courses_data[term][module_code]["data"]["info_description"],
                         term: term
                     })
                 end
