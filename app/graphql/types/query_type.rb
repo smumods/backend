@@ -7,5 +7,6 @@ module Types
     field :temporary_user, resolver: Queries::TemporaryUsers::TemporaryUser
     field :all_courses, resolver: Queries::Courses::Courses
     field :course, resolver: Queries::Courses::Course
+    field :all_professors, resolver: Queries::Professors::Professors
   end
 end
