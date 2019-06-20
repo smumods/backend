@@ -28,3 +28,66 @@ if (Link.all.length == 0)
     Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client'
 end
 
+if (Course.all.length == 0)
+    puts "== load_courses_data =="
+    data_directory_location = "db/seeds/data"
+    term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
+    term_files.each do |term_file_name|
+        File.open("#{data_directory_location}/#{term_file_name}") do |term_file|
+            term_file_contents = term_file.read
+            courses_data = JSON.parse(term_file_contents)
+            courses_data.keys.each do |term|
+                courses_data[term].keys.each do |module_code|
+                    Course.create!({
+                        module_code: module_code,
+                        name: courses_data[term][module_code]["name"],
+                        career: courses_data[term][module_code]["info_career"],
+                        grading_basis: courses_data[term][module_code]["info_grading_basis"],
+                        course_components: courses_data[term][module_code]["info_course_components"],
+                        campus: courses_data[term][module_code]["info_campus"],
+                        academic_group: courses_data[term][module_code]["info_academic_group"],
+                        academic_organization: courses_data[term][module_code]["info_academic_organization"],
+                        credit_units: courses_data[term][module_code]["info_units"],
+                        description: courses_data[term][module_code]["info_description"],
+                        term: term
+                    })
+                end
+            end
+        end
+    end
+end
+
+if (Professor.all.length == 0)
+    (0..30).each do |i|
+        Professor.create(
+            name: Faker::GreekPhilosophers.name
+        )
+    end
+end
+
+if (Review.all.length == 0)
+    (0..30).each do |i|
+        with_professor = rand(2) == 1
+        if with_professor
+            Review.create(
+                professor_review: Faker::Lorem.paragraph ,
+                module_review: Faker::Lorem.paragraph,
+                is_anonymous: [true, false][rand(2)],
+                marking_score: rand(6),
+                engagement_score: rand(6),
+                fairness_score: rand(6),
+                workload_score: rand(6),
+                user: User.find(User.all.ids[rand(User.all.ids.count)]),
+                professor: Professor.find(Professor.all.ids[rand(Professor.all.ids.count)]),
+                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
+            )
+        else
+            Review.create(
+                module_review: Faker::Lorem.paragraph,
+                is_anonymous: [true, false][rand(2)],
+                user: User.find(User.all.ids[rand(User.all.ids.count)]),
+                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
+            )
+        end
+    end
+end
