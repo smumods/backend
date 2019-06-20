@@ -1,0 +1,16 @@
+module Types
+	class CourseType < BaseObject
+		field :id, ID, null: false
+		field :name, String, null:String, null: false
+		field :career, String, null: false
+		field :grading_basis, String, null: false
+		field :course_components, String, null: false
+		field :campus, String, null: false
+		field :academic_group, String, null: false
+		field :academic_organization, String, null: false
+		field :module_code, String, null: false
+		field :credit_units, Float, null: false
+		field :description, String, null: false
+		field :term, String, null: false
+	end
+end
