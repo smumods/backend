@@ -29,7 +29,7 @@ if (Link.all.length == 0)
 end
 
 if (Course.all.length == 0)
-    puts "== load_courses_data =="
+    puts "== Creating Professors and Courses now =="
     data_directory_location = "db/seeds/data"
     term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
     term_files.each do |term_file_name|
@@ -55,17 +55,35 @@ if (Course.all.length == 0)
                         description: courses_info_data["info_description"],
                         term: term
                     })
+                    
                 end
             end
         end
     end
 end
 
-if (Professor.all.length == 0)
-    (0..30).each do |i|
-        Professor.create(
-            name: Faker::GreekPhilosophers.name
-        )
+if (ProfessorCourse.all.length == 0)
+    puts "== Creating ProfessorCourses now =="
+    data_directory_location = "db/seeds/data"
+    term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
+    term_files.each do |term_file_name|
+        File.open("#{data_directory_location}/#{term_file_name}") do |term_file|
+            term_file_contents = term_file.read
+            courses_data = JSON.parse(term_file_contents)
+            courses_data.keys.each do |term|
+                courses_data[term].keys.each do |module_code|
+                    courses_info_data = courses_data[term][module_code]["data"]
+                    course = Course.find_by_module_code(module_code)
+                    courses_info_data["info_instructors"].each do |instructor_name|
+                        begin
+                            professor = Professor.find_by_name(instructor_name)
+                            ProfessorCourse.create!(course: course, professor: professor)
+                        rescue Exception => e
+                        end
+                    end
+                end
+            end
+        end
     end
 end
 
