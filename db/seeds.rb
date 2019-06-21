@@ -113,3 +113,32 @@ if (Review.all.length == 0)
         end
     end
 end
+
+course = Course.create!({
+    name: "Independent Study",
+    career: "Graduate - PhD Business (FNCE)",
+    grading_basis: "Graded",
+    course_components: "Independent Study Required",
+    campus: "Main Campus",
+    academic_group: "Lee Kong Chian Sch of Business",
+    academic_organization: "LKCSB GPO",
+    module_code: "IDST704",
+    credit_units: 1.0,
+    description:
+    "Each independent study is a one-on-one research tutorial between the student and a selected faculty, on a topic mutually agreed upon by the student and the faculty. A research term paper is required in each independent study.",
+    term: "2018-19 Term 2",
+})
+
+Review.create!(
+    module_review: Faker::Lorem.paragraph,
+    is_anonymous: [true, false][rand(2)],
+    user: User.find(User.all.ids[rand(User.all.ids.count)]),
+    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2")
+)
+
+Review.create!(
+    module_review: Faker::Lorem.paragraph,
+    is_anonymous: [true, false][rand(2)],
+    user: User.find(User.all.ids[rand(User.all.ids.count)]),
+    course: course
+)

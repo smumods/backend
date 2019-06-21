@@ -12,5 +12,11 @@ module Types
 		field :credit_units, Float, null: false
 		field :description, String, null: false
 		field :term, String, null: false
+		field :all_reviews, [Types::ReviewType], null: true
+
+		def all_reviews
+			module_code = self.object.module_code
+			::Course.where(module_code: module_code).collect(&:reviews).flatten
+		end
 	end
 end
