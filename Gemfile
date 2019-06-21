@@ -32,6 +32,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'graphiql-rails'
+  gem 'pry-theme'
 end
 
 group :development do

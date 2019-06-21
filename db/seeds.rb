@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-if (User.all.length == 0)
+if (User.count == 0)
     (0..10).each do |i|
         unique_name = Faker::Name.unique.name.split(" ")
         first_name = unique_name[0]
@@ -23,12 +23,12 @@ if (User.all.length == 0)
     end
 end
 
-if (Link.all.length == 0)
-    Link.create url: 'http://graphql.org/', description: 'The Best Query Language'
-    Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client'
+if (Link.count == 0)
+    Link.create url: 'http://graphql.org/', description: 'The Best Query Language', user: User.first
+    Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client', user: User.first
 end
 
-if (Course.all.length == 0)
+if (Course.count == 0)
     puts "== Creating Professors and Courses now =="
     data_directory_location = "db/seeds/data"
     term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
@@ -62,7 +62,7 @@ if (Course.all.length == 0)
     end
 end
 
-if (ProfessorCourse.all.length == 0)
+if (ProfessorCourse.count == 0)
     puts "== Creating ProfessorCourses now =="
     data_directory_location = "db/seeds/data"
     term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
@@ -87,7 +87,7 @@ if (ProfessorCourse.all.length == 0)
     end
 end
 
-if (Review.all.length == 0)
+if (Review.count == 0)
     (0..30).each do |i|
         with_professor = rand(2) == 1
         if with_professor
