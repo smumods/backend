@@ -1,7 +1,7 @@
 module Types
 	class CourseType < BaseObject
 		field :id, ID, null: false
-		field :name, String, null:String, null: false
+		field :name, String, null: false
 		field :career, String, null: false
 		field :grading_basis, String, null: false
 		field :course_components, String, null: false

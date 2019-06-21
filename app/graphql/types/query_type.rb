@@ -8,5 +8,6 @@ module Types
     field :all_courses, resolver: Queries::Courses::Courses
     field :course, resolver: Queries::Courses::Course
     field :all_professors, resolver: Queries::Professors::Professors
+    field :all_reviews, resolver: Queries::Reviews::Reviews
   end
 end
