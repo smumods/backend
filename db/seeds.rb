@@ -133,7 +133,7 @@ Review.create!(
     module_review: Faker::Lorem.paragraph,
     is_anonymous: [true, false][rand(2)],
     user: User.find(User.all.ids[rand(User.all.ids.count)]),
-    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2")
+    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2").first
 )
 
 Review.create!(
