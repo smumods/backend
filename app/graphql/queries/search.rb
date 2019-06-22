@@ -11,25 +11,58 @@ module Queries
             
             results = []
             professors = Set.new
-            courses = Set.new
-            # Search by course, then pull the relevant professors
-            # Get the courses first
-            course_courses = Course.where("name ilike ?", "%#{query_string}%") # by name
-            course_courses = course_courses + Course.where("module_code ilike ?", "%#{query_string}%") # by module_code
-            course_courses.each { |course| courses.add(course) }
-            # Get the professors next
-            courses.collect(&:professors).flatten.each { |professor| professors.add(professor) }
+            courses = {}
 
-            # Search by professor, then pull the relevant courses
-            professor_professors = Professor.where("name ilike ?", "%#{query_string}%")
-            professor_professors.each { |professor| professors.add(professor) }
-            professor_professors.collect(&:courses).flatten.each { |course| courses.add(course) }
+            Course.where("name ilike ? OR module_code ilike ?", "%#{query_string}%", "%#{query_string}%").each do |course|
+                course_module_code = course.module_code
+                if courses[course_module_code].nil?
+                    courses[course_module_code] = Array.new
+                end
+                courses[course_module_code].push course
+            end
+
+            courses.values.flatten.each do |course|
+                course.professors.each do |professor|
+                    professors.add professor
+                end
+            end
+
+            Professor.where("name ilike ?", "%#{query_string}%").each do |professor|
+                professors.add professor
+                professor.courses.each do |course|
+                    course_module_code = course.module_code
+                    if courses[course_module_code].nil?
+                        courses[course_module_code] = Array.new
+                    end
+                    courses[course_module_code].push course
+                end
+            end
             
-            # Get all professors teaching each course
-            courses.each { |course| course.professors.each { |professor| professors.add(professor) } }
+            courses.keys.each do |key|
+                courses[key].sort_by! { |c| terms_order.index(c.term) }
+                courses[key] = courses[key].first
+            end
 
             # Return a merged array
-            professors.to_a + courses.to_a
+            professors.to_a + courses.values.flatten
+        end
+
+        private
+        # Temporarily putting this here until we find a better place to house this
+        def terms_order
+            # Top-most with index of 0 is MOST important
+            # Bottom with higher index is LEAST important
+            start_year = 2016
+            end_year = Date.current.year
+            terms = ["1", "2", "3", "3A"]
+            result = []
+            (start_year..end_year).reverse_each do |year|
+                next_year = (year + 1) % 100
+                terms.reverse_each do |term|
+                    result.push "#{year}-#{next_year} Term #{term}"
+                end
+            end
+            result.freeze
         end
     end
 end

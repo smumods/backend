@@ -43,7 +43,7 @@ if (Course.count == 0)
                         Professor.find_or_create_by(name: instructor_name.strip.squeeze(' '))
                     end
                     begin
-                        Course.create!({
+                        Course.find_or_create_by!({
                             module_code: module_code,
                             name: courses_data[term][module_code]["name"],
                             career: courses_info_data["info_career"],
@@ -76,11 +76,11 @@ if (ProfessorCourse.count == 0)
             courses_data.keys.each do |term|
                 courses_data[term].keys.each do |module_code|
                     courses_info_data = courses_data[term][module_code]["data"]
-                    course = Course.find_by_module_code(module_code)
+                    course = Course.where(module_code: module_code, term: term).first
                     courses_info_data["info_instructors"].each do |instructor_name|
                         begin
                             professor = Professor.find_by_name(instructor_name)
-                            ProfessorCourse.create!(course: course, professor: professor)
+                            ProfessorCourse.find_or_create_by!(course: course, professor: professor)
                         rescue Exception => e
                         end
                     end
