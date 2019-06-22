@@ -4,10 +4,13 @@ module Queries
 
         argument :query_string, String, required: true
         
-        type String, null: false
+        type [Types::SearchResultType], null: true
 
         def resolve(query_string:)
-            query_string
+            results = []
+            results = results + Course.where("name ilike ?", "%#{query_string}%")
+            results = results + Professor.where("name ilike ?", "%#{query_string}%")
+            results
         end
     end
 end
