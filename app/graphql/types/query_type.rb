@@ -9,5 +9,6 @@ module Types
     field :course, resolver: Queries::Courses::Course
     field :all_professors, resolver: Queries::Professors::Professors
     field :all_reviews, resolver: Queries::Reviews::Reviews
+    field :search, resolver: Queries::Search
   end
 end
