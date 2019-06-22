@@ -1,7 +1,7 @@
 module Types
 	class CourseType < BaseObject
 		field :id, ID, null: false
-		field :name, String, null:String, null: false
+		field :name, String, null: false
 		field :career, String, null: false
 		field :grading_basis, String, null: false
 		field :course_components, String, null: false
@@ -12,5 +12,11 @@ module Types
 		field :credit_units, Float, null: false
 		field :description, String, null: false
 		field :term, String, null: false
+		field :all_reviews, [Types::ReviewType], null: true
+
+		def all_reviews
+			module_code = self.object.module_code
+			::Course.where(module_code: module_code).collect(&:reviews).flatten
+		end
 	end
 end

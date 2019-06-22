@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-if (User.all.length == 0)
+if (User.count == 0)
     (0..10).each do |i|
         unique_name = Faker::Name.unique.name.split(" ")
         first_name = unique_name[0]
@@ -23,12 +23,12 @@ if (User.all.length == 0)
     end
 end
 
-if (Link.all.length == 0)
-    Link.create url: 'http://graphql.org/', description: 'The Best Query Language'
-    Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client'
+if (Link.count == 0)
+    Link.create url: 'http://graphql.org/', description: 'The Best Query Language', user: User.first
+    Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client', user: User.first
 end
 
-if (Course.all.length == 0)
+if (Course.count == 0)
     puts "== Creating Professors and Courses now =="
     data_directory_location = "db/seeds/data"
     term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
@@ -62,7 +62,7 @@ if (Course.all.length == 0)
     end
 end
 
-if (ProfessorCourse.all.length == 0)
+if (ProfessorCourse.count == 0)
     puts "== Creating ProfessorCourses now =="
     data_directory_location = "db/seeds/data"
     term_files = Dir.entries(data_directory_location).select { |e| !(e == '.' || e == '..') }
@@ -87,7 +87,7 @@ if (ProfessorCourse.all.length == 0)
     end
 end
 
-if (Review.all.length == 0)
+if (Review.count == 0)
     (0..30).each do |i|
         with_professor = rand(2) == 1
         if with_professor
@@ -113,3 +113,32 @@ if (Review.all.length == 0)
         end
     end
 end
+
+course = Course.create!({
+    name: "Independent Study",
+    career: "Graduate - PhD Business (FNCE)",
+    grading_basis: "Graded",
+    course_components: "Independent Study Required",
+    campus: "Main Campus",
+    academic_group: "Lee Kong Chian Sch of Business",
+    academic_organization: "LKCSB GPO",
+    module_code: "IDST704",
+    credit_units: 1.0,
+    description:
+    "Each independent study is a one-on-one research tutorial between the student and a selected faculty, on a topic mutually agreed upon by the student and the faculty. A research term paper is required in each independent study.",
+    term: "2018-19 Term 2",
+})
+
+Review.create!(
+    module_review: Faker::Lorem.paragraph,
+    is_anonymous: [true, false][rand(2)],
+    user: User.find(User.all.ids[rand(User.all.ids.count)]),
+    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2").first
+)
+
+Review.create!(
+    module_review: Faker::Lorem.paragraph,
+    is_anonymous: [true, false][rand(2)],
+    user: User.find(User.all.ids[rand(User.all.ids.count)]),
+    course: course
+)
