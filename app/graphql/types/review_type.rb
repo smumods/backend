@@ -10,6 +10,8 @@ module Types
         field :user, Types::UserType, null: false
         field :professor, Types::ProfessorType, null: true
         field :course, Types::CourseType, null: false
+        field :created_at, Types::DateTimeType, null: false
+        field :updated_at, Types::DateTimeType, null: false
     end
 
     

@@ -13,6 +13,8 @@ module Types
 		field :description, String, null: false
 		field :term, String, null: false
 		field :all_reviews, [Types::ReviewType], null: true
+		field :created_at, Types::DateTimeType, null: false
+    	field :updated_at, Types::DateTimeType, null: false
 
 		def all_reviews
 			module_code = self.object.module_code
