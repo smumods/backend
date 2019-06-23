@@ -22,7 +22,8 @@ module Types
 
 		def all_reviews
 			module_code = self.object.module_code
-			::Course.where(module_code: module_code).collect(&:reviews).flatten
+			reviews = Course.where(module_code: module_code).collect(&:reviews).flatten
+			reviews.select { |r| r.fairness_score.nil? }
 		end
 		
 		def review_count
