@@ -1,6 +1,7 @@
 module Types
 	class ProfessorType < BaseObject
 		field :id, ID, null: false
+		field :slug, String, null: false
 		field :name, String, null: false
 		field :all_courses, [Types::CourseType], null: true
 		field :all_reviews, [Types::ReviewType], null: true

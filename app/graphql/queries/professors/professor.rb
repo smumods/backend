@@ -1,14 +1,14 @@
 module Queries
     module Professors
         class Professor < Queries::BaseQuery
-            description 'Return ONE Professor by name'
+            description 'Return ONE Professor by slug'
             
-            argument :name, String, required: true
+            argument :slug, String, required: true
 
             type Types::ProfessorType, null: true
 
-            def resolve(name:)
-                ::Professor.find_by(name: name)
+            def resolve(slug:)
+                ::Professor.friendly.find(slug)
             end
         end
     end
