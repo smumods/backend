@@ -8,6 +8,7 @@ module Types
 		field :marking_score, Float, null: true
 		field :fairness_score, Float, null: true
 		field :workload_score, Float, null: true
+		field :overall_score, Float, null: true
 
 		def all_courses
 			courses = {}
@@ -27,6 +28,30 @@ module Types
 
 		def all_reviews
 			self.object.reviews
+		end
+
+		def engagement_score
+			engagement_scores = self.object.reviews.collect(&:engagement_score)
+			(engagement_scores.sum.to_f / engagement_scores.length).round(1)
+		end
+		
+		def marking_score
+			marking_scores = self.object.reviews.collect(&:marking_score)
+			(marking_scores.sum.to_f / marking_scores.length).round(1)
+		end
+		
+		def fairness_score
+			fairness_scores = self.object.reviews.collect(&:fairness_score)
+			(fairness_scores.sum.to_f / fairness_scores.length).round(1)
+		end
+		
+		def workload_score
+			workload_scores = self.object.reviews.collect(&:workload_score)
+			(workload_scores.sum.to_f / workload_scores.length).round(1)
+		end
+
+		def overall_score
+			[marking_score, engagement_score, fairness_score, workload_score].sum.to_f / 4.0
 		end
 	end
 end
