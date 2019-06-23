@@ -12,6 +12,8 @@ module Types
 		field :credit_units, Float, null: false
 		field :description, String, null: false
 		field :term, String, null: false
+		field :academic_group_abbreviation, String, null: false
+		field :module_code_front, String, null: false
 		field :all_reviews, [Types::ReviewType], null: true
 		field :created_at, Types::DateTimeType, null: false
     	field :updated_at, Types::DateTimeType, null: false
