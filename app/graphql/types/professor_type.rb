@@ -4,6 +4,10 @@ module Types
 		field :name, String, null: false
 		field :all_courses, [Types::CourseType], null: true
 		field :all_reviews, [Types::ReviewType], null: true
+		field :engagement_score, Float, null: true
+		field :marking_score, Float, null: true
+		field :fairness_score, Float, null: true
+		field :workload_score, Float, null: true
 
 		def all_courses
 			courses = {}
