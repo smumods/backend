@@ -94,28 +94,32 @@ if (ProfessorCourse.count == 0)
 end
 
 if (Review.count == 0)
-    (0..30).each do |i|
+    Course.all.each do |course|
         with_professor = rand(2) == 1
         if with_professor
-            Review.create(
-                professor_review: Faker::Lorem.paragraph ,
-                module_review: Faker::Lorem.paragraph,
-                is_anonymous: [true, false][rand(2)],
-                marking_score: rand(6),
-                engagement_score: rand(6),
-                fairness_score: rand(6),
-                workload_score: rand(6),
-                user: User.find(User.all.ids[rand(User.all.ids.count)]),
-                professor: Professor.find(Professor.all.ids[rand(Professor.all.ids.count)]),
-                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
-            )
+            User.all.sample(rand(10)).each do |user|
+                Review.create!(
+                    professor_review: Faker::Lorem.paragraph ,
+                    module_review: Faker::Lorem.paragraph,
+                    is_anonymous: [true, false][rand(2)],
+                    marking_score: rand(6),
+                    engagement_score: rand(6),
+                    fairness_score: rand(6),
+                    workload_score: rand(6),
+                    user: user,
+                    professor: Professor.all.sample(1).first,
+                    course: course
+                )
+            end
         else
-            Review.create(
-                module_review: Faker::Lorem.paragraph,
-                is_anonymous: [true, false][rand(2)],
-                user: User.find(User.all.ids[rand(User.all.ids.count)]),
-                course: Course.find(Course.all.ids[rand(Course.all.ids.count)])
-            )
+            User.all.sample(rand(10)).each do |user|
+                Review.create!(
+                    module_review: Faker::Lorem.paragraph(rand(70)),
+                    is_anonymous: [true, false][rand(2)],
+                    user: user,
+                    course: course
+                )
+            end
         end
     end
 end
