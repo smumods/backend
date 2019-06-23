@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2019_06_20_085747) do
     t.float "credit_units"
     t.text "description"
     t.string "term"
+    t.string "academic_group_abbreviation"
+    t.string "module_code_front"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true

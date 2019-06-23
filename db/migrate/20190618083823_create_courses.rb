@@ -12,6 +12,8 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.float :credit_units
       t.text :description
       t.string :term
+      t.string :academic_group_abbreviation
+      t.string :module_code_front
 
       t.timestamps
     end
