@@ -98,7 +98,7 @@ if (Review.count == 0)
         with_professor = rand(2) == 1
         review_content = Faker::Lorem.paragraph(rand(70))
         if with_professor
-            User.all.sample(rand(10)).each do |user|
+            User.all.sample(rand(3)).each do |user|
                 Review.create!(
                     professor_review: Faker::Lorem.paragraph ,
                     module_review: Faker::Lorem.paragraph,
@@ -113,7 +113,7 @@ if (Review.count == 0)
                 )
             end
         else
-            User.all.sample(rand(10)).each do |user|
+            User.all.sample(rand(3)).each do |user|
                 Review.create!(
                     module_review: Faker::Lorem.paragraph(rand(70)),
                     is_anonymous: [true, false][rand(2)],

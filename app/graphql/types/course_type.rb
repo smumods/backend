@@ -15,6 +15,7 @@ module Types
 		field :academic_group_abbreviation, String, null: false
 		field :module_code_front, String, null: false
 		field :all_reviews, [Types::ReviewType], null: true
+		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
 		field :created_at, Types::DateTimeType, null: false
     	field :updated_at, Types::DateTimeType, null: false
@@ -24,6 +25,10 @@ module Types
 			::Course.where(module_code: module_code).collect(&:reviews).flatten
 		end
 		
+		def review_count
+			all_reviews.length		
+		end
+
 		def all_professors
 			module_code = self.object.module_code
 			::Course.where(module_code: module_code).collect(&:professors).flatten

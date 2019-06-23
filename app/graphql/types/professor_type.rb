@@ -4,6 +4,7 @@ module Types
 		field :name, String, null: false
 		field :all_courses, [Types::CourseType], null: true
 		field :all_reviews, [Types::ReviewType], null: true
+		field :review_count, Int, null: true
 		field :engagement_score, Float, null: true
 		field :marking_score, Float, null: true
 		field :fairness_score, Float, null: true
@@ -25,9 +26,13 @@ module Types
 			end
 			return courses.values.flatten
 		end
-
+		
 		def all_reviews
 			self.object.reviews
+		end
+
+		def review_count
+			all_reviews.length		
 		end
 
 		def engagement_score
