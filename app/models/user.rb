@@ -8,6 +8,7 @@ class User < ApplicationRecord
   # Relationships
   has_many :books, dependent: :destroy
   has_many :links, dependent: :destroy
+  has_many :reviews
 
   # Validations
   validates :first_name, presence: true

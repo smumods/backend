@@ -3,6 +3,7 @@ module Types
 		field :id, ID, null: false
 		field :name, String, null: false
 		field :all_courses, [Types::CourseType], null: true
+		field :all_reviews, [Types::ReviewType], null: true
 
 		def all_courses
 			courses = {}
@@ -18,6 +19,10 @@ module Types
                 courses[key] = courses[key].first
 			end
 			return courses.values.flatten
+		end
+
+		def all_reviews
+			self.object.reviews
 		end
 	end
 end

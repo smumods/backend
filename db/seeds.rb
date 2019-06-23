@@ -96,6 +96,7 @@ end
 if (Review.count == 0)
     Course.all.each do |course|
         with_professor = rand(2) == 1
+        review_content = Faker::Lorem.paragraph(rand(70))
         if with_professor
             User.all.sample(rand(10)).each do |user|
                 Review.create!(
@@ -107,7 +108,7 @@ if (Review.count == 0)
                     fairness_score: rand(6),
                     workload_score: rand(6),
                     user: user,
-                    professor: Professor.all.sample(1).first,
+                    professor: course.professors.sample(1).first,
                     course: course
                 )
             end
