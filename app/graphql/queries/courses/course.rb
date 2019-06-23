@@ -7,12 +7,13 @@ module Queries
             null true
             
             argument :module_code, String, required: true
-            argument :term, String, required: true
 
-            type Types::CourseType, null: false
+            type Types::CourseType, null: true
 
             def resolve(module_code: nil, term: nil)
-                ::Course.where(module_code: module_code, term: term).first
+                courses = ::Course.where(module_code: module_code)
+                course = courses.sort_by { |c| ::Course.terms_order.index(c.term) }.first
+                course
             end
         end
     end

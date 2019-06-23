@@ -27,4 +27,20 @@ class Course < ApplicationRecord
     def self.module_code_front(input)
         input.match(/[a-zA-Z]+/i)[0]
     end
+    
+    def self.terms_order
+        # Top-most with index of 0 is MOST important
+        # Bottom with higher index is LEAST important
+        start_year = 2016
+        end_year = Date.current.year
+        terms = ["1", "2", "3", "3A"]
+        result = []
+        (start_year..end_year).reverse_each do |year|
+            next_year = (year + 1) % 100
+            terms.reverse_each do |term|
+                result.push "#{year}-#{next_year} Term #{term}"
+            end
+        end
+        result.freeze
+    end
 end
