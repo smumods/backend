@@ -34,6 +34,7 @@ module Mutations
                 else
                     # With Professor Review
                     review = review.create({
+                        professor_review: args[:professor_review],
                         module_review: args[:module_review],
                         course_id: args[:course_id],
                         marking_score: args[:marking_score],
