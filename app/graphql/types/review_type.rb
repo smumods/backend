@@ -13,6 +13,7 @@ module Types
         field :professor, Types::ProfessorType, null: true
         field :course, Types::CourseType, null: true
         field :type_of_review, String, null: true
+        field :total_vote_score, Int, null: true
         field :created_at, Types::DateTimeType, null: false
         field :updated_at, Types::DateTimeType, null: false
 
