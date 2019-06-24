@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_093514) do
 
   create_table "votes", force: :cascade do |t|
     t.integer "vote_type"
+    t.string "review_type"
     t.bigint "user_id"
     t.bigint "review_id"
     t.datetime "created_at", null: false
