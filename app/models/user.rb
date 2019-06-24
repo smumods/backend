@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :links, dependent: :destroy
   has_many :reviews
+  has_many :votes
+  has_many :voted_reviews, through: :votes
+
 
   # Validations
   validates :first_name, presence: true
