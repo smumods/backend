@@ -120,7 +120,7 @@ if (Review.count == 0)
                     is_anonymous: [true, false][rand(2)],
                     user: user,
                     course: course,
-                    type_of_review: "module"
+                    type_of_review: "mod"
                 )
             end
         end

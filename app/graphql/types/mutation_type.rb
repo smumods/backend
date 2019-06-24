@@ -5,6 +5,6 @@ module Types
     field :create_temporary_user, mutation: Mutations::Users::CreateTemporaryUser
     field :login_user, mutation: Mutations::Users::LogInUser
     field :logout_user, mutation: Mutations::Users::LogOutUser
-    field :create_module_review, mutation: Mutations::Reviews::CreateModuleReview
+    field :create_review, mutation: Mutations::Reviews::CreateReview
   end
 end

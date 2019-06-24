@@ -1,19 +1,19 @@
 module Mutations
     module Reviews
-        class CreateModuleReview < Mutations::BaseMutation
+        class CreateReview < Mutations::BaseMutation
             null true
 
             # Arguments
-            argument :module_review, String, required: true
+            argument :module_review, String, required: false
             argument :professor_review, String, required: false
-            argument :is_anonymous, Boolean, required: true
+            argument :is_anonymous, Boolean, required: false
             argument :marking_score, Int, required: false
             argument :engagement_score, Int, required: false
             argument :fairness_score, Int, required: false
             argument :workload_score, Int, required: false
             argument :professor_slug, String, required: false
-            argument :type_of_review, String, required: true
-            argument :course_id, Int, required: true
+            argument :type_of_review, String, required: false
+            argument :course_id, Int, required: false
 
             # return type from the mutation
             type Types::ReviewType
