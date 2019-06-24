@@ -99,44 +99,36 @@ if (Review.count == 0)
         review_content = Faker::Lorem.paragraph(rand(70))
         if with_professor
             User.all.sample(rand(3)).each do |user|
-                Review.create!(
-                    professor_review: Faker::Lorem.paragraph ,
-                    module_review: Faker::Lorem.paragraph,
-                    is_anonymous: [true, false][rand(2)],
-                    marking_score: rand(5) + 1,
-                    engagement_score: rand(5) + 1,
-                    fairness_score: rand(5) + 1,
-                    workload_score: rand(5) + 1,
-                    user: user,
-                    professor: course.professors.sample(1).first,
-                    course: course,
-                    type_of_review: "prof"
-                )
+                begin
+                    Review.create!(
+                        professor_review: Faker::Lorem.paragraph ,
+                        module_review: Faker::Lorem.paragraph,
+                        is_anonymous: [true, false][rand(2)],
+                        marking_score: rand(5) + 1,
+                        engagement_score: rand(5) + 1,
+                        fairness_score: rand(5) + 1,
+                        workload_score: rand(5) + 1,
+                        user: user,
+                        professor: course.professors.sample(1).first,
+                        course: course,
+                        type_of_review: "prof"
+                    )
+                rescue Exception => e
+                end
             end
         else
             User.all.sample(rand(3)).each do |user|
-                Review.create!(
-                    module_review: Faker::Lorem.paragraph(rand(70)),
-                    is_anonymous: [true, false][rand(2)],
-                    user: user,
-                    course: course,
-                    type_of_review: "mod"
-                )
+                begin
+                    Review.create!(
+                        module_review: Faker::Lorem.paragraph(rand(70)),
+                        is_anonymous: [true, false][rand(2)],
+                        user: user,
+                        course: course,
+                        type_of_review: "mod"
+                    )
+                rescue Exception => e
+                end
             end
         end
     end
 end
-
-Review.create!(
-    module_review: Faker::Lorem.paragraph,
-    is_anonymous: [true, false][rand(2)],
-    user: User.find(User.all.ids[rand(User.all.ids.count)]),
-    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2").first
-)
-
-Review.create!(
-    module_review: Faker::Lorem.paragraph,
-    is_anonymous: [true, false][rand(2)],
-    user: User.find(User.all.ids[rand(User.all.ids.count)]),
-    course: Course.where(module_code: "IDST704", term: "2018-19 Term 2").first
-)

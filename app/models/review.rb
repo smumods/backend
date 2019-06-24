@@ -2,7 +2,7 @@ class Review < ApplicationRecord
   # Relationships
   belongs_to :user
   belongs_to :professor, required: false
-  belongs_to :course
+  belongs_to :course, required: false
   has_many :votes
   has_many :votants, through: :votes
 

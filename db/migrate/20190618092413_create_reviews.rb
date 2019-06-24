@@ -10,7 +10,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.integer :workload_score, null: true
       t.belongs_to :user, foreign_key: true
       t.belongs_to :professor, foreign_key: true, null: true
-      t.belongs_to :course, foreign_key: true
+      t.belongs_to :course, foreign_key: true, null: true
 
       t.timestamps
     end

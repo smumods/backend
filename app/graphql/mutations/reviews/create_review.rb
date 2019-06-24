@@ -25,7 +25,7 @@ module Mutations
                     user: User.first,
                     type_of_review: args[:type_of_review]
                 })
-                if args[:professor_slug].nil?
+                if args[:professor_slug].nil? or args[:professor_slug].empty?
                     # Normal Review
                     review = review.create({
                         module_review: args[:module_review],
@@ -33,16 +33,28 @@ module Mutations
                     })
                 else
                     # With Professor Review
-                    review = review.create({
-                        professor_review: args[:professor_review],
-                        module_review: args[:module_review],
-                        course_id: args[:course_id],
-                        marking_score: args[:marking_score],
-                        engagement_score: args[:engagement_score],
-                        fairness_score: args[:fairness_score],
-                        workload_score: args[:workload_score],
-                        professor: Professor.friendly.find(args[:professor_slug])
-                    })
+                    if args[:course_id] < 0
+                        review = review.create({
+                            professor_review: args[:professor_review],
+                            module_review: args[:module_review],
+                            marking_score: args[:marking_score],
+                            engagement_score: args[:engagement_score],
+                            fairness_score: args[:fairness_score],
+                            workload_score: args[:workload_score],
+                            professor: Professor.friendly.find(args[:professor_slug])
+                        })
+                    else
+                        review = review.create({
+                            professor_review: args[:professor_review],
+                            module_review: args[:module_review],
+                            course_id: args[:course_id],
+                            marking_score: args[:marking_score],
+                            engagement_score: args[:engagement_score],
+                            fairness_score: args[:fairness_score],
+                            workload_score: args[:workload_score],
+                            professor: Professor.friendly.find(args[:professor_slug])
+                        })
+                    end
                 end
                 review
             end
