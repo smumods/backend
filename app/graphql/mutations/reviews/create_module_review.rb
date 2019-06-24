@@ -1,0 +1,48 @@
+module Mutations
+    module Reviews
+        class CreateModuleReview < Mutations::BaseMutation
+            null true
+
+            # Arguments
+            argument :module_review, String, required: true
+            argument :professor_review, String, required: false
+            argument :is_anonymous, Boolean, required: true
+            argument :marking_score, Int, required: false
+            argument :engagement_score, Int, required: false
+            argument :fairness_score, Int, required: false
+            argument :workload_score, Int, required: false
+            argument :professor_slug, String, required: false
+            argument :course_id, Int, required: true
+
+            # return type from the mutation
+            type Types::ReviewType
+
+            # is_anonymous:, module_review:, course_id:, 
+            def resolve(**args)
+                review = Review.create_with({
+                    is_anonymous: args[:is_anonymous],
+                    user: context[:current_user]
+                })
+                if args[:professor_slug].nil?
+                    # Normal Review
+                    review = review.create({
+                        module_review: args[:module_review],
+                        course_id: args[:course_id],
+                    })
+                else
+                    # With Professor Review
+                    review = review.create({
+                        module_review: args[:module_review],
+                        course_id: args[:course_id],
+                        marking_score: args[:marking_score],
+                        engagement_score: args[:engagement_score],
+                        fairness_score: args[:fairness_score],
+                        workload_score: args[:workload_score],
+                        professor: Professor.friendly.find(args[:professor_slug])
+                    })
+                end
+                review
+            end
+        end
+    end
+end
