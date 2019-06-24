@@ -12,6 +12,7 @@ module Types
         field :user, Types::UserType, null: true, method: :user
         field :professor, Types::ProfessorType, null: true
         field :course, Types::CourseType, null: false
+        field :type_of_review, String, null: false
         field :created_at, Types::DateTimeType, null: false
         field :updated_at, Types::DateTimeType, null: false
 

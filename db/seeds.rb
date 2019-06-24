@@ -109,7 +109,8 @@ if (Review.count == 0)
                     workload_score: rand(5) + 1,
                     user: user,
                     professor: course.professors.sample(1).first,
-                    course: course
+                    course: course,
+                    type_of_review: "prof"
                 )
             end
         else
@@ -118,7 +119,8 @@ if (Review.count == 0)
                     module_review: Faker::Lorem.paragraph(rand(70)),
                     is_anonymous: [true, false][rand(2)],
                     user: user,
-                    course: course
+                    course: course,
+                    type_of_review: "module"
                 )
             end
         end

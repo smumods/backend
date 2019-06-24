@@ -12,6 +12,7 @@ module Mutations
             argument :fairness_score, Int, required: false
             argument :workload_score, Int, required: false
             argument :professor_slug, String, required: false
+            argument :type_of_review, String, required: true
             argument :course_id, Int, required: true
 
             # return type from the mutation
@@ -21,7 +22,8 @@ module Mutations
             def resolve(**args)
                 review = Review.create_with({
                     is_anonymous: args[:is_anonymous],
-                    user: context[:current_user]
+                    user: User.first,
+                    type_of_review: args[:type_of_review]
                 })
                 if args[:professor_slug].nil?
                     # Normal Review
