@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_130448) do
     t.string "module_code_front"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bookmarks_count", default: 0
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
   end
 
@@ -108,7 +109,6 @@ ActiveRecord::Schema.define(version: 2019_06_25_130448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_of_review"
-    t.integer "bookmarks_count", default: 0
     t.index ["course_id"], name: "index_reviews_on_course_id"
     t.index ["professor_id"], name: "index_reviews_on_professor_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
