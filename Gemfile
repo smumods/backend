@@ -27,6 +27,9 @@ gem 'devise-token_authenticatable'
 # Data Generators
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
+# Performance
+gem 'appsignal'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
