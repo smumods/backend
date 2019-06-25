@@ -10,6 +10,10 @@ class Review < ApplicationRecord
   # Validate that review_type is either 'prof' or 'mod'
   validates :type_of_review, inclusion: ['prof', 'mod']
 
+  # Bookmarks/Likes/Etc
+  # has_many :like_by_users
+  # has_many :like_by
+
   def total_vote_score
     self.votes.sum("vote_type")
   end

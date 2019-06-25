@@ -8,5 +8,6 @@ module Types
     field :vote, mutation: Mutations::Votes::Vote
     field :create_review, mutation: Mutations::Reviews::CreateReview
     field :edit_review, mutation: Mutations::Reviews::EditReview
+    field :bookmark, mutation: Mutations::Bookmarks::Bookmark
   end
 end

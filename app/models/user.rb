@@ -16,4 +16,8 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, presence: true
   validates :email, presence: true, uniqueness: true
+
+  # Bookmarks/Likes/Etc
+  action_store :bookmark, :professor, counter_cache: true
+  action_store :bookmark, :course, counter_cache: true
 end
