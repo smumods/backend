@@ -24,6 +24,9 @@ gem 'devise'
 gem 'bcrypt'
 gem 'devise-token_authenticatable'
 
+# Likes / Bookmarks / Subscribes
+gem 'action-store'
+
 # Data Generators
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 

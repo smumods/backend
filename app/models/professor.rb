@@ -7,4 +7,7 @@ class Professor < ApplicationRecord
     has_many :professor_courses
     has_many :courses, through: :professor_courses
     has_many :reviews
+
+    # Bookmarks/Likes/Etc
+    # has_many :like_by_users
 end
