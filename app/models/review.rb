@@ -12,7 +12,6 @@ class Review < ApplicationRecord
 
   # Bookmarks/Likes/Etc
   # has_many :like_by_users
-  # has_many :like_by
 
   def total_vote_score
     self.votes.sum("vote_type")
