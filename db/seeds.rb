@@ -57,7 +57,6 @@ if (Course.count == 0)
                             c.module_code_front = Course.module_code_front(module_code)
                         end
                     rescue Exception => e
-                        binding.pry
                     end
                     
                 end

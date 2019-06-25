@@ -32,7 +32,6 @@ module Types
 
 		def all_professors
 			module_code = self.object.module_code
-			binding.pry
 			::Course.where(module_code: module_code).includes(:professors).collect(&:professors).flatten.uniq
 		end
 	end
