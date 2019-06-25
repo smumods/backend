@@ -10,6 +10,7 @@ module Types
     field :all_professors, resolver: Queries::Professors::Professors
     field :professor, resolver: Queries::Professors::Professor
     field :all_reviews, resolver: Queries::Reviews::Reviews
+    field :review, resolver: Queries::Reviews::Review
     field :search, resolver: Queries::Search
   end
 end
