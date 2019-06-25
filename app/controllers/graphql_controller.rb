@@ -5,12 +5,15 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    session = Session.find_by(key: request.headers['Authorization'])
+
     context = {
       # Query context goes here, for example:
       session: session,
       current_user: current_user,
     }
-    result = SampleGraphqlProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = SmumodsGraphqlProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
     raise e unless Rails.env.development?
@@ -21,11 +24,12 @@ class GraphqlController < ApplicationController
 
   # Get current user from token
   def current_user
-    return unless session[:token]
-    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-    token = crypt.decrypt_and_verify(session[:token])
-    user_id = token.gsub('user-id:', '').to_i
-    User.find(user_id)
+    return nil if request.headers['Authorization'].blank?
+    token = request.headers['Authorization'].split(' ').last
+    return nil if token.blank?
+    session = Session.find_by(key: token)
+    return nil if session.nil?
+    session.user
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil
   end

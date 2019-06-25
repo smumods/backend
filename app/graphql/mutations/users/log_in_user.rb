@@ -15,15 +15,13 @@ module Mutations
                 begin
                     user = User.find_by_email(email)
                     return unless user
-                    return unless user.valid_password?(password) 
-                    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-                    token = crypt.encrypt_and_sign("user-id:#{ user.id }")
-                    context[:session][:token] = token
-                    { user: user, token: token }
+                    return unless user.valid_password?(password)
+                    session = user.sessions.create!
+                    { user: user, token: session.key }
                 rescue ActiveRecord::RecordInvalid => invalid
                     GraphQL::ExecutionError.new("Invalid Attributes for #{invalid.record.class.name}: #{invalid.record.errors.full_messages.join(', ')}")
                 end
             end
         end
-    end
+    end 
 end

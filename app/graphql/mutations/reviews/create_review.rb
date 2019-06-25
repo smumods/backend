@@ -20,9 +20,13 @@ module Mutations
 
             # is_anonymous:, module_review:, course_id:, 
             def resolve(**args)
+                current_user = context[:current_user]
+                if current_user.blank?
+                    raise GraphQL::ExecutionError.new("Authentication required")
+                end
                 review = Review.create_with({
                     is_anonymous: args[:is_anonymous],
-                    user: User.first,
+                    user: current_user,
                     type_of_review: args[:type_of_review]
                 })
                 if args[:professor_slug].nil? or args[:professor_slug].empty?

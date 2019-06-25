@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_130448) do
+ActiveRecord::Schema.define(version: 2019_06_25_181335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 2019_06_25_130448) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_sessions_on_key", unique: true
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "temporary_users", force: :cascade do |t|
     t.string "ip_address"
     t.string "session_token"
@@ -160,6 +169,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_130448) do
   add_foreign_key "reviews", "courses"
   add_foreign_key "reviews", "professors"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "votes", "reviews"
   add_foreign_key "votes", "users"
 end
