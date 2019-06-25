@@ -43,4 +43,9 @@ class Course < ApplicationRecord
         end
         result.freeze
     end
+
+    def self.latest_course(module_code)
+        courses = Course.where(module_code: module_code)
+        return courses.sort_by { |c| Course.terms_order.index(c.term) }.first
+    end
 end
