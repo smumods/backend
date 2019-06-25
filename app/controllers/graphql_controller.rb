@@ -10,7 +10,7 @@ class GraphqlController < ApplicationController
       session: session,
       current_user: current_user,
     }
-    result = SampleGraphqlProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = SmumodsGraphqlProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
     raise e unless Rails.env.development?
