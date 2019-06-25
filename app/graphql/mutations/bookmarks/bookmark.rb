@@ -10,7 +10,7 @@ module Mutations
 
             def resolve(bookmark_type:, resource_id_or_slug:)
                 current_user = context[:current_user]
-                if context[:current_user].blank?
+                if current_user.blank?
                     raise GraphQL::ExecutionError.new("Authentication required")
                 end
                 return if current_user.nil?
