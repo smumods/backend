@@ -9,11 +9,15 @@ module Mutations
 
             def resolve(token: nil)
                 return unless token
-                if context[:session][:token] == token
-                    context[:session][:token] = nil
-                    return { is_logged_out: true }
+                
+                user = Session.find_by(key: token).user
+                return if user.nil?
+
+                if user.sessions.delete_all
+                    { is_logged_out: true }
+                else
+                    return { is_logged_out: false }
                 end
-                return { is_logged_out: false }
             end
         end
     end

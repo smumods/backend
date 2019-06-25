@@ -24,11 +24,12 @@ class GraphqlController < ApplicationController
 
   # Get current user from token
   def current_user
-    return unless session[:token]
-    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-    token = crypt.decrypt_and_verify(session[:token])
-    user_id = token.gsub('user-id:', '').to_i
-    User.find(user_id)
+    return nil if request.headers['Authorization'].blank?
+    token = request.headers['Authorization'].split(' ').last
+    return nil if token.blank?
+    session = Session.find_by(key: token)
+    return nil if session.nil?
+    session.user
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil
   end
