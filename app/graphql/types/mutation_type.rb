@@ -7,5 +7,6 @@ module Types
     field :logout_user, mutation: Mutations::Users::LogOutUser
     field :vote, mutation: Mutations::Votes::Vote
     field :create_review, mutation: Mutations::Reviews::CreateReview
+    field :edit_review, mutation: Mutations::Reviews::EditReview
   end
 end
