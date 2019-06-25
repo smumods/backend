@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_125253) do
+ActiveRecord::Schema.define(version: 2019_06_25_130448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_125253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.integer "bookmarks_count", default: 0
     t.index ["slug"], name: "index_professors_on_slug", unique: true
   end
 
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_125253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_of_review"
+    t.integer "bookmarks_count", default: 0
     t.index ["course_id"], name: "index_reviews_on_course_id"
     t.index ["professor_id"], name: "index_reviews_on_professor_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"

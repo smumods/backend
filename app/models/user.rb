@@ -18,6 +18,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   # Bookmarks/Likes/Etc
-  action_store :like, :professor
-  action_store :like, :review
+  action_store :bookmark, :professor, counter_cache: true
+  action_store :bookmark, :review, counter_cache: true
 end
