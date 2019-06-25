@@ -3,7 +3,7 @@ module Queries
         class User < Queries::BaseQuery
             description 'Return an individual user'
             
-            argument :id, ID, required: true
+            argument :id, Int, required: true
 
             type Types::UserType, null: false
 
