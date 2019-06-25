@@ -5,6 +5,9 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    session = Session.find_by(key: request.headers['Authorization'])
+
     context = {
       # Query context goes here, for example:
       session: session,

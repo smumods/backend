@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :votes
   has_many :voted_reviews, through: :votes
+  has_many :sessions
 
 
   # Validations
