@@ -21,7 +21,14 @@ module Mutations
 
             # is_anonymous:, module_review:, course_id:, 
             def resolve(**args)
-                review = Review.find_by(id: args[:id])
+                # Authenticate user
+                current_user = context[:current_user]
+                if current_user.blank?
+                    raise GraphQL::ExecutionError.new("Authentication required")
+                end
+                
+                # Edit Review Logic
+                review = Review.where(id: args[:id], user_id: current_user).first
                 return if review.nil?
                 if review.professor.nil?
                     # it's a normal review
