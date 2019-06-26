@@ -27,6 +27,9 @@ gem 'devise-token_authenticatable'
 # Likes / Bookmarks / Subscribes
 gem 'action-store'
 
+# Telegram
+gem 'telegram-bot'
+
 # Data Generators
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
