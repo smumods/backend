@@ -26,7 +26,7 @@ module Types
 
         def user
             if self.object.is_anonymous
-                return User.new(first_name: "Anonymous")
+                return User.new(first_name: "Anonymous", last_name: "")
             else
                 return self.object.user
             end
