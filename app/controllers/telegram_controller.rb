@@ -37,8 +37,11 @@ class TelegramController < Telegram::Bot::UpdatesController
         login_token = data_parts[2]
         temporary_user = TemporaryUser.where(client_verifier: client_verifier, session_token: login_token).first
         if temporary_user
-          temporary_user.update(telegram_id: from_id)
-          respond_with :message, text: "Logging you in"
+          if temporary_user.update(telegram_id: from_id)
+            respond_with :message, text: "Logging you in"
+          else
+            respond_with :message, text: "You have already created an account. Logging you in now."
+          end
         else
           respond_with :message, text: "Invalid login"
         end
