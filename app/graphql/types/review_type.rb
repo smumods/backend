@@ -24,6 +24,14 @@ module Types
             score_array.sum.to_f / 4.0
         end
 
+        def user
+            if self.object.is_anonymous
+                return User.new(first_name: "Anonymous")
+            else
+                return self.object.user
+            end
+        end
+
         def professor_or_course
             type_of_review = self.object.type_of_review
             if type_of_review == "mod"
