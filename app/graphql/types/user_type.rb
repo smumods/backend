@@ -1,6 +1,6 @@
 module Types
   class UserType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, ID, null: true
     field :firstName, String, null: true
     field :lastName, String, null: true
     field :books, [Types::BookType], null: true
