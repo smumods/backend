@@ -7,15 +7,15 @@ module Mutations
             argument :password, String, required: true
 
             field :token, String, null: true
-            field :user, Types::UserType, null: true
-            
+            field :user, Types::UserType, null: true            
 
             def resolve(email: nil, password: nil)
                 return unless email
                 begin
                     user = User.find_by_email(email)
-                    return unless user
-                    return unless user.valid_password?(password)
+                    if not user or not user.valid_password?(password)
+                        raise GraphQL::ExecutionError.new("Invalid credentials")
+                    end
                     session = user.sessions.create!
                     { user: user, token: session.key }
                 rescue ActiveRecord::RecordInvalid => invalid
