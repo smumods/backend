@@ -17,6 +17,7 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, presence: true
   validates :email, presence: true, uniqueness: true
+  validates :email, format: { with: /([A-Z0-9._%a-z\-]+@(sis|business|economics|socsc|accountancy|law){1}.smu.edu.sg)/ }
 
   # Bookmarks/Likes/Etc
   action_store :bookmark, :professor, counter_cache: true
