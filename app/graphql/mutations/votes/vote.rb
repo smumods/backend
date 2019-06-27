@@ -27,6 +27,7 @@ module Mutations
                 # Return null if review is invalid
                 if review.nil?
                     raise GraphQL::ExecutionError.new("Invalid review")
+                    return
                 end
                 # Find vote and create if it isn't
                 vote_type_updated = review.votes.find_or_create_by({
@@ -39,6 +40,7 @@ module Mutations
                     return { vote: current_user.votes.where(review_id: review).first, vote_count: review_total_score, success: true }
                 else
                     raise GraphQL::ExecutionError.new("Invalid review")
+                    return
                 end
             end
         end
