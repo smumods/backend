@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   # Actions
   before_create :generate_email_token, if: Proc.new { |user| not user.verified }
+  after_create :send_verification_email
 
   private
   def generate_email_token
@@ -31,5 +32,9 @@ class User < ApplicationRecord
           random_token = SecureRandom.urlsafe_base64(nil, false)
           break random_token unless self.class.exists?(email_token: random_token)
       end
+  end
+
+  def send_verification_email
+    UserMailer.send_verification_email(self).deliver_now
   end
 end
