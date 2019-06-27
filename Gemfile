@@ -18,6 +18,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'sendgrid-ruby' # for emails
 
 # User Auth
 gem 'devise'
