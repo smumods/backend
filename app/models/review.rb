@@ -16,4 +16,12 @@ class Review < ApplicationRecord
   def total_vote_score
     self.votes.sum("vote_type")
   end
+
+  def total_prof_score
+    self.votes.where(review_type: "prof").sum("vote_type")
+  end
+  
+  def total_mod_score
+    self.votes.where(review_type: "mod").sum("vote_type")
+  end
 end
