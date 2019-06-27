@@ -23,6 +23,9 @@ module Mutations
                 current_user = context[:current_user]
                 if current_user.blank?
                     raise GraphQL::ExecutionError.new("Authentication required")
+                elsif not current_user.verified
+                    raise GraphQL::ExecutionError.new("Please verify your email first!")
+                    return
                 end
                 review = Review.create_with({
                     is_anonymous: args[:is_anonymous],
