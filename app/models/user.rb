@@ -21,4 +21,15 @@ class User < ApplicationRecord
   # Bookmarks/Likes/Etc
   action_store :bookmark, :professor, counter_cache: true
   action_store :bookmark, :course, counter_cache: true
+
+  # Actions
+  before_create :generate_email_token, if: Proc.new { |user| not user.verified }
+
+  private
+  def generate_email_token
+      self.email_token = loop do
+          random_token = SecureRandom.urlsafe_base64(nil, false)
+          break random_token unless self.class.exists?(email_token: random_token)
+      end
+  end
 end
