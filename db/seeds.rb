@@ -6,27 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-if (User.count == 0)
-    (0..10).each do |i|
-        unique_name = Faker::Name.unique.name.split(" ")
-        first_name = unique_name[0]
-        unique_name.delete_at(0)
-        last_name = unique_name.join(" ")
-        user = User.create(
-            first_name: first_name, 
-            last_name: last_name,
-            email: "#{i}@example.com", 
-            password: "password",
-            password_confirmation: "password"
-        )
-        Book.create(title: Faker::Company.bs.titleize, user: user)
-    end
-end
+# if (User.count == 0)
+#     (0..10).each do |i|
+#         unique_name = Faker::Name.unique.name.split(" ")
+#         first_name = unique_name[0]
+#         unique_name.delete_at(0)
+#         last_name = unique_name.join(" ")
+#         user = User.create(
+#             first_name: first_name, 
+#             last_name: last_name,
+#             email: "#{i}@example.com", 
+#             password: "password",
+#             password_confirmation: "password"
+#         )
+#         Book.create(title: Faker::Company.bs.titleize, user: user)
+#     end
+# end
 
-if (Link.count == 0)
-    Link.create url: 'http://graphql.org/', description: 'The Best Query Language', user: User.first
-    Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client', user: User.first
-end
+# if (Link.count == 0)
+#     Link.create url: 'http://graphql.org/', description: 'The Best Query Language', user: User.first
+#     Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client', user: User.first
+# end
 
 if (Course.count == 0)
     puts "== Creating Professors and Courses now =="
@@ -92,42 +92,42 @@ if (ProfessorCourse.count == 0)
     end
 end
 
-if (Review.count == 0)
-    Course.all.each do |course|
-        with_professor = rand(2) == 1
-        review_content = Faker::Lorem.paragraph(rand(70))
-        if with_professor
-            User.all.sample(rand(3)).each do |user|
-                begin
-                    Review.create!(
-                        professor_review: Faker::Lorem.paragraph ,
-                        module_review: Faker::Lorem.paragraph,
-                        is_anonymous: [true, false][rand(2)],
-                        marking_score: rand(5) + 1,
-                        engagement_score: rand(5) + 1,
-                        fairness_score: rand(5) + 1,
-                        workload_score: rand(5) + 1,
-                        user: user,
-                        professor: course.professors.sample(1).first,
-                        course: course,
-                        type_of_review: "prof"
-                    )
-                rescue Exception => e
-                end
-            end
-        else
-            User.all.sample(rand(3)).each do |user|
-                begin
-                    Review.create!(
-                        module_review: Faker::Lorem.paragraph(rand(70)),
-                        is_anonymous: [true, false][rand(2)],
-                        user: user,
-                        course: course,
-                        type_of_review: "mod"
-                    )
-                rescue Exception => e
-                end
-            end
-        end
-    end
-end
+# if (Review.count == 0)
+#     Course.all.each do |course|
+#         with_professor = rand(2) == 1
+#         review_content = Faker::Lorem.paragraph(rand(70))
+#         if with_professor
+#             User.all.sample(rand(3)).each do |user|
+#                 begin
+#                     Review.create!(
+#                         professor_review: Faker::Lorem.paragraph ,
+#                         module_review: Faker::Lorem.paragraph,
+#                         is_anonymous: [true, false][rand(2)],
+#                         marking_score: rand(5) + 1,
+#                         engagement_score: rand(5) + 1,
+#                         fairness_score: rand(5) + 1,
+#                         workload_score: rand(5) + 1,
+#                         user: user,
+#                         professor: course.professors.sample(1).first,
+#                         course: course,
+#                         type_of_review: "prof"
+#                     )
+#                 rescue Exception => e
+#                 end
+#             end
+#         else
+#             User.all.sample(rand(3)).each do |user|
+#                 begin
+#                     Review.create!(
+#                         module_review: Faker::Lorem.paragraph(rand(70)),
+#                         is_anonymous: [true, false][rand(2)],
+#                         user: user,
+#                         course: course,
+#                         type_of_review: "mod"
+#                     )
+#                 rescue Exception => e
+#                 end
+#             end
+#         end
+#     end
+# end
