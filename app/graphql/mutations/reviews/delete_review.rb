@@ -23,7 +23,7 @@ module Mutations
                 if review.nil?
                     raise GraphQL::ExecutionError.new("Caught ya! You are trying to delete an invalid review!")
                 end
-                if review.delete
+                if review.destroy!
                     return {
                         user: current_user,
                         message: "You have successfully deleted your review!",
