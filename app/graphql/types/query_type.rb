@@ -12,5 +12,6 @@ module Types
     field :review, resolver: Queries::Reviews::Review
     field :search, resolver: Queries::Search
     field :home_professors, resolver: Queries::Home::Professors
+    field :home_courses, resolver: Queries::Home::Courses
   end
 end

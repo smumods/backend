@@ -17,6 +17,7 @@ module Types
 		field :all_reviews, [Types::ReviewType], null: true
 		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
+		field :reviews_count, Int, null: true
 		field :created_at, Types::DateTimeType, null: false
     	field :updated_at, Types::DateTimeType, null: false
 
@@ -33,6 +34,11 @@ module Types
 		def all_professors
 			module_code = self.object.module_code
 			::Course.where(module_code: module_code).includes(:professors).collect(&:professors).flatten.uniq
+		end
+
+		def reviews_count
+			return self.object.reviews_count if self.object.respond_to? :reviews_count
+			return nil
 		end
 	end
 end
