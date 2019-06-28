@@ -4,7 +4,11 @@ class Review < ApplicationRecord
   belongs_to :professor, required: false
   belongs_to :course, required: true
   has_many :votes, dependent: :destroy
-  has_many :votants, through: :votes
+
+  accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :professor
+  accepts_nested_attributes_for :votes
+  accepts_nested_attributes_for :course
 
   # Validations
   # Validate that review_type is either 'prof' or 'mod'
