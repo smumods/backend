@@ -11,6 +11,7 @@ module Types
 		field :fairness_score, Float, null: true
 		field :workload_score, Float, null: true
 		field :overall_score, Float, null: true
+		field :reviews_count, Int, null: true
 
 		def all_courses
 			courses = {}
