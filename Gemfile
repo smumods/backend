@@ -19,6 +19,7 @@ gem 'graphql'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
+gem 'activeadmin'
 
 # User Auth
 gem 'devise'
