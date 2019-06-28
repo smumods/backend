@@ -60,5 +60,10 @@ module Types
 		def overall_score
 			[marking_score, engagement_score, fairness_score, workload_score].sum.to_f / 4.0
 		end
+
+		def reviews_count
+			return self.object.reviews_count if self.object.respond_to? :reviews_count
+			return nil
+		end
 	end
 end
