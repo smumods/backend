@@ -37,6 +37,7 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # gem 'appsignal'
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
