@@ -18,8 +18,14 @@ module Types
 		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
 		field :reviews_count, Int, null: true
+		field :average_marking_score, Float, null: true
+		field :average_engagement_score, Float, null: true
+		field :average_fairness_score, Float, null: true
+		field :average_workload_score, Float, null: true
 		field :created_at, Types::DateTimeType, null: false
     	field :updated_at, Types::DateTimeType, null: false
+
+		# Others
 
 		def all_reviews
 			module_code = self.object.module_code

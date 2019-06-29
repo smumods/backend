@@ -9,6 +9,23 @@ class Course < ApplicationRecord
     validates :module_code, presence: true
     validates :name, presence: true
 
+    # scopes
+    def average_marking_score
+        reviews.sum("marking_score").to_f / reviews.load.size
+    end
+    
+    def average_engagement_score
+        reviews.sum("engagement_score").to_f / reviews.load.size
+    end
+    
+    def average_fairness_score
+        reviews.sum("fairness_score").to_f / reviews.load.size
+    end
+    
+    def average_workload_score
+        reviews.sum("workload_score").to_f / reviews.load.size
+    end
+    
     def self.academic_group_abbreviation(input)
         abbr_mapper = {
             "School of Information Systems"=> "SIS",
