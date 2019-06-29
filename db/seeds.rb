@@ -1,4 +1,4 @@
-if (Rails.env.development? and User.count == 0)
+if ((Rails.env.development? or Rails.env.staging?) and User.count == 0)
     (0..10).each do |i|
         unique_name = Faker::Name.unique.name.split(" ")
         first_name = unique_name[0]
@@ -84,7 +84,7 @@ if (ProfessorCourse.count == 0)
     end
 end
     
-if (Rails.env.development? and Review.count == 0)
+if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     Course.all.each do |course|
         with_professor = rand(2) == 1
         review_content = Faker::Lorem.paragraph(rand(70))
