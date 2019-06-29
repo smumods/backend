@@ -127,4 +127,6 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
+user = User.new(first_name: "Anonymous", last_name: "(System)", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
+user.save(validate: false)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?)
