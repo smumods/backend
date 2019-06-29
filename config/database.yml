@@ -86,6 +86,7 @@ test:
 
 staging:
   <<: *default
+  database: sample_graphql_project_staging
 
 production:
   <<: *default

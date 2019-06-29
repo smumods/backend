@@ -1,4 +1,4 @@
-if (Rails.env.development? and User.count == 0)
+if ((Rails.env.development? or Rails.env.staging?) and User.count == 0)
     (0..10).each do |i|
         unique_name = Faker::Name.unique.name.split(" ")
         first_name = unique_name[0]
@@ -9,7 +9,8 @@ if (Rails.env.development? and User.count == 0)
             last_name: last_name,
             email: ["#{i}@sis.smu.edu.sg", "#{i}@business.smu.edu.sg", "#{i}@economics.smu.edu.sg"].sample(1).first,
             password: "password",
-            password_confirmation: "password"
+            password_confirmation: "password",
+            verified: true
         )
     end
 end
@@ -84,7 +85,7 @@ if (ProfessorCourse.count == 0)
     end
 end
     
-if (Rails.env.development? and Review.count == 0)
+if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     Course.all.each do |course|
         with_professor = rand(2) == 1
         review_content = Faker::Lorem.paragraph(rand(70))
@@ -126,4 +127,4 @@ if (Rails.env.development? and Review.count == 0)
     end
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?)

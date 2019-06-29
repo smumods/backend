@@ -36,6 +36,8 @@ class User < ApplicationRecord
   end
 
   def send_verification_email
-    UserMailer.send_verification_email(self).deliver_now
+    if Rails.env.production?
+      UserMailer.send_verification_email(self).deliver_now
+    end
   end
 end
