@@ -7,7 +7,7 @@ if ((Rails.env.development? or Rails.env.staging?) and User.count == 0)
         user = User.create(
             first_name: first_name, 
             last_name: last_name,
-            email: ["#{i}@sis.smu.edu.sg", "#{i}@business.smu.edu.sg", "#{i}@economics.smu.edu.sg"].sample(1).first,
+            email: "{i}@sis.smu.edu.sg",
             password: "password",
             password_confirmation: "password",
             verified: true
@@ -127,6 +127,7 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
-user = User.new(first_name: "Anonymous", last_name: "(System)", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
+user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
 user.save(validate: false)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?)
+# AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmation: 'password') if Rails.env.production?
