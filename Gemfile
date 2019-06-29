@@ -33,7 +33,7 @@ gem 'action-store'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 # Performance
-gem 'appsignal'
+# gem 'appsignal'
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
 
