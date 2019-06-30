@@ -30,6 +30,17 @@ class User < ApplicationRecord
     email =~ /([A-Z0-9._%a-z\-]+@(sis|business|economics|socsc|accountancy|law){1}.smu.edu.sg)/
   end
 
+  def self.validate_reset_token_and_update_password(uuid, token, password)
+    user = User.find_by(uuid: uuid, password_reset_token: token)
+    return false if user.nil?
+    # If the user hasn't tried to use this token more than 3 times
+    if user.password_token_tries_count < 3
+      return user.update(password: password, password_reset_token: nil, password_token_tries_count: 0)
+    else
+      return false
+    end
+  end
+
   private
   def generate_email_token
       self.email_token = loop do
@@ -44,7 +55,6 @@ class User < ApplicationRecord
     end
   end
 
-  protected
   def generate_password_reset_token
     self.password_reset_token = loop do
         random_token = SecureRandom.urlsafe_base64(nil, false)
@@ -52,6 +62,11 @@ class User < ApplicationRecord
     end
     self.password_reset_created_at = Time.now
     self.password_reset_tries_count += 1
+    self.save
+  end
+
+  def increment_password_token_tries_count
+    self.password_token_tries_count += 1
     self.save
   end
 end
