@@ -43,4 +43,15 @@ class User < ApplicationRecord
       UserMailer.send_verification_email(self).deliver_now
     end
   end
+
+  protected
+  def generate_password_reset_token
+    self.password_reset_token = loop do
+        random_token = SecureRandom.urlsafe_base64(nil, false)
+        break random_token unless self.class.exists?(password_reset_token: random_token)
+    end
+    self.password_reset_created_at = Time.now
+    self.password_reset_tries_count += 1
+    self.save
+  end
 end

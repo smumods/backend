@@ -16,8 +16,12 @@ module Mutations
                     # Valid email
                     user = User.find_by(email: email)
                     if user
-                        # Send an reset password email if user exists
-                        UserMailer.send_reset_password_email(user).deliver_now
+                        # Only allow users to reset 3 times so they don't keep sending spam emails
+                        # They should contact us if their account keeps running into problems
+                        if user.password_reset_token.nil? and user.password_reset_tries_count <= 3
+                            token_created = user.send(:generate_password_reset_token)
+                            UserMailer.send_reset_password_email(user).deliver_now if token_created
+                        end
                     else
                         # Send an email stating that we couldn't find an email with this address
                         UserMailer.send_wrong_user_email(User.new(email: email)).deliver_now

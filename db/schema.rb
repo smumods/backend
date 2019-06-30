@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_061510) do
+ActiveRecord::Schema.define(version: 2019_06_30_151153) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "actions", id: :serial, force: :cascade do |t|
     t.string "action_type", null: false
@@ -173,6 +175,11 @@ ActiveRecord::Schema.define(version: 2019_06_29_061510) do
     t.datetime "authentication_token_created_at"
     t.boolean "verified", default: false
     t.string "email_token"
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
+    t.string "password_reset_token"
+    t.datetime "password_reset_created_at"
+    t.integer "password_reset_tries_count", default: 0
+    t.integer "password_token_tries_count", default: 0
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true
