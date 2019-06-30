@@ -1,4 +1,4 @@
-if ((Rails.env.development? or Rails.env.staging?) and User.count == 0)
+if (Rails.env.development? and User.count == 0)
     (0..10).each do |i|
         unique_name = Faker::Name.unique.name.split(" ")
         first_name = unique_name[0]
@@ -13,6 +13,26 @@ if ((Rails.env.development? or Rails.env.staging?) and User.count == 0)
             verified: true
         )
     end
+end
+
+# Create staging accounts with real emails because emails do get sent out!
+if Rails.env.staging?
+    User.create(
+        first_name: "Gabriel", 
+        last_name: "Chuan",
+        email: "zhchuan.2016@sis.smu.edu.sg",
+        password: "password",
+        password_confirmation: "password",
+        verified: true
+    )
+    User.create(
+        first_name: "Zachery", 
+        last_name: "Ng",
+        email: "ng.zhenghao.2016@sis.smu.edu.sg",
+        password: "password",
+        password_confirmation: "password",
+        verified: true
+    )
 end
 
 if (Course.count == 0)
@@ -90,7 +110,7 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
         with_professor = rand(2) == 1
         review_content = Faker::Lorem.paragraph(rand(70))
         if with_professor
-            User.all.sample(rand(3)).each do |user|
+            User.all.sample(rand(2)).each do |user|
                 begin
                     review = Review.create!(
                         professor_review: Faker::Lorem.paragraph ,
@@ -110,7 +130,7 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
                 end
             end
         else
-            User.all.sample(rand(3)).each do |user|
+            User.all.sample(rand(2)).each do |user|
                 begin
                     review = Review.create!(
                         module_review: Faker::Lorem.paragraph(rand(70)),
