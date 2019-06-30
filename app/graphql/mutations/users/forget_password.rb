@@ -18,9 +18,9 @@ module Mutations
                     if user
                         # Only allow users to reset 3 times so they don't keep sending spam emails
                         # They should contact us if their account keeps running into problems
-                        if user.password_reset_token.nil? and user.password_reset_tries_count <= 3
-                            token_created = user.send(:generate_password_reset_token)
-                            UserMailer.send_reset_password_email(user).deliver_now if token_created
+                        token_created = user.send(:generate_password_reset_token)
+                        if token_created == true
+                            UserMailer.send_reset_password_email(user).deliver_now
                         end
                     else
                         # Send an email stating that we couldn't find an email with this address

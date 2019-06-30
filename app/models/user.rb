@@ -56,13 +56,17 @@ class User < ApplicationRecord
   end
 
   def generate_password_reset_token
-    self.password_reset_token = loop do
-        random_token = SecureRandom.urlsafe_base64(nil, false)
-        break random_token unless self.class.exists?(password_reset_token: random_token)
+    if self.password_reset_token.nil? and self.password_reset_tries_count <= 3
+      self.password_reset_token = loop do
+          random_token = SecureRandom.urlsafe_base64(nil, false)
+          break random_token unless self.class.exists?(password_reset_token: random_token)
+      end
+      self.password_reset_created_at = Time.now
+      self.password_reset_tries_count += 1
+      return self.save
+    else
+      return false
     end
-    self.password_reset_created_at = Time.now
-    self.password_reset_tries_count += 1
-    self.save
   end
 
   def increment_password_token_tries_count
