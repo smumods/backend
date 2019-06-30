@@ -13,7 +13,7 @@ module Mutations
                 user = User.find_by_email_token(email_token)
                 if user
                     # Valid email token
-                    if user.update(verified: true)
+                    if user.update(verified: true, email_token: nil)
                         return { success: true }
                     else
                         raise GraphQL::ExecutionError.new("There was an issue verifying your user account. Please contact an admin!):")

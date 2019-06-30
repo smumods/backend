@@ -35,7 +35,7 @@ class User < ApplicationRecord
     return false if user.nil?
     # If the user hasn't tried to use this token more than 3 times
     if user.password_token_tries_count < 3
-      return user.update(password: password, password_reset_token: nil, password_token_tries_count: 0)
+      return user.update(password: password, password_reset_token: nil, password_token_tries_count: 0, password_reset_tries_count: 0)
     else
       return false
     end
