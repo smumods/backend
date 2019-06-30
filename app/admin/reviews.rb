@@ -30,11 +30,19 @@ ActiveAdmin.register Review do
         end
         f.actions
     end
-
+    
     controller do
         def create
             @review = Review.new(permitted_params[:review])
             @review.save(validate: false)
+            redirect_back(fallback_location: new_admin_review_path)
+        end
+
+        def update
+            @review = Review.find(permitted_params[:id])
+            @review.assign_attributes(permitted_params[:review])
+            @review.save(validate: false)
+            redirect_back(fallback_location: edit_admin_review_path(@review))
         end
     end
 end
