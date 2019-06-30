@@ -1,9 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, 
-         :database_authenticatable, :token_authenticatable
+  devise :database_authenticatable, :registerable, 
+         :database_authenticatable
 
   # Relationships
   has_many :books, dependent: :destroy
@@ -26,6 +25,10 @@ class User < ApplicationRecord
   # Actions
   before_create :generate_email_token, if: Proc.new { |user| not user.verified }
   after_create :send_verification_email
+
+  def self.validate_email_format(email)
+    email =~ /([A-Z0-9._%a-z\-]+@(sis|business|economics|socsc|accountancy|law){1}.smu.edu.sg)/
+  end
 
   private
   def generate_email_token
