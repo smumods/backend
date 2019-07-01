@@ -63,7 +63,7 @@ module Types
 
 		def reviews_count
 			return self.object.reviews_count if self.object.respond_to? :reviews_count
-			return nil
+			return 0
 		end
 	end
 end

@@ -10,7 +10,7 @@ module Queries
             def resolve(sort_type:)
                 case sort_type
                 when "Most Reviews"
-                    ::Course.select("courses.*, COUNT(reviews.id) as reviews_count").joins("LEFT OUTER JOIN reviews ON (reviews.course_id = courses.id)").where("reviews.type_of_review = 'mod'").order("reviews_count DESC").group("courses.id")
+                    ::Course.select("courses.*, COUNT(reviews.id) as reviews_count").joins("LEFT OUTER JOIN reviews ON (reviews.course_id = courses.id)").where("reviews.type_of_review = 'mod'").order("reviews_count DESC").group("courses.id") | Course.all
                 else
                     ::Course.all
                 end

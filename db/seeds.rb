@@ -149,5 +149,5 @@ end
 
 user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
 user.save(validate: false)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?)
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?) if AdminUser.count == 0
 # AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmation: 'password') if Rails.env.production?
