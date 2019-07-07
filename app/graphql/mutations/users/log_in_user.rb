@@ -12,7 +12,7 @@ module Mutations
             def resolve(email: nil, password: nil)
                 return unless email
                 begin
-                    user = User.find_by_email(email)
+                    user = User.find_by_email(email.downcase)
                     if not user or not user.valid_password?(password)
                         raise GraphQL::ExecutionError.new("Invalid credentials")
                     end
