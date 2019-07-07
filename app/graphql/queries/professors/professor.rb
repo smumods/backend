@@ -8,7 +8,7 @@ module Queries
             type Types::ProfessorType, null: true
 
             def resolve(slug:)
-                ::Professor.friendly.find(slug)
+                ::Professor.friendly.find(slug.downcase)
             end
         end
     end

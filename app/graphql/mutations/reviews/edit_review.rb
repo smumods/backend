@@ -36,7 +36,8 @@ module Mutations
                 if review.professor.nil?
                     # it's a normal review
                     review.update({
-                        module_review: args[:module_review]
+                        module_review: args[:module_review],
+                        is_anonymous: args[:is_anonymous]
                     })
                 else
                     if review.course_id < 0

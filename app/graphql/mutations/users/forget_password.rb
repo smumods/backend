@@ -14,7 +14,7 @@ module Mutations
                     return
                 else
                     # Valid email
-                    user = User.find_by(email: email)
+                    user = User.find_by(email: email.downcase)
                     if user
                         # Only allow users to reset 3 times so they don't keep sending spam emails
                         # They should contact us if their account keeps running into problems
