@@ -32,8 +32,9 @@ module Mutations
                 # Find vote and create if it isn't
                 vote_type_updated = review.votes.find_or_create_by({
                     user: current_user,
-                    review_type: review_type
-                }).update(vote_type: vote_type)
+                    review_type: review_type,
+                    vote_type: vote_type
+                }).save(validate: false)
                 review_total_score = review.total_vote_score
                 # Return the total count
                 if vote_type_updated
