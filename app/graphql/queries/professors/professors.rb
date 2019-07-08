@@ -6,7 +6,7 @@ module Queries
             type Types::ProfessorType.connection_type, null: false
 
             def resolve
-                ::Professor.all
+                ::Professor.all.order("name ASC")
             end
         end
     end
