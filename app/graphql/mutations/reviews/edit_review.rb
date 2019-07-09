@@ -33,36 +33,37 @@ module Mutations
                 # Edit Review Logic
                 review = Review.where(id: args[:id], user_id: current_user).first
                 return if review.nil?
-                if review.professor.nil?
-                    # it's a normal review
+                if args[:professor_slug].nil? or args[:professor_slug].empty?
                     review.update({
                         module_review: args[:module_review],
-                        is_anonymous: args[:is_anonymous]
+                        is_anonymous: args[:is_anonymous],
+                        professor_review: args[:professor_review],
+                        module_review: args[:module_review],
+                        marking_score: args[:marking_score],
+                        engagement_score: args[:engagement_score],
+                        fairness_score: args[:fairness_score],
+                        workload_score: args[:workload_score],
+                        course_id: args[:course_id]
                     })
                 else
-                    if review.course_id < 0
-                        # There is no course tied to it (-9999 course id)
-                        review.update({
-                            professor_review: args[:professor_review],
-                            module_review: args[:module_review],
-                            marking_score: args[:marking_score],
-                            engagement_score: args[:engagement_score],
-                            fairness_score: args[:fairness_score],
-                            workload_score: args[:workload_score],
-                            professor: Professor.friendly.find(args[:professor_slug])
-                        })
-                    else
-                        review.update({
-                            professor_review: args[:professor_review],
-                            module_review: args[:module_review],
-                            course_id: args[:course_id],
-                            marking_score: args[:marking_score],
-                            engagement_score: args[:engagement_score],
-                            fairness_score: args[:fairness_score],
-                            workload_score: args[:workload_score],
-                            professor: Professor.friendly.find(args[:professor_slug])
-                        })
+                    begin
+                        professor = Professor.friendly.find(args[:professor_slug])
+                    rescue => e
+                        raise GraphQL::ExecutionError.new("Invalid professor")
+                        return
                     end
+                    review.update({
+                        module_review: args[:module_review],
+                        is_anonymous: args[:is_anonymous],
+                        professor_review: args[:professor_review],
+                        module_review: args[:module_review],
+                        marking_score: args[:marking_score],
+                        engagement_score: args[:engagement_score],
+                        fairness_score: args[:fairness_score],
+                        workload_score: args[:workload_score],
+                        professor: professor,
+                        course_id: args[:course_id]
+                    })
                 end
                 review
             end
