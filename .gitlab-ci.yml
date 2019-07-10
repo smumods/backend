@@ -4,7 +4,7 @@ staging:
   stage: deploy
   script:
   - gem install dpl
-  - dpl --provider=heroku --app=arcane-fortress-92800 --api-key=$HEROKU_STAGING_API_KEY
+  - dpl --provider=heroku --app=mighty-taiga-23888 --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master
 

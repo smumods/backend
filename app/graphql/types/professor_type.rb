@@ -11,6 +11,7 @@ module Types
 		field :fairness_score, Float, null: true
 		field :workload_score, Float, null: true
 		field :overall_score, Float, null: true
+		field :reviews_count, Int, null: true
 
 		def all_courses
 			courses = {}
@@ -57,7 +58,12 @@ module Types
 		end
 
 		def overall_score
-			[marking_score, engagement_score, fairness_score, workload_score].sum.to_f / 4.0
+			([marking_score, engagement_score, fairness_score, workload_score].sum.to_f / 4.0).round(1)
+		end
+
+		def reviews_count
+			return self.object.reviews_count if self.object.respond_to? :reviews_count
+			return 0
 		end
 	end
 end

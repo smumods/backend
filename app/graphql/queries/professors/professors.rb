@@ -3,10 +3,10 @@ module Queries
         class Professors < Queries::BaseQuery
             description 'Return all Professors'
             
-            type [Types::ProfessorType], null: false
+            type Types::ProfessorType.connection_type, null: false
 
             def resolve
-                ::Professor.all
+                ::Professor.all.order("name ASC")
             end
         end
     end

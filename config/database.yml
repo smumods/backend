@@ -83,8 +83,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+staging:
+  <<: *default
+  database: sample_graphql_project_staging
+
 production:
   <<: *default
-  database: sample_graphql_project_production
-  username: sample_graphql_project
-  password: <%= ENV['SAMPLE_GRAPHQL_PROJECT_DATABASE_PASSWORD'] %>

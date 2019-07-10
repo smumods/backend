@@ -18,6 +18,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'sendgrid-ruby' # for emails
+gem 'activeadmin'
+gem 'activeadmin_addons'
 
 # User Auth
 gem 'devise'
@@ -34,9 +37,10 @@ gem 'telegram-bot'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 # Performance
-gem 'appsignal'
+# gem 'appsignal'
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -53,6 +57,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'bullet' # for performance monitoring
+  gem 'letter_opener'
 end
 
 group :test do

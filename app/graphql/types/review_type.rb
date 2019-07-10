@@ -14,6 +14,8 @@ module Types
         field :professor_or_course, Types::ReviewResultType, null: true
         field :course, Types::CourseType, null: true
         field :type_of_review, String, null: true
+        field :total_prof_score, Int, null: true
+        field :total_mod_score, Int, null: true
         field :total_vote_score, Int, null: true
         field :created_at, Types::DateTimeType, null: false
         field :updated_at, Types::DateTimeType, null: false
@@ -22,6 +24,14 @@ module Types
             score_array = ["marking_score", "engagement_score", "fairness_score", "workload_score"].collect { |score| self.object[score.to_sym] }
             return if score_array.include? nil
             score_array.sum.to_f / 4.0
+        end
+
+        def user
+            if self.object.is_anonymous
+                return User.new(first_name: "Anonymous", last_name: "")
+            else
+                return self.object.user
+            end
         end
 
         def professor_or_course
