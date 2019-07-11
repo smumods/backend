@@ -1,7 +1,6 @@
 class TemporaryUser < ApplicationRecord
     validates :session_token, uniqueness: true
     validates :client_verifier, uniqueness: true
-    validates :telegram_id, uniqueness: true
 
     before_create :generate_session_token
     before_create :generate_client_verifier
