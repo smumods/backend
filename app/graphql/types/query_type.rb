@@ -13,5 +13,6 @@ module Types
     field :search, resolver: Queries::Search
     field :home_professors, resolver: Queries::Home::Professors
     field :home_courses, resolver: Queries::Home::Courses
+    field :all_announcements, resolver: Queries::Announcements::Announcements
   end
 end
