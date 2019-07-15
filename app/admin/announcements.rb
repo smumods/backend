@@ -1,0 +1,59 @@
+ActiveAdmin.register Announcement do
+  permit_params :title, :description, :main_image, :valid_from, :expires_on, :additional_images
+
+  index do
+    selectable_column
+    id_column
+    column :title
+    column :valid_from
+    column :expires_on
+    column :created_at
+    column :updated_at
+    actions
+  end
+
+  filter :valid_from
+  filter :expires_on
+  filter :created_at
+  filter :updated_at
+
+  form do |f|
+    f.inputs do
+      f.input :title
+      f.input :description
+      f.input :main_image
+      f.input :additional_images, as: :tags
+      f.input :valid_from, as: :date_time_picker
+      f.input :expires_on, as: :date_time_picker
+    end
+    f.actions
+  end
+
+  controller do
+    def create
+      @announcement = Announcement.new({
+        title: params[:announcement][:title],
+        description: params[:announcement][:description],
+        main_image: params[:announcement][:main_image],
+        valid_from: params[:announcement][:valid_from],
+        expires_on: params[:announcement][:expires_on]
+      })
+      additional_images = permitted_params[:announcement][:additional_images].split(",")
+      @announcement[:additional_images] = additional_images
+      @announcement.save
+    end
+
+    def update
+      @announcement = Announcement.find(permitted_params[:id])
+      @announcement.assign_attributes({
+        title: params[:announcement][:title],
+        description: params[:announcement][:description],
+        main_image: params[:announcement][:main_image],
+        valid_from: params[:announcement][:valid_from],
+        expires_on: params[:announcement][:expires_on]
+      })
+      additional_images = permitted_params[:announcement][:additional_images].split(",")
+      @announcement.update(additional_images: additional_images)
+    end
+  end
+end
