@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_151153) do
+ActiveRecord::Schema.define(version: 2019_07_15_075809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 2019_06_30_151153) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "announcements", force: :cascade do |t|
+    t.datetime "valid_from"
+    t.datetime "expires_on"
+    t.string "main_image"
+    t.text "additional_images", default: [], array: true
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -158,6 +169,9 @@ ActiveRecord::Schema.define(version: 2019_06_30_151153) do
     t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tries_count"
+    t.string "email"
+    t.string "email_verification_token"
   end
 
   create_table "users", force: :cascade do |t|
