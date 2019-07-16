@@ -16,33 +16,3 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB }
-
-=reset-aa-button
-  background: none
-  border-radius: 0
-  border: 0
-  box-shadow: none
-  line-height: 1
-  padding: 0
-  text-shadow: none
-  vertical-align: middle
-  &:not(.disabled)
-    &:hover,
-    &:active,
-    &:focus
-      background: none
-      border: 0
-      box-shadow: none
-
-.array-action--add,
-.array-action--remove
-  +reset-aa-button
-  font-size: rem(15)
-
-.array-action--add
-  color: "#3c763d"
-
-.array-action--remove
-  color: "#a94442"
-  &.can-undo
-    color: "#3c763d"
