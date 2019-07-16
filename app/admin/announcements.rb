@@ -40,9 +40,13 @@ ActiveAdmin.register Announcement do
       })
       additional_images = permitted_params[:announcement][:additional_images].split(",")
       @announcement[:additional_images] = additional_images
-      @announcement.save
+      if @announcement.save
+        redirect_back(fallback_location: edit_admin_announcement_path(@announcement), notice: "Saved!")
+      else
+        redirect_back(fallback_location: new_admin_announcement_path, alert: "Error creating announcement! #{@announcement.errors.full_messages.join(", ")}")
+      end
     end
-
+    
     def update
       @announcement = Announcement.find(permitted_params[:id])
       @announcement.assign_attributes({
@@ -53,7 +57,11 @@ ActiveAdmin.register Announcement do
         expires_on: params[:announcement][:expires_on]
       })
       additional_images = permitted_params[:announcement][:additional_images].split(",")
-      @announcement.update(additional_images: additional_images)
+      if @announcement.update(additional_images: additional_images)
+        redirect_back(fallback_location: edit_admin_announcement_path(@announcement), notice: "Saved!")
+      else
+        redirect_back(fallback_location: edit_admin_announcement_path(@announcement), alert: "Error updating announcement! #{@announcement.errors.full_messages.join(", ")}")
+      end
     end
   end
 end
