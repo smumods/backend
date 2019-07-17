@@ -7,7 +7,7 @@ if (Rails.env.development? and User.count == 0)
         user = User.create(
             first_name: first_name, 
             last_name: last_name,
-            email: "{i}@sis.smu.edu.sg",
+            email: "#{i}@sis.smu.edu.sg",
             password: "password",
             password_confirmation: "password",
             verified: true
