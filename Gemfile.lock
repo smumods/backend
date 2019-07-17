@@ -11,6 +11,12 @@ GIT
       tty-screen (~> 0.6.5)
       tty-tree (~> 0.2.0)
 
+GIT
+  remote: https://github.com/vigetlabs/active_material.git
+  revision: 22f8aa0654e62229ba9d23a1a7db94dacc0463c1
+  specs:
+    active_material (1.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -39,7 +45,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_material (1.4.2)
     activeadmin (2.1.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
@@ -378,6 +383,7 @@ PLATFORMS
 
 DEPENDENCIES
   action-store
+  active_material!
   activeadmin
   activeadmin_addons
   bcrypt
