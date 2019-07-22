@@ -2,6 +2,7 @@ module Types
   class MutationType < BaseObject
     field :create_user, mutation: Mutations::Users::CreateUser
     field :create_temporary_user, mutation: Mutations::TemporaryUsers::CreateTemporaryUser
+    field :login_temporary_user, mutation: Mutations::TemporaryUsers::LoginTemporaryUser
     field :login_user, mutation: Mutations::Users::LogInUser
     field :logout_user, mutation: Mutations::Users::LogOutUser
     field :verify_email, mutation: Mutations::Users::VerifyEmail

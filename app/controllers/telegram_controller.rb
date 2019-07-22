@@ -20,13 +20,13 @@ class TelegramController < Telegram::Bot::UpdatesController
     if data.nil?
       respond_with :message, text: "Welcome to SMUModsBot"
     else
-      binding.pry
       message = self.payload
       from_id = message["from"]["id"]
       permitted_actions = ["login", "register"]
       data_parts = data.split("__")
 
       respond_with :message, text: "Invalid action" if data_parts.empty? or not permitted_actions.include? data_parts[0]
+
       case data_parts[0]
       when "login"
         if data_parts.length != 3
@@ -35,10 +35,16 @@ class TelegramController < Telegram::Bot::UpdatesController
         end
         client_verifier = data_parts[1]
         login_token = data_parts[2]
+        binding.pry
         temporary_user = TemporaryUser.where(client_verifier: client_verifier, session_token: login_token).first
         if temporary_user
           if temporary_user.update(telegram_id: from_id)
-            respond_with :message, text: "Logging you in"
+            user = User.where(telegram_id: from_id).first
+            if not user.nil?
+              respond_with :message, text: "Logging you in"
+            else
+              respond_with :message, text: "Please follow the instructions in the browser to continue"
+            end
           else
             respond_with :message, text: "You have already created an account. Logging you in now."
           end
