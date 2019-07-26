@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_075809) do
+ActiveRecord::Schema.define(version: 2019_07_26_093439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -74,6 +74,19 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "display_picture"
+    t.text "gallery"
+    t.text "description"
+    t.text "social_media"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_clubs_on_name", unique: true
+    t.index ["slug"], name: "index_clubs_on_slug", unique: true
   end
 
   create_table "courses", force: :cascade do |t|
@@ -169,9 +182,13 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tries_count"
     t.string "email"
     t.string "email_verification_token"
+    t.boolean "email_verified", default: false
+    t.string "login_token"
+    t.index ["email"], name: "index_temporary_users_on_email", unique: true
+    t.index ["email_verification_token"], name: "index_temporary_users_on_email_verification_token", unique: true
+    t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -194,10 +211,16 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
     t.integer "password_token_tries_count", default: 0
+    t.boolean "old_system", default: true
+    t.boolean "old_system_verified", default: false
+    t.string "telegram_email_verification_token"
+    t.integer "telegram_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["telegram_email_verification_token"], name: "index_users_on_telegram_email_verification_token", unique: true
+    t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
   create_table "votes", force: :cascade do |t|

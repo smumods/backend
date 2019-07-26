@@ -1,0 +1,31 @@
+h1 Listing clubs
+
+table
+  thead
+    tr
+      th Name
+      th Slug
+      th Display picture
+      th Gallery
+      th Description
+      th Social media
+      th
+      th
+      th
+
+  tbody
+    - @clubs.each do |club|
+      tr
+        td = club.name
+        td = club.slug
+        td = club.display_picture
+        td = club.gallery
+        td = club.description
+        td = club.social_media
+        td = link_to 'Show', club
+        td = link_to 'Edit', edit_club_path(club)
+        td = link_to 'Destroy', club, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Club', new_club_path
