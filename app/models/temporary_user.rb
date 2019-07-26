@@ -25,4 +25,13 @@ class TemporaryUser < ApplicationRecord
           break random_token unless self.class.exists?(email_verification_token: random_token)
       end
     end
+
+    def generate_login_token!
+      if self.login_token.nil?
+        self.login_token = loop do
+          random_token = SecureRandom.urlsafe_base64(nil, false)
+          break random_token unless self.class.exists?(login_token: random_token)
+        end
+      end
+    end
 end

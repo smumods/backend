@@ -13,56 +13,71 @@ module Queries
                 if temporary_user.nil?
                   raise GraphQL::ExecutionError.new("Something went wrong!")
                 end
-                if temporary_user.telegram_id
+                binding.pry
+                if not temporary_user.telegram_id.nil?
                   user = User.where(telegram_id: telegram_id).first
                   if user
                     if user.old_system
                       # Old System
                       if user.old_system.verified
+                        user.generate_login_token!
                         return OpenStruct.new(
                           client_verifier: client_verifier,
                           action: "loginUser",
-                          loginToken: "ilyvera"
+                          login_token: user.login_token
                         )
                       else
                         return OpenStruct.new(
                           client_verifier: client_verifier,
-                          action: "verifyEmail"
+                          action: "verifyEmail",
+                          login_token: nil
                         )
                       end
                     else
                       # New System
                       if user.email
                         if user.old_system.verified
+                          user.generate_login_token!
                           return OpenStruct.new(
                             client_verifier: client_verifier,
                             action: "loginUser",
-                            token: ""
+                            login_token: user.login_token
                           )
                         else
                           return OpenStruct.new(
                             client_verifier: client_verifier,
-                            action: "verifyEmail"
+                            action: "verifyEmail",
+                            login_token: nil
                           )
                         end # user old system verified
                       else
                         return OpenStruct.new(
                           client_verifier: client_verifier,
-                          action: "enterEmail"
+                          action: "enterEmail",
+                          login_token: nil
                         )
                       end # user has email check
                     end # user old system check
                   else
                     return OpenStruct.new(
                       client_verifier: client_verifier,
-                      action: "enterEmail"
+                      action: "loginTelegram",
+                      login_token: nil
                     )
                   end # user check
+                else
+                  # No telegram_id yet
+                  return OpenStruct.new(
+                    client_verifier: client_verifier,
+                    action: "loginTelegram",
+                    login_token: nil
+                  )
                 end
+                user.generate_login_token!
                 return OpenStruct.new(
                   client_verifier: client_verifier,
                   action: "loginUser",
-                  login_token: "ilyvera"
+                  login_token: user.login_token
                 )
             end
         end
