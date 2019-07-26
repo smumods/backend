@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   
   # Admin Routes
   constraints subdomain: 'admin' do
+    # Pages
+    root to: "pages#home"
+    site_pages = ['about']
+    for page in site_pages
+      get "#{page}", to: "pages##{page}", as: page
+    end
+
+    # Resources
     resources :clubs
   end
 

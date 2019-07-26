@@ -1,5 +1,5 @@
 <nav id="header_nav" class="navbar navbar-light navbar-expand-lg bg-white border-bottom box-shadow p-3 px-md-4 <%= 'mb-5' unless @view_options['no_margin'] %>">
-  <a class="my-0 mr-md-5 font-weight-normal navbar-brand" href="<%= "admin.smumods.com" %>">
+  <a class="my-0 mr-md-5 font-weight-normal navbar-brand" href="<%= root_path %>">
     SMUMods Admin
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,10 +9,10 @@
   <div class="collapse navbar-collapse mt-3 mt-sm-0" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="pr-4 text-dark" href="<%= "admin.smumods.com" %>">Home</a>
+        <a class="pr-4 text-dark" href="<%= root_path %>">Home</a>
       </li>
       <li class="nav-item">
-        <a class="pr-4 text-dark" href="<% %>">About</a>
+        <a class="pr-4 text-dark" href="<%= about_path %>">About</a>
       </li>
     </ul>
     <ul class="navbar-nav">
