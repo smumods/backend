@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       get "#{page}", to: "pages##{page}", as: page
     end
 
+    # Devise for ClubAdmin
+    devise_for :club_admins, path: 'admin'
+    
     # Resources
     resources :clubs
   end
