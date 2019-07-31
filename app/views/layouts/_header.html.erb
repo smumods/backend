@@ -16,9 +16,13 @@
       </li>
     </ul>
     <ul class="navbar-nav">
-      
+      <% if current_club_admin %>
+        <a id="signup-btn" class="btn btn-primary mr-0 mr-md-2 mb-3 mb-md-0 mt-3 mt-md-0" href="<% %>">Hi <%= current_club_admin.email %></a>
+        <%= link_to 'Logout', destroy_club_admin_session_path, method: :delete, class: "btn btn-primary" %>
+      <% else %>
         <a id="signup-btn" class="btn btn-primary mr-0 mr-md-2 mb-3 mb-md-0 mt-3 mt-md-0" href="<% %>">Login</a>
-        <a id="signup-btn" class="btn btn-primary" href="<% %>">Sign Up</a>
+        <%= link_to 'Logout', destroy_club_admin_session_path, method: :delete, class: "btn btn-primary" %>
+      <% end %>
     </ul>
   </div>
 </nav>

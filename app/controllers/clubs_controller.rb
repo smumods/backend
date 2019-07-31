@@ -1,8 +1,9 @@
 class ClubsController < ApplicationController
+  before_action :authenticate_club_admin!
 
   def index
     # Should display all the clubs that the user manages
-    @clubs = Club.all
+    @club = current_club_admin.club
   end
 
   def show

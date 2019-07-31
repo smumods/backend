@@ -1,34 +1,22 @@
 .container
   .row
     .col-12
-      h1 Listing clubs
+      h1 Your Club Dashboard
 
-      table
-        thead
-          tr
-            th Name
-            th Slug
-            th Display picture
-            th Gallery
-            th Description
-            th Social media
-            th
-            th
-            th
+      - if @club
+        h2 Club Details
+        = @club.name
+        = @club.slug
+        = @club.display_picture
+        = @club.gallery
+        = @club.description
+        = @club.social_media
+        = link_to 'Show', @club
+        = link_to 'Edit', edit_club_path(@club)
 
-        tbody
-          - @clubs.each do |club|
-            tr
-              td = club.name
-              td = club.slug
-              td = club.display_picture
-              td = club.gallery
-              td = club.description
-              td = club.social_media
-              td = link_to 'Show', club
-              td = link_to 'Edit', edit_club_path(club)
-              td = link_to 'Destroy', club, data: { confirm: 'Are you sure?' }, method: :delete
+        h2 Listing Members
 
-      br
-
-      = link_to 'New Club', new_club_path
+      - else
+        p 
+        | No club associated with this account yet. Please message us on telegram at 
+        a href="https://t.me/smumods" SMUMods

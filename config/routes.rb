@@ -13,12 +13,12 @@ Rails.application.routes.draw do
     for page in site_pages
       get "#{page}", to: "pages##{page}", as: page
     end
-
-    # Devise for ClubAdmin
-    devise_for :club_admins, path: 'admin'
     
-    # Resources
-    resources :clubs
+    # Devise for ClubAdmin
+    devise_for :club_admins, path: '/'
+    
+    # Clubs
+    get 'dashboard', to: 'clubs#index'
   end
 
   # GraphQL
