@@ -1,8 +1,11 @@
-h1 Editing club
+.container
+  .row
+    .col-8.offset-2
+        h1 Editing club
 
-== render 'form'
+        == render 'form'
 
-=> link_to 'Show', @club
-'|
-=< link_to 'Back', dashboard_path
+        => link_to 'Show', @club
+        '|
+        =< link_to 'Back', dashboard_path
 

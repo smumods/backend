@@ -19,6 +19,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+gem "bootstrap_form", ">= 4.2.0"
 
 # Backend / APIs etc
 gem 'graphql'
