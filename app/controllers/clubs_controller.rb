@@ -10,11 +10,13 @@ class ClubsController < ApplicationController
   end
 
   def update
+    @club = Club.friendly.find(club_params[:slug])
     if @club.update(club_params)
-      redirect_back(fallback_location: dashboard_path, notice: "Saved club details")
+      flash[:notice] = "Successfully updated your club details"
     else
-      redirect_back(fallback_location: dashboard_path, alert: "Failed to save club details")
+      flash[:alert] = "We had some issues saving your club details, refer below."
     end
+    render template: 'clubs/edit'
   end
 
   private

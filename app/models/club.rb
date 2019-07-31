@@ -4,6 +4,8 @@ class Club < ApplicationRecord
     friendly_id :slug_candidates, use: :slugged
 
     # Validations
+    validates :name, uniqueness: true
+    validates :name, presence: true, length: { minimum: 3 }
 
     # Relationships
     has_one :club_admin
