@@ -1,24 +1,31 @@
 .container
   .row
     .col-8.offset-2
-      p
-        strong Name:
-        = @club.name
-      p
-        strong Slug:
-        = @club.slug
-      p
-        strong Display picture:
-        = @club.display_picture
-      p
-        strong Gallery:
-        = @club.gallery
-      p
-        strong Description:
-        = @club.description
-      p
-        strong Social media:
-        = @club.social_media
+      => link_to 'Edit', edit_club_path(@club)
+      '|
+      =< link_to 'Back', dashboard_path
+      br
+      br
+
+      .text-uppercase.font-weight-bold.text-muted Club Name
+      p = @club.name
+      
+      .text-uppercase.font-weight-bold.text-muted Display Url
+      p = @club.slug
+
+      .text-uppercase.font-weight-bold.text-muted Display picture
+      p = @club.display_picture
+      
+      img.mt-3.mb-3 src="#{@club.display_picture}"
+      
+      .text-uppercase.font-weight-bold.text-muted Gallery
+      p = @club.gallery
+      
+      .text-uppercase.font-weight-bold.text-muted Club Description
+      p = @club.description
+
+      .text-uppercase.font-weight-bold.text-muted Social Media Links
+      p = @club.social_media
 
       => link_to 'Edit', edit_club_path(@club)
       '|
