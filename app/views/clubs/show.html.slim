@@ -1,24 +1,25 @@
-p#notice = notice
+.container
+  .row
+    .col-8.offset-2
+      p
+        strong Name:
+        = @club.name
+      p
+        strong Slug:
+        = @club.slug
+      p
+        strong Display picture:
+        = @club.display_picture
+      p
+        strong Gallery:
+        = @club.gallery
+      p
+        strong Description:
+        = @club.description
+      p
+        strong Social media:
+        = @club.social_media
 
-p
-  strong Name:
-  = @club.name
-p
-  strong Slug:
-  = @club.slug
-p
-  strong Display picture:
-  = @club.display_picture
-p
-  strong Gallery:
-  = @club.gallery
-p
-  strong Description:
-  = @club.description
-p
-  strong Social media:
-  = @club.social_media
-
-=> link_to 'Edit', edit_club_path(@club)
-'|
-=< link_to 'Back', dashboard_path
+      => link_to 'Edit', edit_club_path(@club)
+      '|
+      =< link_to 'Back', dashboard_path

@@ -1,10 +1,9 @@
+- if @club.errors.any?
+  .alert.alert-danger
+    - @club.errors.full_messages.each do |message|
+      li = message
+
 = bootstrap_form_for(@club, inline_errors: true, label_errors: false) do |f|
-
-  .field
-    = f.text_field :name
-
-  .field
-    = f.text_field :slug
 
   .field
     = f.text_field :display_picture

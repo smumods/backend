@@ -15,10 +15,22 @@
   <body>
     <%= render 'layouts/header' %>
     
-    <% if notice or alert %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 offset-2">
+          <% if alert %>
+            <div class="alert alert-danger" role="alert">
+              <%= alert %>
+            </div>
+          <% end %>
+          <% if notice %>
+            <div class="alert alert-success" role="alert">
+              <%= notice %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
     <%= yield %>
 

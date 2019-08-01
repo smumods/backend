@@ -6,6 +6,8 @@ class Club < ApplicationRecord
     # Validations
     validates :name, uniqueness: true
     validates :name, presence: true, length: { minimum: 3 }
+    validates :slug, uniqueness: true
+    validates :slug, presence: true, length: { minimum: 3 }
 
     # Relationships
     has_one :club_admin

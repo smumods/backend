@@ -6,11 +6,11 @@ class ClubsController < ApplicationController
     # Should display all the clubs that the user manages
   end
 
-  def show    
+  def show
   end
 
   def update
-    @club = Club.friendly.find(club_params[:slug])
+    @club = Club.friendly.find(params[:id])
     if @club.update(club_params)
       flash[:notice] = "Successfully updated your club details"
     else
@@ -21,7 +21,7 @@ class ClubsController < ApplicationController
 
   private
   def club_params
-    params.require(:club).permit(:name, :slug, :display_picture, :gallery, :description, :social_media)
+    params.require(:club).permit(:display_picture, :gallery, :description, :social_media)
   end
 
   def set_club
