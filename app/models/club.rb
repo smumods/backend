@@ -9,6 +9,10 @@ class Club < ApplicationRecord
     validates :slug, uniqueness: true
     validates :slug, presence: true, length: { minimum: 3 }
     validates :description, presence: true
+    validates :gallery, length: {
+        maximum: 6,
+        message: "You can only setup 5 images for your gallery"
+    }
 
     # Relationships
     has_one :club_admin
