@@ -21,7 +21,7 @@ class ClubsController < ApplicationController
 
   private
   def club_params
-    params.require(:club).permit(:display_picture, :gallery, :description, :social_media)
+    params.require(:club).permit(:display_picture, :description, :social_media, gallery: [])
   end
 
   def set_club

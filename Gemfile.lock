@@ -103,9 +103,6 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap_form (4.2.0)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
     builder (3.2.3)
     bullet (6.0.0)
       activesupport (>= 3.0.0)
@@ -325,6 +322,9 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
     sendgrid-ruby (6.0.0)
       ruby_http_client (~> 3.3.0)
+    simple_form (4.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -402,7 +402,6 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
-  bootstrap_form (>= 4.2.0)
   bullet
   byebug
   capybara (>= 2.15)
@@ -432,6 +431,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   sendgrid-ruby
+  simple_form
   slim
   slim-rails
   spring

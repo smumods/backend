@@ -3,18 +3,13 @@
     - @club.errors.full_messages.each do |message|
       li = message
 
-= bootstrap_form_for(@club, inline_errors: true, label_errors: false) do |f|
+= simple_form_for(@club) do |f|
+  = f.input :display_picture
+  = f.input :gallery, as: :array
+  
+  .add-gallery-button Add 1 More Picture
 
-  .field
-    = f.text_field :display_picture
-
-  .field
-    = f.text_area :gallery
-
-  .field
-    = f.text_area :description
-
-  .field
-    = f.text_area :social_media
+  = f.input :description
+  = f.input :social_media
 
   .actions = f.submit
