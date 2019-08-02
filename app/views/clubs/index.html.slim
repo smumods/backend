@@ -4,17 +4,11 @@
       h1 Your Club Dashboard
 
       - if @club
-        h2 Club Details
-        = @club.name
-        = @club.slug
-        = @club.display_picture
-        = @club.gallery
-        = @club.description
-        = @club.social_media
-        = link_to 'Show', @club
-        = link_to 'Edit', edit_club_path(@club)
+        h2.mb-3 Club Details
+        = link_to 'View your club profile', club_path(@club), class: "btn btn-outline-secondary d-block col-3 mb-2"
+        = link_to 'Edit your profile', edit_club_path(@club), class: "btn btn-outline-secondary d-block col-3 mb-2"
 
-        h2 Listing Members
+        h2.mt-3.mb-3 Listing Members
 
       - else
         p 

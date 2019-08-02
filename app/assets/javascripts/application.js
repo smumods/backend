@@ -18,4 +18,5 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require autosize/dist/autosize
 //= require_tree .

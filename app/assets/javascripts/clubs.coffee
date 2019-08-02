@@ -11,3 +11,5 @@ $(document).ready ->
     $lastGalleryField = $('input[name="club[gallery][]"]:last-of-type').clone()
     $lastGalleryField.val("")
     $(".form-group.club_gallery").append($lastGalleryField)
+
+  autosize(document.querySelectorAll('textarea'));
