@@ -4,11 +4,10 @@
 
 $(document).ready ->
   console.log "Triggered"
-  $('.add-gallery-button').on 'click', @addGalleryField
-  
-  addGalleryField: (ev) ->
-    console.log "Hello"
+  console.log(@addGalleryField)
+  $('.add-gallery-button').on 'click', (ev) ->
     ev.preventDefault()    
-    $lastGalleryField = $('input[name="course[gallery][]"]:last-of-type').clone()
+    console.log "Hello"
+    $lastGalleryField = $('input[name="club[gallery][]"]:last-of-type').clone()
     $lastGalleryField.val("")
-    $(".input.gallery").append($lastGalleryField)
+    $(".form-group.club_gallery").append($lastGalleryField)

@@ -11,7 +11,6 @@ class ClubsController < ApplicationController
 
   def update
     @club = Club.friendly.find(params[:id])
-    binding.pry
     if @club.update(club_params)
       flash[:notice] = "Successfully updated your club details"
     else
