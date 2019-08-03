@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_034141) do
+ActiveRecord::Schema.define(version: 2019_08_02_175019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(version: 2019_07_31_034141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "club_admin_delegates", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_club_admin_delegates_on_club_id"
+    t.index ["user_id"], name: "index_club_admin_delegates_on_user_id"
   end
 
   create_table "club_admins", force: :cascade do |t|
@@ -249,6 +258,8 @@ ActiveRecord::Schema.define(version: 2019_07_31_034141) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "club_admin_delegates", "clubs"
+  add_foreign_key "club_admin_delegates", "users"
   add_foreign_key "clubs", "club_admins"
   add_foreign_key "links", "users"
   add_foreign_key "professor_courses", "courses"

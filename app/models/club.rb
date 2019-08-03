@@ -17,6 +17,8 @@ class Club < ApplicationRecord
 
     # Relationships
     has_one :club_admin
+    has_many :club_admin_delegates
+    has_many :users, through: :club_admin_delegates
 
     # Others
     serialize :gallery, Array

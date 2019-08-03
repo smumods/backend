@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :votes
   has_many :voted_reviews, through: :votes
   has_many :sessions
-
+  has_many :club_admin_delegates
+  has_many :clubs, through: :club_admin_delegates
 
   # Validations
   validates :first_name, presence: true
