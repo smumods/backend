@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_175019) do
+ActiveRecord::Schema.define(version: 2019_08_03_023552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 2019_08_02_175019) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_club_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_club_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "club_members", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.integer "status"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_club_members_on_club_id"
+    t.index ["user_id"], name: "index_club_members_on_user_id"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -260,6 +271,8 @@ ActiveRecord::Schema.define(version: 2019_08_02_175019) do
   add_foreign_key "books", "users"
   add_foreign_key "club_admin_delegates", "clubs"
   add_foreign_key "club_admin_delegates", "users"
+  add_foreign_key "club_members", "clubs"
+  add_foreign_key "club_members", "users"
   add_foreign_key "clubs", "club_admins"
   add_foreign_key "links", "users"
   add_foreign_key "professor_courses", "courses"
