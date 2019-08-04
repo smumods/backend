@@ -10,7 +10,15 @@
 
         h2.mt-3.mb-3 Your Administrators
 
-        
+        - @club.club_managers.each do |club_manager|
+          .card style=("width: 18rem;") 
+            .card-body
+              h5.card-title = club_manager.email
+              h6.card-subtitle.mb-2.text-muted Club Manager
+              p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+              a.card-link href="#"  Card link
+              a.card-link href="#"  Another link
+
 
         h2.mt-3.mb-3 Listing Members
 
