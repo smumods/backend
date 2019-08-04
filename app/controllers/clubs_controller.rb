@@ -1,6 +1,7 @@
 class ClubsController < ApplicationController
   before_action :authenticate_club_admin!
   before_action :set_club, only: [:index, :edit, :show, :update]
+  before_action :set_club_manager, only: [:index]
 
   def index
     # Should display all the clubs that the user manages
@@ -28,6 +29,10 @@ class ClubsController < ApplicationController
 
   def set_club
     @club = current_club_admin.club
+  end
+  
+  def set_club_manager
+    @club_manager = ClubAdminDelegate.new(club_id: @club.id)
   end
 
 end

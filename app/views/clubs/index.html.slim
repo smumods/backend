@@ -4,23 +4,30 @@
       h1 Your Club Dashboard
 
       - if @club
-        h2.mb-3 Club Details
+        h2.mt-5.mb-3 Club Details
         = link_to 'View your club profile', club_path(@club), class: "btn btn-outline-secondary d-block col-3 mb-2"
         = link_to 'Edit your profile', edit_club_path(@club), class: "btn btn-outline-secondary d-block col-3 mb-2"
 
-        h2.mt-3.mb-3 Your Administrators
+        h2.mt-5.mb-3 Your Administrators
 
-        - @club.club_managers.each do |club_manager|
-          .card style=("width: 18rem;") 
-            .card-body
-              h5.card-title = club_manager.email
-              h6.card-subtitle.mb-2.text-muted Club Manager
-              p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-              a.card-link href="#"  Card link
-              a.card-link href="#"  Another link
+        = simple_form_for @club_manager, as: :club_manager, url: club_managers_path do |f|
+          .form-row
+            .col
+              = f.input :email_address, as: :fake, label: false, placeholder: "Enter an email address"
+            .col
+              = f.button :submit, class: "btn btn-primary"
+
+        .card-columns
+          - @club.club_managers.each do |club_manager|
+            .card 
+              .card-body
+                h5.card-title = club_manager.email
+                h6.card-subtitle.mb-4.text-muted Club Manager
+                / p.card-text   
+                = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger"
 
 
-        h2.mt-3.mb-3 Listing Members
+        h2.mt-5.mb-3 Listing Members
 
       - else
         p 

@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_08_03_023552) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
-  create_table "club_admin_delegates", force: :cascade do |t|
+  create_table "club_admin_delegates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "club_id"
     t.datetime "created_at", null: false
@@ -241,14 +241,14 @@ ActiveRecord::Schema.define(version: 2019_08_03_023552) do
     t.boolean "verified", default: false
     t.string "email_token"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.string "password_reset_token"
-    t.datetime "password_reset_created_at"
-    t.integer "password_reset_tries_count", default: 0
-    t.integer "password_token_tries_count", default: 0
     t.boolean "old_system", default: true
     t.boolean "old_system_verified", default: false
     t.string "telegram_email_verification_token"
     t.integer "telegram_id"
+    t.string "password_reset_token"
+    t.datetime "password_reset_created_at"
+    t.integer "password_reset_tries_count", default: 0
+    t.integer "password_token_tries_count", default: 0
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true
