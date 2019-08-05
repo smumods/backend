@@ -13,3 +13,4 @@ $(document).ready ->
     $(".form-group.club_gallery").append($lastGalleryField)
 
   autosize(document.querySelectorAll('textarea'));
+  

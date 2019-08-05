@@ -7,7 +7,7 @@ section.bg-grey
         h1 Your Club Dashboard
     - if @club
       .row.boxed
-        .col-4
+        .col-md-4.col-sm-12
           h2.mb-3 Club Details
           = link_to 'View your club profile', club_path(@club), class: "btn btn-outline-secondary d-block col-12 mb-2"
           = link_to 'Edit your profile', edit_club_path(@club), class: "btn btn-outline-secondary d-block col-12 mb-2"
@@ -23,14 +23,32 @@ section.bg-grey
               .col
                 = f.button :submit, class: "btn btn-success"
 
-          .card-columns
-            - @club.club_managers.each do |club_manager|
-              .card 
-                .card-body
-                  h5.card-title = club_manager.email
-                  h6.card-subtitle.mb-4.text-muted Club Manager
-                  / p.card-text   
-                  = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
+          .table-responsive
+            table#example.table.table-striped
+              thead
+                tr
+                  th First name
+                  th Last name
+                  th Email
+                  th Actions
+              tbody
+                - @club.club_managers.each do |club_manager|
+                  tr
+                    td = club_manager.first_name
+                    td = club_manager.last_name
+                    td = club_manager.email
+                    td
+                      = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
+
+          / .card-columns
+          /   - @club.club_managers.each do |club_manager|
+            
+          /     .card 
+          /       .card-body
+          /         h5.card-title = club_manager.email
+          /         h6.card-subtitle.mb-4.text-muted Club Manager
+          /         / p.card-text   
+          /         = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
 
       .row.boxed
         .col-12
