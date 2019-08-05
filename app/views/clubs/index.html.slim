@@ -21,7 +21,7 @@ section.bg-grey
               .col
                 = f.input :email_address, as: :fake, label: false, placeholder: "Enter an email address"
               .col
-                = f.button :submit, class: "btn btn-primary"
+                = f.button :submit, class: "btn btn-success"
 
           .card-columns
             - @club.club_managers.each do |club_manager|
@@ -30,7 +30,7 @@ section.bg-grey
                   h5.card-title = club_manager.email
                   h6.card-subtitle.mb-4.text-muted Club Manager
                   / p.card-text   
-                  = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger"
+                  = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
 
       .row.boxed
         .col-12

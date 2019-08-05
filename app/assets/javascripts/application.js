@@ -16,7 +16,10 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery3
+//= require jquery_ujs
 //= require popper
 //= require bootstrap
 //= require autosize/dist/autosize
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require_tree .

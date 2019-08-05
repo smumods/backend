@@ -21,6 +21,9 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 # gem "bootstrap_form", ">= 4.2.0"
 gem 'simple_form'
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
 
 # Backend / APIs etc
 gem 'graphql'
