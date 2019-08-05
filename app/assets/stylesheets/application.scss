@@ -16,7 +16,7 @@
 @import "bootstrap";
 
 body {
-  font-family: 'Open Sans', sans-serif
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -25,4 +25,24 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 h1 {
     font-size: 2.8rem
+}
+
+section {
+  > .container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  &.bg-grey {
+    background: #f9f9f9;
+  }
+}
+
+.row, div[name^="col-"] {
+  &.boxed  {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0, 0.2);
+    margin-bottom: 2em;
+    padding: 2em;
+  }
 }
