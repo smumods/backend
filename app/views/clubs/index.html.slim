@@ -53,6 +53,21 @@ section.bg-grey
       .row.boxed
         .col-12
           h2.mb-3 Listing Members
+          .table-responsive
+            table#example.table.table-striped
+              thead
+                tr
+                  th First name
+                  th Last name
+                  th Email
+                  th Actions
+              tbody
+                - @club.club_memberships.each do |club_member|
+                  tr
+                    td = club_member.first_name
+                    td = club_member.last_name
+                    td = club_member.email
+                    td Nil
 
     - else
       row.boxed
