@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_03_023552) do
+ActiveRecord::Schema.define(version: 2019_08_06_091605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -141,6 +141,24 @@ ActiveRecord::Schema.define(version: 2019_08_03_023552) do
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "main_image"
+    t.text "gallery"
+    t.string "color"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "location"
+    t.float "price"
+    t.boolean "require_rsvp"
+    t.datetime "rsvp_by"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_events_on_club_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -274,6 +292,7 @@ ActiveRecord::Schema.define(version: 2019_08_03_023552) do
   add_foreign_key "club_members", "clubs"
   add_foreign_key "club_members", "users"
   add_foreign_key "clubs", "club_admins"
+  add_foreign_key "events", "clubs"
   add_foreign_key "links", "users"
   add_foreign_key "professor_courses", "courses"
   add_foreign_key "professor_courses", "professors"

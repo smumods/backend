@@ -21,6 +21,7 @@ class Club < ApplicationRecord
     has_many :club_managers, through: :club_admin_delegates, source: :user
     has_many :club_members
     has_many :club_memberships, through: :club_members, source: :user
+    has_many :events
 
     # Others
     serialize :gallery, Array

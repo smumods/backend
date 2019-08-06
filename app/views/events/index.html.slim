@@ -1,0 +1,43 @@
+h1 Listing events
+
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Main image
+      th Gallery
+      th Color
+      th Start date
+      th End date
+      th Location
+      th Price
+      th Require rsvp
+      th Rsvp by
+      th Club
+      th
+      th
+      th
+
+  tbody
+    - @events.each do |event|
+      tr
+        td = event.name
+        td = event.description
+        td = event.main_image
+        td = event.gallery
+        td = event.color
+        td = event.start_date
+        td = event.end_date
+        td = event.location
+        td = event.price
+        td = event.require_rsvp
+        td = event.rsvp_by
+        td = event.club
+        td = link_to 'Show', event
+        td = link_to 'Edit', edit_event_path(event)
+        td = link_to 'Destroy', event, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Event', new_event_path

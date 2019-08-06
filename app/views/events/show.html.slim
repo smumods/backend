@@ -1,0 +1,42 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @event.name
+p
+  strong Description:
+  = @event.description
+p
+  strong Main image:
+  = @event.main_image
+p
+  strong Gallery:
+  = @event.gallery
+p
+  strong Color:
+  = @event.color
+p
+  strong Start date:
+  = @event.start_date
+p
+  strong End date:
+  = @event.end_date
+p
+  strong Location:
+  = @event.location
+p
+  strong Price:
+  = @event.price
+p
+  strong Require rsvp:
+  = @event.require_rsvp
+p
+  strong Rsvp by:
+  = @event.rsvp_by
+p
+  strong Club:
+  = @event.club
+
+=> link_to 'Edit', edit_event_path(@event)
+'|
+=< link_to 'Back', events_path
