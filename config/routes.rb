@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
     # Club Managers
     resources :club_managers, only: [:create, :destroy]
+
+    # Club Members
+    resources :club_memberships, only: [:create, :destroy]
   end
 
   # GraphQL
