@@ -8,45 +8,15 @@ section.bg-grey
 
     .row.boxed
         .col-12
-          .table-responsive
-            table#example.table.table-striped
-              thead
-                tr
-                  th Name
-                  th Description
-                  th Main image
-                  th Gallery
-                  th Color
-                  th Start date
-                  th End date
-                  th Location
-                  th Price
-                  th Require rsvp
-                  th Rsvp by
-                  th Club
-                  th
-                  th
-                  th
-
-              tbody
-                - @events.each do |event|
-                  tr
-                    td = event.name
-                    td = event.description
-                    td = event.main_image
-                    td = event.gallery
-                    td = event.color
-                    td = event.start_date
-                    td = event.end_date
-                    td = event.location
-                    td = event.price
-                    td = event.require_rsvp
-                    td = event.rsvp_by
-                    td = event.club
-                    td = link_to 'Show', event
-                    td = link_to 'Edit', edit_event_path(event)
-                    td = link_to 'Destroy', event, data: { confirm: 'Are you sure?' }, method: :delete
-
-          br
+          - @events.each_slice(3) do |events_group|
+            .card-deck
+              - events_group.each do |event|
+                .card.mb-3
+                  .card-body
+                    h5.card-title = event.name
+                    p.card-text = event.description.truncate(140, separator: ' ')
+                    = link_to 'Edit Event', edit_event_path(event)
+                  .card-footer
+                    small.text-muted Last updated 3 mins ago
 
           = link_to 'New Event', new_event_path
