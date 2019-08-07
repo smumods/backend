@@ -13,6 +13,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 Rails.application.config.assets.precompile += %w( application.js application.css )
 
+Rails.application.config.assets.precompile += ["pages.coffee", "pages.sass"]
 Rails.application.config.assets.precompile += ["events.coffee", "events.scss"]
 Rails.application.config.assets.precompile += ["clubs.coffee", "clubs.scss"]
 

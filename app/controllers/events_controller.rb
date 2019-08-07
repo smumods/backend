@@ -38,6 +38,14 @@ class EventsController < ApplicationController
     render template: 'events/edit'
   end
 
+  def destroy
+    if @event.destroy!
+      redirect_back(fallback_location: events_path, notice: "Successfully removed your Event")
+    else
+      redirect_back(fallback_location: events_path, notice: "Could not remove your Event. If this problem persists, contact us via telegram!")
+    end
+  end
+
   private
 
     def event_params
