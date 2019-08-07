@@ -1,42 +1,62 @@
-p#notice = notice
+- @view_options["no_margin"] = true 
 
-p
-  strong Name:
-  = @event.name
-p
-  strong Description:
-  = @event.description
-p
-  strong Main image:
-  = @event.main_image
-p
-  strong Gallery:
-  = @event.gallery
-p
-  strong Color:
-  = @event.color
-p
-  strong Start date:
-  = @event.start_date
-p
-  strong End date:
-  = @event.end_date
-p
-  strong Location:
-  = @event.location
-p
-  strong Price:
-  = @event.price
-p
-  strong Require rsvp:
-  = @event.require_rsvp
-p
-  strong Rsvp by:
-  = @event.rsvp_by
-p
-  strong Club:
-  = @event.club
+section.bg-grey
+  .container
+    .row
+      .col-12
+        h1 
+          = @event.name 
+          | &nbsp;Details&nbsp;
 
-=> link_to 'Edit', edit_event_path(@event)
-'|
-=< link_to 'Back', events_path
+    .row.boxed
+        .col-12
+
+          => link_to 'Edit', edit_event_path(@event)
+          '|
+          =< link_to 'Back', events_path
+
+          .mb-5
+
+          p#notice = notice
+
+          .text-uppercase.font-weight-bold.text-muted Name
+          p = @event.name
+
+          .text-uppercase.font-weight-bold.text-muted Description
+          p = @event.description
+
+          .text-uppercase.font-weight-bold.text-muted Main image
+          p = @event.main_image
+
+          .text-uppercase.font-weight-bold.text-muted Gallery
+          p = @event.gallery
+
+          .text-uppercase.font-weight-bold.text-muted Color
+          p = @event.color
+
+          .text-uppercase.font-weight-bold.text-muted Start date
+          p = @event.start_date
+
+          .text-uppercase.font-weight-bold.text-muted End date
+          p = @event.end_date
+
+          .text-uppercase.font-weight-bold.text-muted Location
+          p = @event.location
+
+          .text-uppercase.font-weight-bold.text-muted Price
+          p = @event.price
+
+          .text-uppercase.font-weight-bold.text-muted Require rsvp
+          p = @event.require_rsvp
+
+          .text-uppercase.font-weight-bold.text-muted Rsvp by
+          p = @event.rsvp_by
+
+          .text-uppercase.font-weight-bold.text-muted Club
+          = @event.club
+
+          .mt-5
+
+          => link_to 'Edit', edit_event_path(@event)
+          '|
+          =< link_to 'Back', events_path
