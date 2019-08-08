@@ -38,12 +38,10 @@ section {
   }
 }
 
-.row, div[name^="col-"] {
-  &.boxed  {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px hsla(0, 0%, 0, 0.2);
-    margin-bottom: 2em;
-    padding: 2em;
-  }
+.boxed  {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px hsla(0, 0%, 0, 0.2);
+  margin-bottom: 2em;
+  padding: 2em;
 }

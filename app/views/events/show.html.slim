@@ -2,22 +2,15 @@
 
 section.bg-grey
   .container
+    .row.align-middle
+      .col-6
+        h1 Event Details
+      .col-6.text-right
+        = link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary"
+
     .row
-      .col-12
-        h1 
-          = @event.name 
-          | &nbsp;Details&nbsp;
-
-    .row.boxed
-        .col-12
-
-          => link_to 'Edit', edit_event_path(@event)
-          '|
-          =< link_to 'Back', events_path
-
-          .mb-5
-
-          p#notice = notice
+      .col-8
+        .boxed
 
           .text-uppercase.font-weight-bold.text-muted Name
           p = @event.name
@@ -31,6 +24,11 @@ section.bg-grey
           .text-uppercase.font-weight-bold.text-muted Gallery
           p = @event.gallery
 
+          .text-uppercase.font-weight-bold.text-muted Club
+          = @event.club.name
+
+      .col-4
+        .boxed
           .text-uppercase.font-weight-bold.text-muted Color
           p = @event.color
 
@@ -51,12 +49,3 @@ section.bg-grey
 
           .text-uppercase.font-weight-bold.text-muted Rsvp by
           p = @event.rsvp_by
-
-          .text-uppercase.font-weight-bold.text-muted Club
-          = @event.club
-
-          .mt-5
-
-          => link_to 'Edit', edit_event_path(@event)
-          '|
-          =< link_to 'Back', events_path
