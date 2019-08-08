@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :managed_clubs, through: :club_admin_delegates, source: :club
   has_many :club_members
   has_many :club_memberships, through: :club_members, source: :club
+  has_many :rsvps
 
   # Validations
   validates :first_name, presence: true

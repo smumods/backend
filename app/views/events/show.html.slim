@@ -9,25 +9,45 @@ section.bg-grey
         = link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary"
 
     .row
-      .col-8
-        .boxed
+      .col-12.col-md-8.m-0.p-0
+        .row-fluid
+          .col-12
+            .boxed
+              .text-uppercase.font-weight-bold.text-muted Name
+              p = @event.name
 
-          .text-uppercase.font-weight-bold.text-muted Name
-          p = @event.name
+              .text-uppercase.font-weight-bold.text-muted Description
+              p = @event.description
 
-          .text-uppercase.font-weight-bold.text-muted Description
-          p = @event.description
+              .text-uppercase.font-weight-bold.text-muted Main image
+              p = @event.main_image
 
-          .text-uppercase.font-weight-bold.text-muted Main image
-          p = @event.main_image
+              .text-uppercase.font-weight-bold.text-muted Gallery
+              p = @event.gallery
 
-          .text-uppercase.font-weight-bold.text-muted Gallery
-          p = @event.gallery
+              .text-uppercase.font-weight-bold.text-muted Club
+              = @event.club.name
+          .row-fluid
+            .col-12
+              .boxed
+                h2 RSVPs
+                table-responsive
+                  table.table.table-striped
+                    thead
+                      tr
+                        th First name
+                        th Last name
+                        th Email
+                        th Actions
+                    tbody
+                      - @event.users.each do |user|
+                        tr
+                          td = user.first_name
+                          td = user.last_name
+                          td = user.email
 
-          .text-uppercase.font-weight-bold.text-muted Club
-          = @event.club.name
-
-      .col-4
+                
+      .col-12.col-md-4
         .boxed
           .text-uppercase.font-weight-bold.text-muted Color
           p = @event.color
@@ -49,3 +69,21 @@ section.bg-grey
 
           .text-uppercase.font-weight-bold.text-muted Rsvp by
           p = @event.rsvp_by
+
+      / .col-12.col-md-8.order-2
+      /   .boxed
+      /     h2 RSVPs
+      /     table-responsive
+      /       table.table.table-striped
+      /         thead
+      /           tr
+      /             th First name
+      /             th Last name
+      /             th Email
+      /             th Actions
+      /         tbody
+      /           - @event.users.each do |user|
+      /             tr
+      /               td = user.first_name
+      /               td = user.last_name
+      /               td = user.email
