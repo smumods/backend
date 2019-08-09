@@ -30,9 +30,20 @@ Rails.application.routes.draw do
     # Events
     resources :events
   end
+  
+  # Quick hack to get subdomains working
+  # Staging API
+  constraints subdomain: 'api-staging' do
+    # GraphQL
+    post "/graphql", to: "graphql#execute"
+  end
 
-  # GraphQL
-  post "/graphql", to: "graphql#execute"
+  # Normal API
+  constraints subdomain: 'api' do
+    # GraphQL
+    post "/graphql", to: "graphql#execute"
+  end
+
   # GraphiQL for Development
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
