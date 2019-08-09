@@ -13,9 +13,15 @@ class Club < ApplicationRecord
         maximum: 6,
         message: "You can only setup 5 images for your gallery"
     }
+    validates :display_picture, presence: true
 
     # Relationships
     has_one :club_admin
+    has_many :club_admin_delegates
+    has_many :club_managers, through: :club_admin_delegates, source: :user
+    has_many :club_members
+    has_many :club_memberships, through: :club_members, source: :user
+    has_many :events
 
     # Others
     serialize :gallery, Array

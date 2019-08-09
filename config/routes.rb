@@ -20,6 +20,15 @@ Rails.application.routes.draw do
     # Clubs
     get 'dashboard', to: 'clubs#index'
     resources :clubs, only: [:show, :edit, :update]
+    
+    # Club Managers
+    resources :club_managers, only: [:create, :destroy]
+    
+    # Club Members
+    resources :club_memberships, only: [:create, :destroy]
+    
+    # Events
+    resources :events
   end
 
   # GraphQL

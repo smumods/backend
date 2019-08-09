@@ -1,0 +1,16 @@
+- @view_options["no_margin"] = true 
+
+section.bg-grey
+  .container
+    .row
+      .col-12
+        h1 Editing event
+
+    .row.boxed
+        .col-12
+            == render 'form'
+
+            => link_to 'Show', @event
+            '|
+            =< link_to 'Back', events_path
+

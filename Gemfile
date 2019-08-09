@@ -21,9 +21,13 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 # gem "bootstrap_form", ">= 4.2.0"
 gem 'simple_form'
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
 
 # Backend / APIs etc
 gem 'graphql'
+gem 'graphql-batch' # Optimizing GraphQL queries
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
