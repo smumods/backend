@@ -6,7 +6,7 @@ module Queries
             type Types::EventType.connection_type, null: false
 
             def resolve()
-                ::Event.where("start_date > ?", Time.now)
+                ::Event.where("start_date > ? and require_rsvp = false", Time.now).order("start_date ASC")
             end
         end
     end

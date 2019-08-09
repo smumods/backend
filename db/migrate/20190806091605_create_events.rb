@@ -10,7 +10,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :end_date
       t.string :location
       t.float :price
-      t.boolean :require_rsvp
+      t.boolean :require_rsvp, default: false
       t.datetime :rsvp_by
       t.belongs_to :club, foreign_key: true
 

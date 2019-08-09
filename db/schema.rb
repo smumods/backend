@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_093343) do
     t.datetime "end_date"
     t.string "location"
     t.float "price"
-    t.boolean "require_rsvp"
+    t.boolean "require_rsvp", default: false
     t.datetime "rsvp_by"
     t.bigint "club_id"
     t.datetime "created_at", null: false
