@@ -15,5 +15,7 @@ module Types
     field :home_courses, resolver: Queries::Home::Courses
     field :all_announcements, resolver: Queries::Announcements::Announcements
     field :all_upcoming_events, resolver: Queries::Events::AllUpcomingEvents
+    field :events_on_date, resolver: Queries::Events::EventsOnDate
+    field :all_rsvp_events, resolver: Queries::Events::AllRsvpEvents
   end
 end
