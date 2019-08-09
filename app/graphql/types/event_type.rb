@@ -14,6 +14,10 @@ module Types
         field :rsvp_by, Types::DateTimeType, null: false
         field :club, Types::ClubType, null: false
 		field :created_at, Types::DateTimeType, null: false
-    	field :updated_at, Types::DateTimeType, null: false
+        field :updated_at, Types::DateTimeType, null: false
+        
+        def club
+            RecordLoader.for(Club).load(object.club_id)
+        end
 	end
 end
