@@ -1,3 +1,5 @@
+- @view_options["no_margin"] = true
+
 #pages_home
   .container-fluid.p-0.pb-5
     .row.p-0.m-0
@@ -29,15 +31,15 @@
     .row.justify-content-md-center.text-center.pb-4
       .col-4.col-md-2
         p.m-0
-          strong.h3 100
+          strong.h3 #{Club.count}
         p Clubs
       .col-4.col-md-2
         p.m-0
-          strong.h3 3,028
+          strong.h3 #{User.count}
         p Users
       .col-4.col-md-2
         p.m-0
-          strong.h3 2592
+          strong.h3 #{Rsvp.count}
         p RSVPs
 
   
