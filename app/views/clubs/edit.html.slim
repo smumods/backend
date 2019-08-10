@@ -1,14 +1,20 @@
-.container
-  .row
-    .col-8.offset-2
+- @view_options["no_margin"] = true 
+
+section.bg-grey
+  .container
+    .row
+      .col-8.offset-2
         h1 Editing club
 
-        == render 'form'
+    .row
+      .col-8.offset-2
+        .boxed
+          == render 'form'
 
-        br
-        br
-        
-        => link_to 'Show', @club
-        '|
-        =< link_to 'Back', dashboard_path
+          br
+          br
+          
+          => link_to 'Show', @club
+          '|
+          =< link_to 'Back', dashboard_path
 

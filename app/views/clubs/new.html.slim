@@ -1,5 +1,13 @@
-h1 New club
+- @view_options["no_margin"] = true 
 
-== render 'form'
+section.bg-grey
+  .container
+    .row
+      .col-12
+        h1 New club
+    .row
+        .col-12
+            .boxed
+                == render 'form'
 
-= link_to 'Back', clubs_path
+                = link_to 'Back', clubs_path
