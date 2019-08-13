@@ -9,10 +9,7 @@
   <div class="collapse navbar-collapse mt-3 mt-sm-0" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="pr-4 text-dark" href="<%= root_path %>">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="pr-4 text-dark" href="<%= dashboard_path %>">Dashboard</a>
+        <a class="pr-4 text-dark" href="<%= root_path %>">Dashboard</a>
       </li>
       <li class="nav-item">
         <a class="pr-4 text-dark" href="<%= events_path %>">Events</a>
@@ -20,11 +17,10 @@
     </ul>
     <ul class="navbar-nav">
       <% if current_club_admin %>
-        <a id="signup-btn" class="btn btn-primary mr-0 mr-md-2 mb-3 mb-md-0 mt-3 mt-md-0" href="<% %>">Hi <%= current_club_admin.email %></a>
+        <a id="signup-btn" class="btn btn-primary mr-0 mr-md-2 mb-3 mb-md-0 mt-3 mt-md-0" href="<% %>">Hi <%= current_club_admin.first_name %></a>
         <%= link_to 'Logout', destroy_club_admin_session_path, method: :delete, class: "btn btn-primary" %>
       <% else %>
         <a id="signup-btn" class="btn btn-primary mr-0 mr-md-2 mb-3 mb-md-0 mt-3 mt-md-0" href="<%= new_club_admin_session_path %>">Login</a>
-        <%= link_to 'Logout', destroy_club_admin_session_path, method: :delete, class: "btn btn-primary" %>
       <% end %>
     </ul>
   </div>

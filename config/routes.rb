@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
   constraints subdomain: "admin#{append_staging}" do
     # Pages
+    authenticated :club_admin do
+      root to: 'clubs#index'
+    end
     root to: "pages#home"
     site_pages = ['about']
     for page in site_pages
