@@ -6,4 +6,7 @@ class Event < ApplicationRecord
 
   # Validations
   validates :name, presence: true
+  validates :description, presence: true
+  validates :main_image, presence: true
+  validates :location, presence: true
 end

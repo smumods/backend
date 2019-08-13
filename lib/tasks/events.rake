@@ -15,6 +15,8 @@ namespace :events do
             end_date: time.tomorrow,
             name: "Event for #{time.strftime("%d %b (%a) %l:%m %p")}",
             description: "Description for #{time.strftime("%d %b (%a) %l:%m %p")}",
+            main_image: "test_main_image.jpg",
+            location: "Test Location",
             club: club
           )
         end # end clubs

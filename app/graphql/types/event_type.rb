@@ -4,14 +4,14 @@ module Types
 		field :name, String, null: false
 		field :description, String, null: false
 		field :main_image, String, null: false
-		field :gallery, String, null: false
-		field :color, String, null: false
+		field :gallery, String, null: true
+		field :color, String, null: true
 		field :start_date, Types::DateTimeType, null: false
 		field :end_date, Types::DateTimeType, null: false
-		field :location, String, null: false
-		field :price, String, null: false
+		field :location, String, null: true
+		field :price, String, null: true
 		field :require_rsvp, Boolean, null: false
-        field :rsvp_by, Types::DateTimeType, null: false
+        field :rsvp_by, Types::DateTimeType, null: true
 		field :club, Types::ClubType, null: false
 		field :all_users, [Integer, null: true], null: false
 		field :created_at, Types::DateTimeType, null: false
