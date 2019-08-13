@@ -160,6 +160,6 @@ end
 # Setup Club and ClubAdmin
 if Rails.env.development? or Rails.env.staging?
     club = Club.create!(name: "Test Club", display_picture: "sample.png", description: "Test Club Description")
-    club_admin = ClubAdmin.create!(email: "hello2@smumods.com", password: "password", password_confirmation: "password")
+    club_admin = ClubAdmin.create!(email: "hello@smumods.com", password: "password", password_confirmation: "password")
     club.update!(club_admin_id: club_admin.id)
 end
