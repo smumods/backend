@@ -17,7 +17,7 @@ namespace :events do
             description: "Description for #{time.strftime("%d %b (%a) %l:%m %p")}",
             main_image: "test_main_image.jpg",
             location: "Test Location",
-            color: "background-color: rgba(7,64,249,0.70);",
+            color: "background: rgba(7,64,249,0.70);",
             club: club
           )
         end # end clubs
