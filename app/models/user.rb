@@ -25,6 +25,7 @@ class User < ApplicationRecord
   # Bookmarks/Likes/Etc
   action_store :bookmark, :professor, counter_cache: true
   action_store :bookmark, :course, counter_cache: true
+  action_store :bookmark, :event, counter_cache: true
 
   # Actions
   before_create :generate_email_token, if: Proc.new { |user| not user.verified }

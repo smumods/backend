@@ -9,6 +9,7 @@ module Types
     field :all_reviews, [Types::ReviewType], null: true
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
+    field :event_bookmarks, [Types::EventType], null: true
 
     def books_count
       books.size
@@ -28,6 +29,10 @@ module Types
 
     def professor_bookmarks
       self.object.bookmark_professors
+    end
+
+    def event_bookmarks
+      self.object.bookmark_events
     end
   end
 end

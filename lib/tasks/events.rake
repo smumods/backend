@@ -7,7 +7,8 @@ namespace :events do
       year = date.year
       month = date.month
       day = date.day
-      (0...24).each do |hour|
+      # Every 7 hours create an event so that each day has only 4 events
+      (0...24).select { |h| h % 7  == 0 }.each do |hour|
         time = Time.new(year, month, day, hour)
         Club.all.each do |club|
           Event.create!(
