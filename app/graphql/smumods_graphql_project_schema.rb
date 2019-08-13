@@ -4,4 +4,6 @@ class SmumodsGraphqlProjectSchema < GraphQL::Schema
 
   # use GraphQL::Batch
   use BatchLoader::GraphQL
+  # use RecordLoader
+  use GraphQL::Batch
 end

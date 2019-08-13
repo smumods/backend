@@ -26,11 +26,18 @@ module Types
 		
 		def all_users
 			object.user_ids
-			# ForeignKeyLoader.for(User, :id).load([object.user_ids])
+			# ForeignKeyLoader.for(Rsvp, :event_id).load(object.id) do |rsvp|
+			# 	RecordLoader.for(User).load(rsvp.user_id)
+			# end
+
+			# Loaders::ForeignKeyLoader.for(Milestone, :project_id).load([object.id])
+			
+			# RecordLoader.for(User).load_many(object.users)
 			# BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |event_ids, loader|
-			# 	Rsvp.includes(:user).joins(:user).where(event_id: event_ids).each do |rsvp|
-			# 		loader.call(rsvp.user_id)
-			# 	end
+				# loader.call(event_ids)
+				# Rsvp.includes(:user).joins(:user).where(event_id: event_ids).each do |rsvp|
+				# 	loader.call(rsvp.user_id)
+				# end
 			# end
 		end
 
