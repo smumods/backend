@@ -12,5 +12,6 @@ module Types
     field :edit_review, mutation: Mutations::Reviews::EditReview
     field :delete_review, mutation: Mutations::Reviews::DeleteReview
     field :bookmark, mutation: Mutations::Bookmarks::Bookmark
+    field :register_event, mutation: Mutations::Events::RegisterEvent
   end
 end
