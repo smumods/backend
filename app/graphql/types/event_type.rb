@@ -12,12 +12,27 @@ module Types
 		field :price, String, null: false
 		field :require_rsvp, Boolean, null: false
         field :rsvp_by, Types::DateTimeType, null: false
-        field :club, Types::ClubType, null: false
+		field :club, Types::ClubType, null: false
+		field :all_users, [Integer, null: true], null: false
 		field :created_at, Types::DateTimeType, null: false
         field :updated_at, Types::DateTimeType, null: false
         
         def club
-            RecordLoader.for(Club).load(object.club_id)
-        end
+			# RecordLoader.for(Club).load(object.club_id)
+			BatchLoader::GraphQL.for(object.club_id).batch do |club_ids, loader|
+				Club.where(id: club_ids).each { |club| loader.call(club.id, club) }
+			end
+		end
+		
+		def all_users
+			object.user_ids
+			# ForeignKeyLoader.for(User, :id).load([object.user_ids])
+			# BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |event_ids, loader|
+			# 	Rsvp.includes(:user).joins(:user).where(event_id: event_ids).each do |rsvp|
+			# 		loader.call(rsvp.user_id)
+			# 	end
+			# end
+		end
+
 	end
 end

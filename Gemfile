@@ -28,6 +28,7 @@ gem 'sweet-alert2-rails'
 # Backend / APIs etc
 gem 'graphql'
 gem 'graphql-batch' # Optimizing GraphQL queries
+gem 'batch-loader'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
