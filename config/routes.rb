@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   
   # Admin Routes
-  constraints subdomain: 'admin' do
+  append_staging = ""
+  if Rails.env.staging?
+    append_staging = "-staging"
+  end
+  constraints subdomain: "admin#{append_staging}" do
     # Pages
     root to: "pages#home"
     site_pages = ['about']
