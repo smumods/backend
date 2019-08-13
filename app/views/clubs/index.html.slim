@@ -4,7 +4,7 @@ section.bg-grey
   .container
     .row
       .col-12
-        h1 Your Club Dashboard
+        h1 Your Dashboard
     - if @club
       .row.boxed
         .col-md-4.col-sm-12
@@ -14,7 +14,7 @@ section.bg-grey
       
       .row.boxed
         .col-12
-          h2.mb-3 Your Administrators
+          h2.mb-3 Exco List
 
           = simple_form_for @club_manager, as: :club_manager, url: club_managers_path do |f|
             .form-row
@@ -27,18 +27,16 @@ section.bg-grey
             table#example.table.table-striped
               thead
                 tr
-                  th First name
-                  th Last name
+                  th Name
                   th Email
                   th Actions
               tbody
                 - @club.club_managers.each do |club_manager|
                   tr
-                    td = club_manager.first_name
-                    td = club_manager.last_name
+                    td = "#{club_manager.first_name} #{club_manager.last_name}"
                     td = club_manager.email
                     td
-                      = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
+                      = button_to 'Delete Exco', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
 
           / .card-columns
           /   - @club.club_managers.each do |club_manager|
@@ -52,7 +50,7 @@ section.bg-grey
 
       .row.boxed
         .col-12
-          h2.mb-3 Listing Members
+          h2.mb-3 Member List
           
           = simple_form_for @club_member, as: :club_member, url: club_memberships_path do |f|
             .form-row
@@ -65,15 +63,13 @@ section.bg-grey
             table#example.table.table-striped
               thead
                 tr
-                  th First name
-                  th Last name
+                  th Name
                   th Email
                   th Actions
               tbody
                 - @club.club_memberships.each do |club_member|
                   tr
-                    td = club_member.first_name
-                    td = club_member.last_name
+                    td = "#{club_member.first_name} #{club_member.last_name}"
                     td = club_member.email
                     td 
                       = button_to 'Delete Member', club_membership_path(club_member.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_member.email}?" }
