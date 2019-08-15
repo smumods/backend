@@ -4,9 +4,9 @@ module Types
 		field :name, String, null: false
 		field :slug, String, null: false
 		field :display_picture, String, null: false
-		field :gallery, String, null: false
-		field :description, String, null: false
-		field :social_media, String, null: false
+		field :gallery, String, null: true
+		field :description, String, null: true
+		field :social_media, String, null: true
 		field :all_upcoming_events, [Types::EventType, null: true], null: false
 		field :all_past_events, [Types::EventType, null: true], null: false
 		field :created_at, Types::DateTimeType, null: false
