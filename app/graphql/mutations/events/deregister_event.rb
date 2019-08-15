@@ -30,7 +30,7 @@ module Mutations
                     return { status: false, message: "You haven't RSVPed for this event" }
                 else
                     if rsvp.destroy!
-                        return  { status: true, user: current_user, message: "Successfully unRSVPed for the event" }
+                        return  { status: true, user: current_user, message: "Successfully unRSVPed for the event", event: event }
                     else
                         raise GraphQL::ExecutionError.new("We could not unRSVP you due to some server issues.")
                     end
