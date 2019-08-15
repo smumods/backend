@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   # devise_for :admin_users, ActiveAdmin::Devise.config
   # devise_for :users
   
-  # ActiveAdmin route
-  ActiveAdmin.routes(self)
   
   # Admin Routes
   append_staging = ""
@@ -41,12 +39,18 @@ Rails.application.routes.draw do
   # Quick hack to get subdomains working
   # Staging API
   constraints subdomain: 'api-staging' do
+    # ActiveActive
+    ActiveAdmin.routes(self)
+
     # GraphQL
     post "/graphql", to: "graphql#execute"
   end
 
   # Normal API
   constraints subdomain: 'api' do
+    # ActiveActive
+    ActiveAdmin.routes(self)
+
     # GraphQL
     post "/graphql", to: "graphql#execute"
   end
