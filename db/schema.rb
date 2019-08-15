@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_085724) do
+ActiveRecord::Schema.define(version: 2019_08_15_070041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_085724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "club_admin_id"
+    t.integer "bookmarks_count", default: 0
     t.index ["club_admin_id"], name: "index_clubs_on_club_admin_id"
     t.index ["name"], name: "index_clubs_on_name", unique: true
     t.index ["slug"], name: "index_clubs_on_slug", unique: true

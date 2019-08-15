@@ -10,6 +10,7 @@ module Types
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
     field :event_bookmarks, [Types::EventType], null: true
+    field :club_bookmarks, [Types::ClubType], null: true
 
     def books_count
       books.size
@@ -33,6 +34,10 @@ module Types
 
     def event_bookmarks
       self.object.bookmark_events
+    end
+
+    def club_bookmarks
+      self.object.bookmark_clubs
     end
   end
 end
