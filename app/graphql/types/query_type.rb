@@ -1,7 +1,7 @@
 module Types
   class QueryType < Types::BaseObject
     field :hello_world, resolver: Queries::HelloWorld
-    field :users, resolver: Queries::Users::Users
+    # field :users, resolver: Queries::Users::Users
     field :user, resolver: Queries::Users::User
     field :temporary_user, resolver: Queries::TemporaryUsers::TemporaryUser
     field :all_courses, resolver: Queries::Courses::Courses
