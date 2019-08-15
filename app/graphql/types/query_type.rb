@@ -13,11 +13,14 @@ module Types
     field :home_professors, resolver: Queries::Home::Professors
     field :home_courses, resolver: Queries::Home::Courses
     field :all_announcements, resolver: Queries::Announcements::Announcements
+    field :club, resolver: Queries::Clubs::Club
+
+    # Events
     field :all_upcoming_events, resolver: Queries::Events::AllUpcomingEvents
     field :events_on_date, resolver: Queries::Events::EventsOnDate
     field :all_rsvp_events, resolver: Queries::Events::AllRsvpEvents
     field :event, resolver: Queries::Events::Event
-    field :club, resolver: Queries::Clubs::Club
+    field :all_recommended_events, resolver: Queries::Events::AllRecommendedEvents
 
     # Search
     field :search, resolver: Queries::ReviewsSearch
