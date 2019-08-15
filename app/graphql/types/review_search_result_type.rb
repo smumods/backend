@@ -1,5 +1,5 @@
-class Types::SearchResultType < Types::BaseUnion
-    description 'Courses and Professors that a search may return'
+class Types::ReviewSearchResultType < Types::BaseUnion
+    description 'Courses and Professors that a Review Search may return'
     possible_types Types::CourseType, Types::ProfessorType
 
     def self.resolve_type(object, context)

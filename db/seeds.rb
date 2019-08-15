@@ -147,7 +147,19 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
-user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
-user.save(validate: false)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?) if AdminUser.count == 0
-# AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmation: 'password') if Rails.env.production?
+if Rails.env.production?
+    user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
+    user.save(validate: false)
+end
+
+if (Rails.env.development? or Rails.env.staging?) and AdminUser.count == 0
+    AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
+# AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmations: 'password') if Rails.env.production?
+
+# Setup Club and ClubAdmin
+if Rails.env.development? or Rails.env.staging?
+    club = Club.create!(name: "Test Club", display_picture: "sample.png", description: "Test Club Description")
+    club_admin = ClubAdmin.create!(email: "hello@smumods.com", password: "password", password_confirmation: "password")
+    club.update!(club_admin_id: club_admin.id)
+end

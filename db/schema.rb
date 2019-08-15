@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_075809) do
+ActiveRecord::Schema.define(version: 2019_08_15_070041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,54 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
+  create_table "club_admin_delegates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_club_admin_delegates_on_club_id"
+    t.index ["user_id"], name: "index_club_admin_delegates_on_user_id"
+  end
+
+  create_table "club_admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_club_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_club_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "club_members", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.integer "status"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_club_members_on_club_id"
+    t.index ["user_id"], name: "index_club_members_on_user_id"
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "display_picture"
+    t.text "gallery"
+    t.text "description"
+    t.text "social_media"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "club_admin_id"
+    t.integer "bookmarks_count", default: 0
+    t.index ["club_admin_id"], name: "index_clubs_on_club_admin_id"
+    t.index ["name"], name: "index_clubs_on_name", unique: true
+    t.index ["slug"], name: "index_clubs_on_slug", unique: true
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "career"
@@ -94,6 +142,25 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "main_image"
+    t.text "gallery"
+    t.string "color"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "location"
+    t.float "price"
+    t.boolean "require_rsvp", default: false
+    t.datetime "rsvp_by"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "bookmarks_count", default: 0
+    t.index ["club_id"], name: "index_events_on_club_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -153,6 +220,17 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "rsvps", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.boolean "paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_rsvps_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_rsvps_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id"
     t.string "key"
@@ -169,9 +247,13 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tries_count"
     t.string "email"
     t.string "email_verification_token"
+    t.boolean "email_verified", default: false
+    t.string "login_token"
+    t.index ["email"], name: "index_temporary_users_on_email", unique: true
+    t.index ["email_verification_token"], name: "index_temporary_users_on_email_verification_token", unique: true
+    t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -190,6 +272,10 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.boolean "verified", default: false
     t.string "email_token"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
+    t.boolean "old_system", default: true
+    t.boolean "old_system_verified", default: false
+    t.string "telegram_email_verification_token"
+    t.integer "telegram_id"
     t.string "password_reset_token"
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
@@ -198,6 +284,8 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["telegram_email_verification_token"], name: "index_users_on_telegram_email_verification_token", unique: true
+    t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
@@ -212,12 +300,20 @@ ActiveRecord::Schema.define(version: 2019_07_15_075809) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "club_admin_delegates", "clubs"
+  add_foreign_key "club_admin_delegates", "users"
+  add_foreign_key "club_members", "clubs"
+  add_foreign_key "club_members", "users"
+  add_foreign_key "clubs", "club_admins"
+  add_foreign_key "events", "clubs"
   add_foreign_key "links", "users"
   add_foreign_key "professor_courses", "courses"
   add_foreign_key "professor_courses", "professors"
   add_foreign_key "reviews", "courses"
   add_foreign_key "reviews", "professors"
   add_foreign_key "reviews", "users"
+  add_foreign_key "rsvps", "events"
+  add_foreign_key "rsvps", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "votes", "reviews"
   add_foreign_key "votes", "users"
