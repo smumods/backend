@@ -7,8 +7,8 @@ module Types
 		field :gallery, String, null: true
 		field :description, String, null: true
 		field :social_media, String, null: true
-		field :all_upcoming_events, [Types::EventType, null: true], null: false
-		field :all_past_events, [Types::EventType, null: true], null: false
+		field :all_upcoming_events, Types::EventType.connection_type, null: false
+		field :all_past_events, Types::EventType.connection_type, null: false
 		field :created_at, Types::DateTimeType, null: false
 		field :updated_at, Types::DateTimeType, null: false
 		
