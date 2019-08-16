@@ -8,10 +8,11 @@ module Queries
             type Types::EventType.connection_type, null: false
 
             def resolve(time:)
+                puts Time.now
                 date = Time.at(time)
-                start_of_month = date.beginning_of_month
-                end_of_month = date.end_of_month
-                ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_month, end_of_month).order("start_date ASC")
+                start_of_day = date.beginning_of_day
+                end_of_day = date.end_of_day
+                ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_day, end_of_day).order("start_date ASC")
             end
         end
     end
