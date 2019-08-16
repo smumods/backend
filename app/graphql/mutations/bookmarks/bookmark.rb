@@ -45,7 +45,7 @@ module Mutations
                         current_user.create_action(:bookmark, target: event)
                     end
                 when "club"
-                    club = Club.find(resource_id_or_slug)
+                    club = Club.friendly.find(resource_id_or_slug)
                     return if club.nil?
                     if current_user.bookmark_club? club
                         current_user.destroy_action(:bookmark, target: club)
