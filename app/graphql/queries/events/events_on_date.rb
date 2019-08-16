@@ -9,7 +9,9 @@ module Queries
 
             def resolve(time:)
                 date = Time.at(time)
-                ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", date.beginning_of_day, date.end_of_day).order("start_date ASC")
+                start_of_month = date.beginning_of_month
+                end_of_month = date.end_of_month
+                ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_month, end_of_month).order("start_date ASC")
             end
         end
     end
