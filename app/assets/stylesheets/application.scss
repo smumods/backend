@@ -16,12 +16,23 @@
 @import "bootstrap";
 @import "sweetalert2";
 
+::selection {
+  background: rgb(255, 203, 218) none repeat scroll 0% 0%;
+}
+
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: rgb(71, 81, 88);
+  line-height: 1.44;
+  letter-spacing: 0.01em;
+  font-size: 18px;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Montserrat', sans-serif
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 800;
+  color: rgb(44, 53, 60);
 }
 
 h1 {

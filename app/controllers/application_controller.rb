@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
     def set_view_options()
         @view_options = {}
         @view_options['no_margin'] = false
+        @view_options['nav-border-bottom'] = 'border-bottom'
     end
 
     # def authenticate_admin_user!
