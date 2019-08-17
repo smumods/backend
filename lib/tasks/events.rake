@@ -9,9 +9,9 @@ namespace :events do
       day = date.day
       # Every 7 hours create an event so that each day has only 4 events
       (0...24).select { |h| h % 7  == 0 }.each do |hour|
-        time = Time.new(year, month, day, hour).in_time_zone
+        time = Time.new(year, month, day, hour).to_datetime
         Club.all.each do |club|
-          Event.create!(
+          event = Event.create(
             start_date: time,
             end_date: time.tomorrow,
             name: "Event for #{time.strftime("%d %b (%a) %l:%m %p")}",

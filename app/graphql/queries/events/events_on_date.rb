@@ -11,8 +11,8 @@ module Queries
                 puts "TIME NOW IS? #{Time.now.to_date}"
                 puts "TIME ZONE IS? #{Time.zone.name}"
                 date = Time.zone.at(time)
-                start_of_day = date.beginning_of_day
-                end_of_day = date.end_of_day
+                start_of_day = date.beginning_of_day.to_datetime
+                end_of_day = date.end_of_day.to_datetime
                 ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_day, end_of_day).order("start_date ASC")
             end
         end
