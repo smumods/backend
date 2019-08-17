@@ -22,5 +22,8 @@ module SampleGraphqlProject
          resource '*', :headers => :any, :methods => [:get, :post]
        end
     end
+
+    # Set timezone
+    config.time_zone = 'Singapore'
   end
 end
