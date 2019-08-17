@@ -3,7 +3,7 @@ namespace :events do
 
   task populate: :environment do
     puts "Current event count: #{Event.count}"
-    (Time.now.prev_month.to_date..Time.now.at_end_of_week.to_date).each do |date|
+    (Time.zone.now.prev_month.to_date..Time.zone.now.at_end_of_week.to_date).each do |date|
       year = date.year
       month = date.month
       day = date.day
