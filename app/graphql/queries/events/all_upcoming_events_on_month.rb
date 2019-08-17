@@ -8,7 +8,7 @@ module Queries
             type [Types::EventType], null: false
 
             def resolve(month:)
-                date = Time.at(month)
+                date = Time.zone.at(month)
                 start_of_month = date.beginning_of_month
                 end_of_month = date.end_of_month
                 ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_month, end_of_month).order("start_date ASC")

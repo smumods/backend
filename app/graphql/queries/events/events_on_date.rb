@@ -8,8 +8,9 @@ module Queries
             type Types::EventType.connection_type, null: false
 
             def resolve(time:)
-                puts Time.now
-                date = Time.at(time)
+                puts "TIME NOW IS? #{Time.now.to_date}"
+                puts "TIME ZONE IS? #{Time.zone.name}"
+                date = Time.zone.at(time)
                 start_of_day = date.beginning_of_day
                 end_of_day = date.end_of_day
                 ::Event.where("start_date BETWEEN ? and ? AND require_rsvp = false", start_of_day, end_of_day).order("start_date ASC")
