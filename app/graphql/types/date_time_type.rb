@@ -5,7 +5,7 @@ module Types
         end
         
         def self.coerce_result(value, _context)
-            value.utc.to_i
+            value.to_i
         end
     end
 end
