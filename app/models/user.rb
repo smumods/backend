@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :registerable,
          :database_authenticatable
 
   # Relationships
@@ -39,6 +39,10 @@ class User < ApplicationRecord
     else
       return false
     end
+  end
+
+  def send_welcome_message
+    Telegram.bot.send_message(chat_id: self.telegram_id, text: "Welcome to SMUMods! You have successfully linked your account with #{self.email}")
   end
 
   private
