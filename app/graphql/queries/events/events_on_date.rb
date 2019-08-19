@@ -10,7 +10,7 @@ module Queries
             def resolve(time:)
                 puts "TIME NOW IS? #{Time.now.to_date}"
                 puts "TIME ZONE IS? #{Time.zone.name}"
-                date = Time.at(time)
+                date = Time.zone.at(time).to_time
                 start_of_day = date.beginning_of_day
                 puts "start_of_day is #{start_of_day}"
                 end_of_day = date.end_of_day
