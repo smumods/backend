@@ -6,7 +6,7 @@ module Mutations
             argument :telegram_id, Integer, required: true
 
             field :success, String, null: true
-            
+
             def resolve(telegram_id:)
                 return unless telegram_id
                 current_user = context[:current_user]
@@ -19,6 +19,7 @@ module Mutations
                 user_with_telegram_id = User.find_by(telegram_id: telegram_id)
                 if user_with_telegram_id.nil?
                     if current_user.update(telegram_id: telegram_id)
+                        current_user.send_welcome_message!
                         return { success: true }
                     else
                         raise GraphQL::ExecutionError.new("We could not add Telegram Login for your account due to some server issues. Please contact us if it persists")
@@ -34,5 +35,5 @@ module Mutations
                 end
             end
         end
-    end 
+    end
 end

@@ -272,14 +272,14 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.boolean "verified", default: false
     t.string "email_token"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.boolean "old_system", default: true
-    t.boolean "old_system_verified", default: false
-    t.string "telegram_email_verification_token"
-    t.integer "telegram_id"
     t.string "password_reset_token"
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
     t.integer "password_token_tries_count", default: 0
+    t.boolean "old_system", default: true
+    t.boolean "old_system_verified", default: false
+    t.string "telegram_email_verification_token"
+    t.integer "telegram_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true

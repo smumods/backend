@@ -1,5 +1,5 @@
 module Mutations
-    module Users
+    module TemporaryUsers
         class CreateTemporaryUser < Mutations::BaseMutation
             # return type from the mutation
             type Types::TemporaryUserType

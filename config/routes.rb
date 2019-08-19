@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   # ActiveActive
   ActiveAdmin.routes(self)
-  
-  
+
+
   # Admin Routes
   append_staging = ""
   if Rails.env.staging?
@@ -21,20 +21,20 @@ Rails.application.routes.draw do
     for page in site_pages
       get "#{page}", to: "pages##{page}", as: page
     end
-    
+
     # Devise for ClubAdmin
     devise_for :club_admins, path: '/'
-    
+
     # Clubs
     get 'dashboard', to: 'clubs#index'
     resources :clubs, only: [:show, :edit, :update]
-    
+
     # Club Managers
     resources :club_managers, only: [:create, :destroy]
-    
+
     # Club Members
     resources :club_memberships, only: [:create, :destroy]
-    
+
     # Events
     resources :events
   end
@@ -52,10 +52,15 @@ Rails.application.routes.draw do
     # GraphQL
     post "/graphql", to: "graphql#execute"
   end
-  
+
   # GraphQL for Development
   if Rails.env.development?
     post "/graphql", to: "graphql#execute"
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
+  post "/graphql", to: "graphql#execute"
+
+  # Telegram Routes
+  telegram_webhook TelegramController, Rails.env.to_sym
+
 end
