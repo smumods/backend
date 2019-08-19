@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_07_17_115914) do
-=======
 ActiveRecord::Schema.define(version: 2019_08_15_070041) do
->>>>>>> 5a2357e6656319d72020f22373ef136a717af1d9
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -276,10 +272,6 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.boolean "verified", default: false
     t.string "email_token"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.boolean "old_system", default: true
-    t.boolean "old_system_verified", default: false
-    t.string "telegram_email_verification_token"
-    t.integer "telegram_id"
     t.string "password_reset_token"
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0

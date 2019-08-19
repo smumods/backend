@@ -1,13 +1,9 @@
 module Types
   class MutationType < BaseObject
     field :create_user, mutation: Mutations::Users::CreateUser
-<<<<<<< HEAD
-    field :create_temporary_user, mutation: Mutations::TemporaryUsers::CreateTemporaryUser
     field :login_temporary_user, mutation: Mutations::TemporaryUsers::LoginTemporaryUser
-=======
     field :add_telegram_login, mutation: Mutations::Users::AddTelegramLogin
-    field :create_temporary_user, mutation: Mutations::Users::CreateTemporaryUser
->>>>>>> 5a2357e6656319d72020f22373ef136a717af1d9
+    field :create_temporary_user, mutation: Mutations::TemporaryUsers::CreateTemporaryUser
     field :login_user, mutation: Mutations::Users::LogInUser
     field :logout_user, mutation: Mutations::Users::LogOutUser
     field :verify_email, mutation: Mutations::Users::VerifyEmail

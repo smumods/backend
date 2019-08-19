@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :club_memberships, through: :club_members, source: :club
   has_many :rsvps
   has_many :events, through: :rsvps, source: :event
-  
+
   # Validations
   validates :first_name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -48,7 +48,7 @@ class User < ApplicationRecord
     end
   end
 
-  def send_welcome_message
+  def send_welcome_message!
     Telegram.bot.send_message(chat_id: self.telegram_id, text: "Welcome to SMUMods! You have successfully linked your account with #{self.email}")
   end
 
