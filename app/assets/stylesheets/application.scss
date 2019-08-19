@@ -1,0 +1,58 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+@import "sweetalert2";
+
+::selection {
+  background: rgb(255, 203, 218) none repeat scroll 0% 0%;
+}
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: rgb(71, 81, 88);
+  line-height: 1.44;
+  letter-spacing: 0.01em;
+  font-size: 18px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 800;
+  color: rgb(44, 53, 60);
+}
+
+h1 {
+    font-size: 2.8rem
+}
+
+section {
+  > .container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  &.bg-grey {
+    background: #f9f9f9;
+  }
+}
+
+.boxed  {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px hsla(0, 0%, 0, 0.2);
+  margin-bottom: 2em;
+  padding: 2em;
+}

@@ -9,6 +9,10 @@ module Types
     field :all_reviews, [Types::ReviewType], null: true
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
+    field :event_bookmarks, [Types::EventType], null: true
+    field :club_bookmarks, [Types::ClubType], null: true
+    field :upcoming_events, Types::EventType.connection_type, null: true
+    field :past_events, Types::EventType.connection_type, null: true
 
     def books_count
       books.size
@@ -28,6 +32,22 @@ module Types
 
     def professor_bookmarks
       self.object.bookmark_professors
+    end
+
+    def event_bookmarks
+      self.object.bookmark_events
+    end
+
+    def club_bookmarks
+      self.object.bookmark_clubs
+    end
+
+    def upcoming_events
+      self.object.events.where("start_date >= ?", Time.now)
+    end
+
+    def past_events
+      self.object.events.where("start_date < ?", Time.now)
     end
   end
 end

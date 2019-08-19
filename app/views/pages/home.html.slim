@@ -1,0 +1,45 @@
+- @view_options["no_margin"] = true
+- @view_options["nav-border-bottom"] = ''
+
+#pages_home
+  .container-fluid.p-0.pb-5
+    .row.p-0.m-0
+      .col-xs-12.col-sm-12.col-md-8.offset-2.pr-0.text-center
+        img src="https://i.imgur.com/5AmYCu6.png" width="85%"
+
+      .d-block.d-sm-none.col-xs-12.p-5
+        .h3 The app for managing club events and memberships, free for life
+        p.description.mt-5
+          | PM us at&nbsp;
+          a href="https://t.me/smumods" @SMUMods
+          | &nbsp;and let us know you want to manage your club
+
+      .d-none.d-sm-block.col-sm-12.col-md-6.offset-3.pt-5.pb-5.text-center
+        h1 width="85%" The app for managing club events and memberships, free for life
+        p.description.mt-3
+          | Tired of managing club members whenever you change excos? Or managing events and notifying your members about it? Or having your email end up in Clutter?
+
+        .row-fluid.m-0.p-0.mt-5.text-center
+          a.btn.btn-primary.btn-lg.d-block.col-6.offset-3 href="https://t.me/smumods" Talk to us on Telegram
+
+
+  .container-fluid.m-0.bg-light
+    .row-fluid.pt-5.pb-3.text-center
+      .col-12.p-0
+        strong.h5 OUR STATISTICS
+
+    .row.justify-content-md-center.text-center.pb-4
+      .col-4.col-md-2
+        p.m-0
+          strong.h3 #{Club.count}
+        p Clubs
+      .col-4.col-md-2
+        p.m-0
+          strong.h3 #{User.count}
+        p Users
+      .col-4.col-md-2
+        p.m-0
+          strong.h3 #{Rsvp.count}
+        p RSVPs
+
+  
