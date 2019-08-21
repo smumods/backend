@@ -36,6 +36,7 @@ gem 'activeadmin'
 gem 'activeadmin_addons'
 gem "active_material", github: "vigetlabs/active_material"
 gem 'sidekiq'
+gem 'aws-sdk-s3', require: false
 
 # User Auth
 gem 'devise'

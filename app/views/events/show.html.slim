@@ -1,4 +1,4 @@
-- @view_options["no_margin"] = true 
+- @view_options["no_margin"] = true
 
 section.bg-grey
   .container
@@ -20,7 +20,10 @@ section.bg-grey
               p = @event.description
 
               .text-uppercase.font-weight-bold.text-muted Main image
-              p = @event.main_image
+              - if @event.image.attached?
+                p = image_tag @event.image
+              - else
+                p No image uploaded yet
 
               .text-uppercase.font-weight-bold.text-muted Gallery
               p = @event.gallery
@@ -46,7 +49,7 @@ section.bg-grey
                           td = user.last_name
                           td = user.email
 
-                
+
       .col-12.col-md-4
         .boxed
           .text-uppercase.font-weight-bold.text-muted Color

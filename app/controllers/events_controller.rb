@@ -17,6 +17,7 @@ class EventsController < ApplicationController
 
   def create
     @event = @club.events.new(event_params)
+    @event.image.attach(event_params[:image])
     if @event.save
       redirect_to(events_path, notice: "Successfully added your Event")
     else
@@ -29,7 +30,9 @@ class EventsController < ApplicationController
   end
 
   def update
+    binding.pry
     @event = Event.find(params[:id])
+    @event.image.attach(event_params[:image])
     if @event.update(event_params)
       flash[:notice] = "Successfully updated your event"
     else
@@ -49,7 +52,7 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.require(:event).permit(:name, :description, :main_image, :gallery, :color, :start_date, :end_date, :location, :price, :require_rsvp, :rsvp_by)
+      params.require(:event).permit(:name, :description, :main_image, :image, :color, :start_date, :end_date, :location, :price, :require_rsvp, :rsvp_by, :image, gallery: [])
     end
 
     def set_club

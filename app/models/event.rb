@@ -14,6 +14,10 @@ class Event < ApplicationRecord
   validates :color, presence: true
   validates :color, inclusion: { in: ["background: rgba(7,64,249,0.70);", "background: rgba(218,27,18,0.70);", "background: rgba(124,157,126,0.70);", "background: rgba(76,80,87,0.70);"] }
 
+  # Attachments
+  has_one_attached :image
+  has_many_attached :gallery
+
   # Callbacks
   after_create :notify_members_of_event
 
