@@ -30,7 +30,9 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.image.attach(event_params[:image])
+    if event_params[:image]
+      @event.image.attach(event_params[:image])
+    end
     if @event.update(event_params)
       flash[:notice] = "Successfully updated your event"
     else
@@ -58,7 +60,7 @@ class EventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.with_eager_loaded_gallery.find(params[:id])
     end
 
     def authenticate_event_owner

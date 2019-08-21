@@ -26,7 +26,11 @@ section.bg-grey
                 p No image uploaded yet
 
               .text-uppercase.font-weight-bold.text-muted Gallery
-              p = @event.gallery
+              - if @event.gallery.attached?
+                - @event.gallery.each do |gallery_photo|
+                  = image_tag gallery_photo, width: "20%", class: "d-block mb-3"
+              - else
+                p No images in gallery uploaded yet
 
               .text-uppercase.font-weight-bold.text-muted Club
               = @event.club.name

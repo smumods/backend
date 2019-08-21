@@ -18,6 +18,10 @@ class Event < ApplicationRecord
   has_one_attached :image
   has_many_attached :gallery
 
+  # Scopes
+  scope :with_eager_loaded_gallery, -> { eager_load(gallery_attachments: :blob) }
+  scope :with_preloaded_gallery, -> { preload(gallery_attachments: :blob) }
+
   # Callbacks
   after_create :notify_members_of_event
 

@@ -5,8 +5,13 @@
   .form-inputs
     = f.input :name
     = f.input :description, input_html: { rows: 10 }
-    = f.input :image
+    = f.input :image, hint: "Upload another photo to remove the old photo and override it"
+    - if @event.image.attached?
+      = image_tag @event.image, width: "50%", class: "mb-3"
     = f.input :gallery, as: :file, input_html: { multiple: true }, hint: "You can hold down shift and select multiple files"
+    - if @event.gallery.attached?
+      - @event.gallery.each do |gallery_photo|
+        = image_tag gallery_photo, width: "20%", class: "mb-3"
     = f.input :color, as: :radio_buttons, collection: [["background: rgba(7,64,249,0.70);", "Blue"], ["background: rgba(218,27,18,0.70);", "Red"], ["background: rgba(124,157,126,0.70);", "Green"], ["background: rgba(76,80,87,0.70);", "Grey"]], label_method: :second, value_method: :first
     = f.input :start_date
     = f.input :end_date
