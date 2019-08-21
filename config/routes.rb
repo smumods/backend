@@ -57,10 +57,15 @@ Rails.application.routes.draw do
   if Rails.env.development?
     post "/graphql", to: "graphql#execute"
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+
+    # Manage SideKiq
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
   end
   post "/graphql", to: "graphql#execute"
 
   # Telegram Routes
   telegram_webhook TelegramController, Rails.env.to_sym
+
 
 end

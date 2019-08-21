@@ -14,8 +14,8 @@ class Review < ApplicationRecord
   # Validate that review_type is either 'prof' or 'mod'
   validates :type_of_review, inclusion: ['prof', 'mod']
 
-  # Bookmarks/Likes/Etc
-  # has_many :like_by_users
+  # Callbacks for Notifications
+  after_create :notify_subscribers
 
   def total_vote_score
     self.votes.sum("vote_type")
@@ -24,8 +24,13 @@ class Review < ApplicationRecord
   def total_prof_score
     self.votes.where(review_type: "prof").sum("vote_type")
   end
-  
+
   def total_mod_score
     self.votes.where(review_type: "mod").sum("vote_type")
+  end
+
+  private
+  def notify_subscribers
+    NotificationsWorker.perform_async(:send_new_review_message, User.first.id)
   end
 end

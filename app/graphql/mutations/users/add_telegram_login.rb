@@ -19,7 +19,7 @@ module Mutations
                 user_with_telegram_id = User.find_by(telegram_id: telegram_id)
                 if user_with_telegram_id.nil?
                     if current_user.update(telegram_id: telegram_id)
-                        current_user.send_welcome_message!
+                        NotificationsWorker.perform_async(:send_new_review_message, User.first.id)
                         return { success: true }
                     else
                         raise GraphQL::ExecutionError.new("We could not add Telegram Login for your account due to some server issues. Please contact us if it persists")

@@ -48,10 +48,6 @@ class User < ApplicationRecord
     end
   end
 
-  def send_welcome_message!
-    Telegram.bot.send_message(chat_id: self.telegram_id, text: "Welcome to SMUMods! You have successfully linked your account with #{self.email}")
-  end
-
   private
   def generate_email_token
       self.email_token = loop do
