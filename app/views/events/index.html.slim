@@ -1,10 +1,12 @@
-- @view_options["no_margin"] = true 
+- @view_options["no_margin"] = true
 
 section.bg-grey
   .container
     .row
-      .col-12
-        h1 Your Events
+      .col-6
+        h1 Event Details
+      .col-6.text-right
+        = link_to 'Add Event', new_event_path(@event), class: "btn btn-outline-primary"
 
     .row.boxed
         .col-12
@@ -14,7 +16,7 @@ section.bg-grey
                 .col-12.col-md-4
                   .card.mb-3
                     .card-body
-                      h5.card-title 
+                      h5.card-title
                         = link_to event.name, event_path(event)
                       p.card-text = event.description.truncate(140, separator: ' ')
                       = link_to 'Show Event', event_path(event), class: "col-12 col-md-6 btn btn-outline-primary mr-2 mb-2"

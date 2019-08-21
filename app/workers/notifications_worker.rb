@@ -20,6 +20,6 @@ class NotificationsWorker
 
   def notify_members_of_event(user_id, options)
     user = User.find(user_id)
-    Telegram.bot.send_photo(chat_id: user.telegram_id, photo: options["image"], caption: options["message"])
+    Telegram.bot.send_photo(parse_mode: :HTML, chat_id: user.telegram_id, photo: options["image"], caption: options["message"])
   end
 end

@@ -17,7 +17,6 @@ class EventsController < ApplicationController
 
   def create
     @event = @club.events.new(event_params)
-    @event.image.attach(event_params[:image])
     if @event.save
       redirect_to(events_path, notice: "Successfully added your Event")
     else

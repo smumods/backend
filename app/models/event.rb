@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :description, presence: true
-  validates :main_image, presence: true
+  validates :image, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
@@ -24,7 +24,13 @@ class Event < ApplicationRecord
   private
   def notify_members_of_event
     self.club.club_memberships.each do |user|
-      NotificationsWorker.perform_async(:notify_members_of_event, user.id, { image: self.main_image, message: "[#{self.club.name}] #{self.name} will be organizing an event on #{self.start_date} at #{self.location}" })
+      NotificationsWorker.perform_async(
+        :notify_members_of_event,
+        user.id,
+        {
+          image: self.image.service_url,
+          message: "**#{self.club.name}** is organizing an event: \n\n**Event Name:** #{self.name}\n**Date & Time:** #{self.start_date}\n**Location:** #{self.location}"
+        })
     end
   end
 end
