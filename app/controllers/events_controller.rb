@@ -30,7 +30,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    binding.pry
     @event = Event.find(params[:id])
     @event.image.attach(event_params[:image])
     if @event.update(event_params)

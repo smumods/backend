@@ -13,7 +13,6 @@ module Queries
                 if temporary_user.nil?
                   raise GraphQL::ExecutionError.new("Something went wrong!")
                 end
-                binding.pry
                 if not temporary_user.telegram_id.nil?
                   user = User.where(telegram_id: telegram_id).first
                   if user

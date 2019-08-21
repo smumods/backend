@@ -35,7 +35,6 @@ class TelegramController < Telegram::Bot::UpdatesController
         end
         client_verifier = data_parts[1]
         login_token = data_parts[2]
-        binding.pry
         temporary_user = TemporaryUser.where(client_verifier: client_verifier, session_token: login_token).first
         if temporary_user
           if temporary_user.update(telegram_id: from_id)
