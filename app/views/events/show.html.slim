@@ -21,7 +21,7 @@ section.bg-grey
 
               .text-uppercase.font-weight-bold.text-muted Main image
               - if @event.image.attached?
-                p = image_tag @event.image
+                p = image_tag @event.image, width: "100%"
               - else
                 p No image uploaded yet
 
@@ -56,10 +56,10 @@ section.bg-grey
           p = @event.color
 
           .text-uppercase.font-weight-bold.text-muted Start date
-          p = @event.start_date
+          p = @event.formatted_start_date
 
           .text-uppercase.font-weight-bold.text-muted End date
-          p = @event.end_date
+          p = @event.formatted_end_date
 
           .text-uppercase.font-weight-bold.text-muted Location
           p = @event.location

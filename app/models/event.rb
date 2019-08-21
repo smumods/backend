@@ -21,6 +21,22 @@ class Event < ApplicationRecord
   # Callbacks
   after_create :notify_members_of_event
 
+  def formatted_start_date
+    self.start_date.strftime("%d %b (%a) %l:%m %p")
+  end
+
+  def formatted_end_date
+    self.end_date.strftime("%d %b (%a) %l:%m %p")
+  end
+
+  def price
+    self[:price].nil? ? "No Price Set" : self[:price]
+  end
+
+  def require_rsvp
+    self[:require_rsvp] ? "Yes" : "No"
+  end
+
   private
   def notify_members_of_event
     self.club.club_memberships.each do |user|
@@ -29,7 +45,7 @@ class Event < ApplicationRecord
         user.id,
         {
           image: self.image.service_url,
-          message: "**#{self.club.name}** is organizing an event: \n\n**Event Name:** #{self.name}\n**Date & Time:** #{self.start_date.strftime("%d %b (%a) %l:%m %p")}\n**Location:** #{self.location}"
+          message: "**#{self.club.name}** is organizing an event: \n\n**Event Name:** #{self.name}\n**Date & Time:** #{self.formatted_start_date}\n**Location:** #{self.location}"
         })
     end
   end
