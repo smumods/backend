@@ -11,7 +11,14 @@ module Types
 		field :all_past_events, Types::EventType.connection_type, null: false
 		field :created_at, Types::DateTimeType, null: false
 		field :updated_at, Types::DateTimeType, null: false
-		
+
+    def display_picture
+      if object.display_picture and object.display_picture.attached?
+        return object.display_picture.service_url
+      end
+      return ""
+    end
+
 		def all_upcoming_events
 			upcoming_events = object.events.where("start_date >= ?", Time.now)
 			return upcoming_events
