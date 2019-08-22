@@ -5,9 +5,9 @@
   .form-inputs
     = f.input :name
     = f.input :description, input_html: { rows: 10 }
-    = f.input :image, hint: "Upload another photo to remove the old photo and override it"
-    - if @event.image.attached?
-      = image_tag @event.image, width: "50%", class: "mb-3"
+    = f.input :main_image, hint: "Upload another photo to remove the old photo and override it"
+    - if @event.main_image.attached?
+      = image_tag @event.main_image, width: "50%", class: "mb-3"
     = f.input :gallery, as: :file, input_html: { multiple: true }, hint: "You can hold down shift and select multiple files"
     - if @event.gallery.attached?
       - @event.gallery.each do |gallery_photo|

@@ -17,8 +17,13 @@ module Types
 		field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false
 
+
     def main_image
-      return object.image.service_url
+      if object.main_image and object.main_image.attached?
+        return object.main_image.service_url
+      else
+        return ""
+      end
     end
 
     def club

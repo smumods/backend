@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.require(:event).permit(:name, :description, :main_image, :image, :color, :start_date, :end_date, :location, :price, :require_rsvp, :rsvp_by, :image, gallery: [])
+      params.require(:event).permit(:name, :description, :main_image, :image, :color, :start_date, :end_date, :location, :price, :require_rsvp, :rsvp_by, gallery: [])
     end
 
     def set_club

@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :description, presence: true
-  validates :image, presence: true
+  validates :main_image, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
@@ -15,7 +15,7 @@ class Event < ApplicationRecord
   validates :color, inclusion: { in: ["background: rgba(7,64,249,0.70);", "background: rgba(218,27,18,0.70);", "background: rgba(124,157,126,0.70);", "background: rgba(76,80,87,0.70);"] }
 
   # Attachments
-  has_one_attached :image
+  has_one_attached :main_image
   has_many_attached :gallery
 
   # Scopes
@@ -48,7 +48,7 @@ class Event < ApplicationRecord
         :notify_members_of_event,
         user.id,
         {
-          image: self.image.service_url,
+          image: self.main_image.service_url,
           message: "<b>#{self.club.name}</b> is organizing an event: \n\n<b>Event Name:</b> #{self.name}\n<b>Date & Time:</b> #{self.formatted_start_date}\n<b>Location:</b> #{self.location}"
         })
     end

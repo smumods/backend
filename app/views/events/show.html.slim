@@ -20,8 +20,8 @@ section.bg-grey
               p = @event.description
 
               .text-uppercase.font-weight-bold.text-muted Main image
-              - if @event.image.attached?
-                p = image_tag @event.image, width: "100%"
+              - if @event.main_image.attached?
+                p = image_tag @event.main_image, width: "100%"
               - else
                 p No image uploaded yet
 
