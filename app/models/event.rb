@@ -49,7 +49,7 @@ class Event < ApplicationRecord
         user.id,
         {
           image: self.image.service_url,
-          message: "**#{self.club.name}** is organizing an event: \n\n**Event Name:** #{self.name}\n**Date & Time:** #{self.formatted_start_date}\n**Location:** #{self.location}"
+          message: "<b>#{self.club.name}</b> is organizing an event: \n\n<b>Event Name:</b> #{self.name}\n<b>Date & Time:</b> #{self.formatted_start_date}\n<b>Location:</b> #{self.location}"
         })
     end
   end
