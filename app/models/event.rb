@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+  # Attr Accessors
+  attr_accessor :notify_of_event
+
   # Relationships
   belongs_to :club
   has_many :rsvps
@@ -25,6 +28,7 @@ class Event < ApplicationRecord
   # Callbacks
   after_create :notify_members_of_event
 
+  # Methods
   def formatted_start_date
     self.start_date.strftime("%d %b (%a) %l:%m %p")
   end
@@ -41,16 +45,28 @@ class Event < ApplicationRecord
     self[:require_rsvp] ? "Yes" : "No"
   end
 
+  # Turn notifications off if explicitly set
+  def notify_of_event=(value)
+    @notify_of_event = value
+  end
+
+  def notify_of_event?
+    return true if @notify_of_event.nil?
+    return @notify_of_event
+  end
+
   private
   def notify_members_of_event
-    self.club.club_memberships.each do |user|
-      NotificationsWorker.perform_async(
-        :notify_members_of_event,
-        user.id,
-        {
-          image: self.main_image.service_url,
-          message: "<b>#{self.club.name}</b> is organizing an event: \n\n<b>Event Name:</b> #{self.name}\n<b>Date & Time:</b> #{self.formatted_start_date}\n<b>Location:</b> #{self.location}"
-        })
+    if self.notify_of_event?
+      self.club.club_memberships.each do |user|
+        NotificationsWorker.perform_async(
+          :notify_members_of_event,
+          user.id,
+          {
+            image: self.main_image.service_url,
+            message: "<b>#{self.club.name}</b> is organizing an event: \n\n<b>Event Name:</b> #{self.name}\n<b>Date & Time:</b> #{self.formatted_start_date}\n<b>Location:</b> #{self.location}"
+          })
+      end
     end
   end
 end
