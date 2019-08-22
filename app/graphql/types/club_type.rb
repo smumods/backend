@@ -19,6 +19,13 @@ module Types
       return ""
     end
 
+    def gallery
+      if object.gallery and object.gallery.attached?
+        return object.gallery.attachments.map(&:service_url)
+      end
+      return [""]
+    end
+
 		def all_upcoming_events
 			upcoming_events = object.events.where("start_date >= ?", Time.now)
 			return upcoming_events

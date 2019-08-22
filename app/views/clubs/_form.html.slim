@@ -5,9 +5,10 @@
 
 = simple_form_for(@club) do |f|
   = f.input :display_picture, as: :file
-  = f.input :gallery, as: :file, multiple: true
-
-  button.btn.btn-outline-secondary.add-gallery-button.mb-3 Add 1 More Picture
+  = f.input :gallery, as: :file, input_html: { multiple: true }, hint: "You can hold down shift and select multiple files"
+  - if @club.gallery.attached?
+      - @club.gallery.attachments.each do |gallery_photo|
+        = image_tag gallery_photo, width: "20%", class: "mb-3"
 
   = f.input :description
   = f.input :social_media
