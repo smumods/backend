@@ -23,11 +23,14 @@ class Club < ApplicationRecord
     has_many :club_memberships, through: :club_members, source: :user
     has_many :events
 
+    # Attachments
+    has_one_attached :display_picture
+    has_many_attached :gallery
+
     # Others
     serialize :gallery, Array
 
     # Callbacks
-    before_save :remove_blank_gallery_pictures
 
     def slug_candidates
         [:name, :name_and_sequence]
@@ -38,9 +41,5 @@ class Club < ApplicationRecord
         slug = name.to_param
         sequence = self.class.where("slug like '#{slug}-%'").count + 2
         "#{slug}-#{sequence}"
-    end
-
-    def remove_blank_gallery_pictures
-        gallery.reject!(&:blank?)
     end
 end

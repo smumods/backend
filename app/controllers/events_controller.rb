@@ -30,8 +30,8 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if event_params[:image]
-      @event.image.attach(event_params[:image])
+    if event_params[:main_image]
+      @event.main_image.attach(event_params[:main_image])
     end
     if @event.update(event_params)
       flash[:notice] = "Successfully updated your event"

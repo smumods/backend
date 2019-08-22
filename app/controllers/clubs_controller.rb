@@ -13,6 +13,9 @@ class ClubsController < ApplicationController
 
   def update
     @club = Club.friendly.find(params[:id])
+    if club_params[:display_picture]
+      @club.display_picture.attach(club_params[:display_picture])
+    end
     if @club.update(club_params)
       flash[:notice] = "Successfully updated your club details"
     else
@@ -23,15 +26,13 @@ class ClubsController < ApplicationController
 
   private
   def club_params
-    accepted_params = params.require(:club).permit(:display_picture, :description, :social_media, gallery: [])
-    accepted_params[:gallery].reject! { |photo_url| photo_url.empty? }
-    return accepted_params
+    params.require(:club).permit(:display_picture, :description, :social_media, gallery: [])
   end
 
   def set_club
     @club = current_club_admin.club
   end
-  
+
   def set_club_manager
     @club_manager = ClubAdminDelegate.new(club_id: @club.id)
   end

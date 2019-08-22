@@ -4,9 +4,9 @@
       li = message
 
 = simple_form_for(@club) do |f|
-  = f.input :display_picture
-  = f.input :gallery, as: :array
-  
+  = f.input :display_picture, as: :file
+  = f.input :gallery, as: :file, multiple: true
+
   button.btn.btn-outline-secondary.add-gallery-button.mb-3 Add 1 More Picture
 
   = f.input :description
