@@ -17,6 +17,9 @@ module Types
 		field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false
 
+    def require_rsvp
+      object[:require_rsvp]
+    end
 
     def main_image
       if object.main_image and object.main_image.attached?
