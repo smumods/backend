@@ -4,7 +4,7 @@ module Types
 		field :name, String, null: false
 		field :slug, String, null: false
 		field :display_picture, String, null: false
-		field :gallery, String, null: true
+		field :gallery, [String], null: true
 		field :description, String, null: true
 		field :social_media, String, null: true
 		field :all_upcoming_events, Types::EventType.connection_type, null: false
