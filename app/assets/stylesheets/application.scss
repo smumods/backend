@@ -15,6 +15,7 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "sweetalert2";
+@import "toastr";
 
 ::selection {
   background: rgb(255, 203, 218) none repeat scroll 0% 0%;

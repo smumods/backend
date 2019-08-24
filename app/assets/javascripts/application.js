@@ -22,4 +22,33 @@
 //= require autosize/dist/autosize
 //= require sweetalert2
 //= require sweet-alert2-rails
+//= require toastr
 //= require_tree .
+
+$(document).ready(function() {
+  toastr.options.closeButton = false,
+  toastr.options.debug = false,
+  toastr.options.newestOnTop = false,
+  toastr.options.progressBar = false,
+  toastr.options.positionClass = "toast-bottom-right",
+  toastr.options.preventDuplicates = false,
+  toastr.options.onclick = null,
+  toastr.options.showDuration = "300",
+  toastr.options.hideDuration = "300",
+  toastr.options.timeOut = "5000",
+  toastr.options.extendedTimeOut = "1000",
+  toastr.options.showEasing = "swing",
+  toastr.options.hideEasing = "linear",
+  toastr.options.showMethod = "fadeIn",
+  toastr.options.hideMethod = "fadeOut"
+  toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+  let iterations = 0;
+  let toastSuccess = () => {
+    iterations++
+    if(iterations >=5) {
+      clearInterval(interval)
+    }
+    toastr.success('Aye!!')
+  }
+  let interval = setInterval(toastSuccess, 1250)
+});

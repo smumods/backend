@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   # Quick hack to get subdomains working
   # Staging API
   constraints subdomain: 'api-staging' do
-
     # GraphQL
     post "/graphql", to: "graphql#execute"
   end
@@ -66,6 +65,5 @@ Rails.application.routes.draw do
 
   # Telegram Routes
   telegram_webhook TelegramController, Rails.env.to_sym
-
 
 end
