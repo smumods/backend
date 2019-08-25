@@ -32,3 +32,6 @@
 
 # Ignore redis files
 dump.rdb
+
+# Ignore .DSStore
+.DS_Store

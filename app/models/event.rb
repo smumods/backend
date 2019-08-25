@@ -21,6 +21,16 @@ class Event < ApplicationRecord
   has_one_attached :main_image
   has_many_attached :gallery
 
+  def self.main_image_sizes
+    {
+      thumbnail: { resize: "160x160" }
+    }
+  end
+
+  def main_image_sized(size)
+    self.main_image.variant(Event.main_image_sizes[size]).processed
+  end
+
   # Scopes
   scope :with_eager_loaded_gallery, -> { eager_load(gallery_attachments: :blob) }
   scope :with_preloaded_gallery, -> { preload(gallery_attachments: :blob) }

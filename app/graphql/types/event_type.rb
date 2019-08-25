@@ -4,6 +4,7 @@ module Types
 		field :name, String, null: false
 		field :description, String, null: false
 		field :main_image, String, null: false
+		field :main_image_thumbnail, String, null: false
 		field :gallery, String, null: true
 		field :color, String, null: true
 		field :start_date, Types::DateTimeType, null: false
@@ -27,6 +28,14 @@ module Types
       else
         return ""
       end
+    end
+
+    def main_image_thumbnail
+      thumbnail_image = object.main_image_sized(:thumbnail)
+      if thumbnail_image and thumbnail_image.processed
+        return thumbnail_image.service_url
+      end
+      return ""
     end
 
     def club

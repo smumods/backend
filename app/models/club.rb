@@ -41,7 +41,6 @@ class Club < ApplicationRecord
     serialize :gallery, Array
 
     # Callbacks
-    after_create :generate_thumbnail
 
     def slug_candidates
         [:name, :name_and_sequence]
