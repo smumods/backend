@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'scanner/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   # devise_for :users
 
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
   append_staging = ""
   if Rails.env.staging?
     append_staging = "-staging"
+  end
+  constraints subdomain: "scanner#{append_staging}" do
+    root to: "scanner#index"
   end
   constraints subdomain: "admin#{append_staging}" do
     # Pages
