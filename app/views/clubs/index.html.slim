@@ -1,4 +1,4 @@
-- @view_options["no_margin"] = true 
+- @view_options["no_margin"] = true
 
 section.bg-grey
   .container
@@ -11,7 +11,7 @@ section.bg-grey
           h2.mb-3 Club Details
           = link_to 'View your club profile', club_path(@club), class: "btn btn-outline-secondary d-block col-12 mb-2"
           = link_to 'Edit your profile', edit_club_path(@club), class: "btn btn-outline-secondary d-block col-12 mb-2"
-      
+
       .row.boxed
         .col-12
           h2.mb-3 Exco List
@@ -40,22 +40,22 @@ section.bg-grey
 
           / .card-columns
           /   - @club.club_managers.each do |club_manager|
-            
-          /     .card 
+
+          /     .card
           /       .card-body
           /         h5.card-title = club_manager.email
           /         h6.card-subtitle.mb-4.text-muted Club Manager
-          /         / p.card-text   
+          /         / p.card-text
           /         = button_to 'Delete Manager', club_manager_path(club_manager.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_manager.email}?" }
 
       .row.boxed
         .col-12
           h2.mb-3 Member List
-          
+
           = simple_form_for @club_member, as: :club_member, url: club_memberships_path do |f|
             .form-row
               .col
-                = f.input :email_address, as: :fake, label: false, placeholder: "Enter an email address"
+                = f.input "club_membership[email_address]", as: :fake, label: false, placeholder: "Enter an email address"
               .col
                 = f.button :submit, class: "btn btn-success"
 
@@ -71,12 +71,14 @@ section.bg-grey
                   tr
                     td = "#{club_member.first_name} #{club_member.last_name}"
                     td = club_member.email
-                    td 
+                    td
                       = button_to 'Delete Member', club_membership_path(club_member.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_member.email}?" }
+                      .form-group
+                        = select_tag "club_membership[status]", options_for_select(["Pending", "Pending Payment", "Member"]), class: 'form-control col-6 mt-2', data: { url: club_membership_update_status_path(club_member), remote: true, method: :put }
 
     - else
       row.boxed
         .col-12
-          p 
-          | No club associated with this account yet. Please message us on telegram at 
+          p
+          | No club associated with this account yet. Please message us on telegram at
           a href="https://t.me/smumods" SMUMods

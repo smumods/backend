@@ -1,0 +1,5 @@
+<% if @club_membership_message[:status] == "error" %>
+  toastr.error("<%= @club_membership_message[:message] %>")
+<% elsif @club_membership_message[:status] == "success" %>
+  toastr.success("<%= @club_membership_message[:message] %>")
+<% end %>

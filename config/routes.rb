@@ -33,7 +33,9 @@ Rails.application.routes.draw do
     resources :club_managers, only: [:create, :destroy]
 
     # Club Members
-    resources :club_memberships, only: [:create, :destroy]
+    resources :club_memberships, only: [:create, :destroy, :update] do
+      put "update_status"
+    end
 
     # Events
     resources :events
