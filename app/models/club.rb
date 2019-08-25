@@ -27,10 +27,21 @@ class Club < ApplicationRecord
     has_one_attached :display_picture
     has_many_attached :gallery
 
+    def self.display_picture_sizes
+      {
+        thumbnail: { resize: "160x160" }
+      }
+    end
+
+    def display_picture_sized(size)
+      self.display_picture.variant(Club.display_picture_sizes[size]).processed
+    end
+
     # Others
     serialize :gallery, Array
 
     # Callbacks
+    after_create :generate_thumbnail
 
     def slug_candidates
         [:name, :name_and_sequence]

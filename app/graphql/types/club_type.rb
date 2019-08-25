@@ -4,6 +4,7 @@ module Types
 		field :name, String, null: false
 		field :slug, String, null: false
 		field :display_picture, String, null: false
+		field :display_picture_thumbnail, String, null: false
 		field :gallery, [String], null: true
 		field :description, String, null: true
 		field :social_media, String, null: true
@@ -15,6 +16,14 @@ module Types
     def display_picture
       if object.display_picture and object.display_picture.attached?
         return object.display_picture.service_url
+      end
+      return ""
+    end
+
+    def display_picture_thumbnail
+      thumbnail_image = object.display_picture_sized(:thumbnail)
+      if thumbnail_image and thumbnail_image.processed
+        return thumbnail_image.service_url
       end
       return ""
     end

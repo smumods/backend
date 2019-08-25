@@ -19,7 +19,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
-# gem "bootstrap_form", ">= 4.2.0"
+# gem 'bootstrap_form', '>= 4.2.0'
 gem 'simple_form'
 gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
 gem 'sweet-alert2-rails'
@@ -35,9 +35,10 @@ gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.
 gem 'sendgrid-ruby' # for emails
 gem 'activeadmin'
 gem 'activeadmin_addons'
-gem "active_material", github: "vigetlabs/active_material"
+gem 'active_material', github: 'vigetlabs/active_material'
 gem 'sidekiq'
 gem 'aws-sdk-s3', require: false
+gem "mini_magick"
 
 # User Auth
 gem 'devise'
@@ -57,7 +58,6 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # gem 'appsignal'
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
-gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
