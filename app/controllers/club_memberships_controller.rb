@@ -21,7 +21,6 @@ class ClubMembershipsController < ApplicationController
     end
 
     def update_status
-      binding.pry
       club_member = ClubMember.find_by(id: params[:club_membership_id])
       if club_member.nil?
         @club_membership_message = { message: "Invalid Club Member", status: "error" }

@@ -26,9 +26,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "target_uuid"
-    t.uuid "user_uuid"
     t.index ["action_type", "target_type", "target_id", "user_type", "user_id"], name: "uk_action_target_user", unique: true
     t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
     t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
@@ -77,7 +74,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -91,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -99,8 +94,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -109,9 +102,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.bigint "club_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "club_uuid"
     t.index ["club_id"], name: "index_club_admin_delegates_on_club_id"
     t.index ["user_id"], name: "index_club_admin_delegates_on_user_id"
   end
@@ -124,7 +114,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["email"], name: "index_club_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_club_admins_on_reset_password_token", unique: true
   end
@@ -136,9 +125,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "club_uuid"
     t.index ["club_id"], name: "index_club_members_on_club_id"
     t.index ["user_id"], name: "index_club_members_on_user_id"
   end
@@ -152,8 +138,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "updated_at", null: false
     t.bigint "club_admin_id"
     t.integer "bookmarks_count", default: 0
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "club_admin_uuid"
     t.index ["club_admin_id"], name: "index_clubs_on_club_admin_id"
     t.index ["name"], name: "index_clubs_on_name", unique: true
     t.index ["slug"], name: "index_clubs_on_slug", unique: true
@@ -176,7 +160,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
   end
 
@@ -194,8 +177,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "club_uuid"
     t.index ["club_id"], name: "index_events_on_club_id"
   end
 
@@ -216,8 +197,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
@@ -226,9 +205,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "professor_uuid"
-    t.uuid "course_uuid"
     t.index ["course_id"], name: "index_professor_courses_on_course_id"
     t.index ["professor_id"], name: "index_professor_courses_on_professor_id"
   end
@@ -239,7 +215,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "bookmarks_count", default: 0
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["slug"], name: "index_professors_on_slug", unique: true
   end
 
@@ -257,10 +232,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_of_review"
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "professor_uuid"
-    t.uuid "course_uuid"
     t.index ["course_id"], name: "index_reviews_on_course_id"
     t.index ["professor_id"], name: "index_reviews_on_professor_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
@@ -274,9 +245,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "updated_at", null: false
     t.string "status", default: "Attending"
     t.string "notes", default: ""
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "event_uuid"
     t.index ["event_id"], name: "index_rsvps_on_event_id"
     t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id", unique: true
     t.index ["user_id"], name: "index_rsvps_on_user_id"
@@ -287,8 +255,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.string "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
     t.index ["key"], name: "index_sessions_on_key", unique: true
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
@@ -304,7 +270,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.string "email_verification_token"
     t.boolean "email_verified", default: false
     t.string "login_token"
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["email"], name: "index_temporary_users_on_email", unique: true
     t.index ["email_verification_token"], name: "index_temporary_users_on_email_verification_token", unique: true
     t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
@@ -318,9 +283,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "event_uuid"
     t.index ["event_id"], name: "index_unrsvps_on_event_id"
     t.index ["user_id"], name: "index_unrsvps_on_user_id"
   end
@@ -364,9 +326,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.bigint "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.uuid "user_uuid"
-    t.uuid "review_uuid"
     t.index ["review_id"], name: "index_votes_on_review_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end

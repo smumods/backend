@@ -67,12 +67,12 @@ section.bg-grey
                   th Email
                   th Actions
               tbody
-                - @club.club_memberships.each do |club_member|
+                - @club.club_members.each do |club_member|
                   tr
-                    td = "#{club_member.first_name} #{club_member.last_name}"
-                    td = club_member.email
+                    td = "#{club_member.user.first_name} #{club_member.user.last_name}"
+                    td = club_member.user.email
                     td
-                      = button_to 'Delete Member', club_membership_path(club_member.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_member.email}?" }
+                      = button_to 'Delete Member', club_membership_path(club_member.id), method: :delete, class: "card-link btn btn-danger", data: { confirm: "Are you sure you want to delete #{club_member.user.email}?" }
                       .form-group
                         = select_tag "club_membership[status]", options_for_select(["Pending", "Pending Payment", "Member"]), class: 'form-control col-6 mt-2', data: { url: club_membership_update_status_path(club_member), remote: true, method: :put }
 
