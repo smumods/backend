@@ -5,7 +5,7 @@ if (Rails.env.development? and User.count == 0)
         unique_name.delete_at(0)
         last_name = unique_name.join(" ")
         user = User.create(
-            first_name: first_name, 
+            first_name: first_name,
             last_name: last_name,
             email: "#{i}@sis.smu.edu.sg",
             password: "password",
@@ -18,7 +18,7 @@ end
 # Create staging accounts with real emails because emails do get sent out!
 if Rails.env.staging?
     User.create(
-        first_name: "Gabriel", 
+        first_name: "Gabriel",
         last_name: "Chuan",
         email: "zhchuan.2016@sis.smu.edu.sg",
         password: "password",
@@ -26,7 +26,7 @@ if Rails.env.staging?
         verified: true
     )
     User.create(
-        first_name: "Zachery", 
+        first_name: "Zachery",
         last_name: "Ng",
         email: "ng.zhenghao.2016@sis.smu.edu.sg",
         password: "password",
@@ -66,7 +66,7 @@ if (Course.count == 0)
                             end
                         rescue Exception => e
                         end
-                        
+
                     end
                 end
             rescue Exception => e
@@ -104,16 +104,15 @@ if (ProfessorCourse.count == 0)
         end
     end
 end
-    
+
 if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     Course.all.each do |course|
         with_professor = rand(2) == 1
-        review_content = Faker::Lorem.paragraph(rand(70))
         if with_professor
             User.all.sample(rand(2)).each do |user|
                 begin
                     review = Review.create!(
-                        professor_review: Faker::Lorem.paragraph ,
+                        professor_review: Faker::Lorem.paragraph,
                         module_review: Faker::Lorem.paragraph,
                         is_anonymous: [true, false][rand(2)],
                         marking_score: rand(5) + 1,
@@ -133,7 +132,7 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
             User.all.sample(rand(2)).each do |user|
                 begin
                     review = Review.create!(
-                        module_review: Faker::Lorem.paragraph(rand(70)),
+                        module_review: Faker::Lorem.paragraph,
                         is_anonymous: [true, false][rand(2)],
                         user: user,
                         course: course,
@@ -158,8 +157,36 @@ end
 # AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmations: 'password') if Rails.env.production?
 
 # Setup Club and ClubAdmin
-if Rails.env.development? or Rails.env.staging?
-    club = Club.create!(name: "Test Club", display_picture: "sample.png", description: "Test Club Description")
-    club_admin = ClubAdmin.create!(email: "hello@smumods.com", password: "password", password_confirmation: "password")
-    club.update!(club_admin_id: club_admin.id)
+if Rails.env.development? or Rails.env.staging? and Club.count == 0
+  club_admin = ClubAdmin.create!(email: "hello@smumods.com", password: "password", password_confirmation: "password")
+  club = Club.create!(name: "Test Club", display_picture: file = File.open(File.join(Rails.root, "app/assets/images/smuai.jpeg")), description: "Test Club Description", club_admin_id: club_admin.id)
+end
+
+# Setup Votes and Actions
+if Rails.env.development? or Rails.env.staging? and Action.count == 0
+  users = User.all.to_a
+  puts "Seeding Event Bookmarks"
+  Event.all.each do |event|
+    users.each do |user|
+      user.create_action(:bookmark, target: event)
+    end
+  end
+  puts "Seeding Course Bookmarks"
+  Course.all.each do |course|
+    users.each do |user|
+      user.create_action(:bookmark, target: course)
+    end
+  end
+  puts "Seeding Club Bookmarks"
+  Club.all.each do |club|
+    users.each do |user|
+      user.create_action(:bookmark, target: club)
+    end
+  end
+  puts "Seeding Professor Bookmarks"
+  Professor.all.each do |professor|
+    users.each do |user|
+      user.create_action(:bookmark, target: professor)
+    end
+  end
 end

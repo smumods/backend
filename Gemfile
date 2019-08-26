@@ -53,7 +53,7 @@ gem 'action-store'
 gem 'telegram-bot'
 
 # Data Generators
-gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'faker'
 
 # Performance
 # gem 'appsignal'

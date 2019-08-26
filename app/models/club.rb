@@ -16,7 +16,7 @@ class Club < ApplicationRecord
     validates :display_picture, presence: true
 
     # Relationships
-    has_one :club_admin
+    belongs_to :club_admin
     has_many :club_admin_delegates
     has_many :club_managers, through: :club_admin_delegates, source: :user
     has_many :club_members

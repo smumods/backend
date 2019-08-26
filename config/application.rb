@@ -28,5 +28,12 @@ module SampleGraphqlProject
     config.active_record.default_timezone = :local
     config.active_record.time_zone_aware_attributes = false
     config.active_record.time_zone_aware_types = [:datetime, :time]
+
+    # Use UUIDs for migrations and ActiveRecord
+    config.active_record.primary_key = :uuid
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+      g.orm :active_record, foreign_key_type: :uuid
+    end
   end
 end
