@@ -61,7 +61,7 @@ class EventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.with_eager_loaded_gallery.find(params[:id])
+      @event = Event.find(params[:id])
     end
 
     def authenticate_event_owner

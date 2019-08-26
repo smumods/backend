@@ -141,7 +141,6 @@ namespace :db do
     ## Migrate primary keys to uuids
     table_names.each do |table_name|
       if ActiveRecord::Migration.column_exists?(table_name, :id) && ActiveRecord::Migration.column_exists?(table_name, :uuid)
-        binding.pry
         ActiveRecord::Base.connection.execute %Q{ALTER TABLE #{table_name} DROP CONSTRAINT #{table_name}_pkey CASCADE} rescue nil
         ActiveRecord::Migration.remove_column(table_name, :id)
         ActiveRecord::Migration.rename_column( table_name, :uuid, :id) if ActiveRecord::Migration.column_exists?(table_name, :uuid)
