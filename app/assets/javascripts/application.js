@@ -23,7 +23,6 @@
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require toastr
-//= require instascan.min
 //= require_tree .
 
 $(document).ready(function() {

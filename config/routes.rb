@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  get 'scanner/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   # devise_for :users
 
   # ActiveActive
   ActiveAdmin.routes(self)
-
 
   # Admin Routes
   append_staging = ""

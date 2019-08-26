@@ -57,6 +57,14 @@ class TelegramController < Telegram::Bot::UpdatesController
     end
   end
 
+  def test!
+    respond_with :message, text: "yo", reply_markup: {
+      inline_keyboard: [
+        [{text: "YAY", url: 'https://schmich.github.io/instascan/'}],
+      ]
+    }
+  end
+
   private
 
   def with_locale(&block)

@@ -2,10 +2,13 @@
   "name": "sample_graphql_project",
   "private": true,
   "dependencies": {
-    "autosize": "^4.0.2"
+    "@rails/webpacker": "^4.0.7",
+    "autosize": "^4.0.2",
+    "jsqr": "^1.2.0",
+    "qr-scanner": "^1.1.1"
   },
   "devDependencies": {
     "webpack": "^4.32.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-dev-server": "^3.8.0"
   }
 }
