@@ -1,0 +1,6 @@
+<% if @rsvp_message[:status] == "error" %>
+  toastr.error("<%= @rsvp_message[:message] %>")
+<% elsif @rsvp_message[:status] == "success" %>
+  toastr.success("<%= @rsvp_message[:message] %>")
+  $('#rsvp_table tbody').append("<%= escape_javascript(render(partial: "rsvps/rsvp_row", locals: { rsvp: @rsvp_message[:rsvp] })) %>")
+<% end %>

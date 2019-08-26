@@ -48,6 +48,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
   def generate_email_token
       self.email_token = loop do

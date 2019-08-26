@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_142302) do
+ActiveRecord::Schema.define(version: 2019_08_26_030343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -240,9 +240,11 @@ ActiveRecord::Schema.define(version: 2019_08_24_142302) do
   create_table "rsvps", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.boolean "paid"
+    t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "Attending"
+    t.string "notes", default: ""
     t.index ["event_id"], name: "index_rsvps_on_event_id"
     t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id", unique: true
     t.index ["user_id"], name: "index_rsvps_on_user_id"
@@ -271,6 +273,18 @@ ActiveRecord::Schema.define(version: 2019_08_24_142302) do
     t.index ["email"], name: "index_temporary_users_on_email", unique: true
     t.index ["email_verification_token"], name: "index_temporary_users_on_email_verification_token", unique: true
     t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
+  end
+
+  create_table "unrsvps", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.boolean "paid", default: false
+    t.string "status", default: "Unrsvped"
+    t.string "notes", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_unrsvps_on_event_id"
+    t.index ["user_id"], name: "index_unrsvps_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -333,6 +347,8 @@ ActiveRecord::Schema.define(version: 2019_08_24_142302) do
   add_foreign_key "rsvps", "events"
   add_foreign_key "rsvps", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "unrsvps", "events"
+  add_foreign_key "unrsvps", "users"
   add_foreign_key "votes", "reviews"
   add_foreign_key "votes", "users"
 end

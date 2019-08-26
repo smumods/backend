@@ -46,7 +46,7 @@ ActiveAdmin.register Announcement do
         redirect_back(fallback_location: new_admin_announcement_path, alert: "Error creating announcement! #{@announcement.errors.full_messages.join(", ")}")
       end
     end
-    
+
     def update
       @announcement = Announcement.find(permitted_params[:id])
       @announcement.assign_attributes({

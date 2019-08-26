@@ -38,20 +38,25 @@ section.bg-grey
             .col-12
               .boxed
                 h2 RSVPs
-                table-responsive
-                  table.table.table-striped
+                = simple_form_for Rsvp.new, data: { url: rsvps_path, remote: true, method: :post } do |f|
+                  = hidden_field_tag :event_id, @event.id
+                  .form-row
+                    .col
+                      = f.input :email_address, as: :fake, label: false, placeholder: "Enter an email address"
+                    .col
+                      = f.button :submit, class: "btn btn-success"
+
+                .table-responsive
+                  table#rsvp_table.table.table-striped
                     thead
                       tr
-                        th First name
-                        th Last name
+                        th Name
                         th Email
+                        th Status
                         th Actions
                     tbody
-                      - @event.users.each do |user|
-                        tr
-                          td = user.first_name
-                          td = user.last_name
-                          td = user.email
+                      - @event.rsvps.each do |rsvp|
+                        = render partial: "rsvps/rsvp_row", locals: { rsvp: rsvp }
 
 
       .col-12.col-md-4

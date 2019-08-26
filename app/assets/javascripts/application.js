@@ -41,14 +41,14 @@ $(document).ready(function() {
   toastr.options.hideEasing = "linear",
   toastr.options.showMethod = "fadeIn",
   toastr.options.hideMethod = "fadeOut"
-  toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
-  let iterations = 0;
-  let toastSuccess = () => {
-    iterations++
-    if(iterations >=5) {
-      clearInterval(interval)
-    }
-    toastr.success('Aye!!')
-  }
-  let interval = setInterval(toastSuccess, 1250)
+  // toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+  // let iterations = 0;
+  // let toastSuccess = () => {
+  //   iterations++
+  //   if(iterations >=5) {
+  //     clearInterval(interval)
+  //   }
+  //   toastr.success('Aye!!')
+  // }
+  // let interval = setInterval(toastSuccess, 1250)
 });

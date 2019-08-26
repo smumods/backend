@@ -41,6 +41,9 @@ Rails.application.routes.draw do
 
     # Events
     resources :events
+
+    # Rsvps
+    resources :rsvps, only: [:create, :destroy, :update]
   end
 
   # Quick hack to get subdomains working
