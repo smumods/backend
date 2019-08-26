@@ -55,8 +55,7 @@ section.bg-grey
                         th Status
                         th Actions
                     tbody
-                      - @event.rsvps.each do |rsvp|
-                        = render partial: "rsvps/rsvp_row", locals: { rsvp: rsvp }
+                      = render partial: "rsvps/rsvp_row", collection: @event.rsvps, as: :rsvp
 
 
       .col-12.col-md-4

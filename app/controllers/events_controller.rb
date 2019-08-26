@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    # @event_rsvps = Event.find_by(id: @event.id).rsvps
   end
 
   def new
