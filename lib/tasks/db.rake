@@ -114,17 +114,45 @@ namespace :db do
     table_names = ActiveRecord::Base.connection.tables - ["schema_migrations", "ar_internal_metadata", "migration_validators", "ar_internal_metadata", "friendly_id_slugs", "active_admin_comments", "active_storage_blobs", "active_storage_attachments"]
 
     table_names.each do |table_name|
+      puts "[UPDATE] change id to uuid #{table_name}"
       model = table_name.singularize.camelize.constantize
       id_columns = model.column_names.select{|c| c.end_with?("_id")}
 
+
+      # write the association's uuid to a temporary foreign key _uuid column
+      # eg. Message.room_id => Message.room_uuid
       model.reflections.each do|k, v|
         begin
           association_id_col = v.foreign_key
           # Error checking
           # Make sure the relationship actually currently exists
           next unless id_columns.include?(association_id_col)
+          # Check that there is at
 
+          # 1) Create temporary _uuid column set to nulll,
           tmp_uuid_column_name = column_name_to_uuid(association_id_col)
+          unless ActiveRecord::Migration.column_exists?(table_name, tmp_uuid_column_name)
+            puts "[CREATE] #{table_name}.#{tmp_uuid_column_name}"
+            ActiveRecord::Migration.add_column(table_name, tmp_uuid_column_name, :uuid)
+          end
+
+          # 2) For each association set the value of the _uuid column
+          #
+          # For example.  Assume the following example
+          #
+          # message.room_id = 1
+          # room = Room.find(1)
+          # room.uuid = 0x123
+          # message.room_uuid = 0x123
+          #
+          association_klass = v.klass
+
+          model.unscoped.all.each do |inst|
+            next unless inst.present?
+            association = association_klass.find_by(id: inst.try(association_id_col.try(:to_sym)))
+            next unless association.present?
+            inst.update_column(tmp_uuid_column_name, association.try(:uuid))
+          end
 
           # 3) Remove id column
           ActiveRecord::Migration.remove_column table_name, association_id_col if ActiveRecord::Migration.column_exists?(table_name, association_id_col)

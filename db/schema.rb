@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "actions", id: :serial, force: :cascade do |t|
+  create_table "actions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "action_type", null: false
     t.string "action_option"
     t.string "target_type"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "target_uuid"
+    t.uuid "user_uuid"
     t.index ["action_type", "target_type", "target_id", "user_type", "user_id"], name: "uk_action_target_user", unique: true
     t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
     t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
@@ -45,17 +47,17 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -66,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "admin_users", force: :cascade do |t|
+  create_table "admin_users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -78,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "announcements", force: :cascade do |t|
+  create_table "announcements", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "valid_from"
     t.datetime "expires_on"
     t.string "main_image"
@@ -89,24 +91,21 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "title"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.uuid "user_id"
   end
 
-  create_table "club_admin_delegates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "club_id"
+  create_table "club_admin_delegates", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["club_id"], name: "index_club_admin_delegates_on_club_id"
-    t.index ["user_id"], name: "index_club_admin_delegates_on_user_id"
+    t.uuid "user_id"
+    t.uuid "club_id"
   end
 
-  create_table "club_admins", force: :cascade do |t|
+  create_table "club_admins", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -118,32 +117,29 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["reset_password_token"], name: "index_club_admins_on_reset_password_token", unique: true
   end
 
-  create_table "club_members", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "club_id"
+  create_table "club_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "status", default: "Pending"
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["club_id"], name: "index_club_members_on_club_id"
-    t.index ["user_id"], name: "index_club_members_on_user_id"
+    t.uuid "user_id"
+    t.uuid "club_id"
   end
 
-  create_table "clubs", force: :cascade do |t|
+  create_table "clubs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
     t.text "description"
     t.text "social_media"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "club_admin_id"
     t.integer "bookmarks_count", default: 0
-    t.index ["club_admin_id"], name: "index_clubs_on_club_admin_id"
+    t.uuid "club_admin_id"
     t.index ["name"], name: "index_clubs_on_name", unique: true
     t.index ["slug"], name: "index_clubs_on_slug", unique: true
   end
 
-  create_table "courses", force: :cascade do |t|
+  create_table "courses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.string "career"
     t.string "grading_basis"
@@ -163,7 +159,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["term", "module_code"], name: "index_courses_on_term_and_module_code", unique: true
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "color"
@@ -173,11 +169,10 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.float "price"
     t.boolean "require_rsvp", default: false
     t.datetime "rsvp_by"
-    t.bigint "club_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0
-    t.index ["club_id"], name: "index_events_on_club_id"
+    t.uuid "club_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -191,25 +186,22 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "links", force: :cascade do |t|
+  create_table "links", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "url"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_links_on_user_id"
+    t.uuid "user_id"
   end
 
-  create_table "professor_courses", force: :cascade do |t|
-    t.bigint "professor_id"
-    t.bigint "course_id"
+  create_table "professor_courses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_professor_courses_on_course_id"
-    t.index ["professor_id"], name: "index_professor_courses_on_professor_id"
+    t.uuid "professor_id"
+    t.uuid "course_id"
   end
 
-  create_table "professors", force: :cascade do |t|
+  create_table "professors", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -218,7 +210,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["slug"], name: "index_professors_on_slug", unique: true
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reviews", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.text "professor_review"
     t.text "module_review"
     t.boolean "is_anonymous", default: false
@@ -226,40 +218,33 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.integer "engagement_score"
     t.integer "fairness_score"
     t.integer "workload_score"
-    t.bigint "user_id"
-    t.bigint "professor_id"
-    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_of_review"
-    t.index ["course_id"], name: "index_reviews_on_course_id"
-    t.index ["professor_id"], name: "index_reviews_on_professor_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.uuid "user_id"
+    t.uuid "professor_id"
+    t.uuid "course_id"
   end
 
-  create_table "rsvps", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
+  create_table "rsvps", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "Attending"
     t.string "notes", default: ""
-    t.index ["event_id"], name: "index_rsvps_on_event_id"
-    t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id", unique: true
-    t.index ["user_id"], name: "index_rsvps_on_user_id"
+    t.uuid "user_id"
+    t.uuid "event_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
     t.index ["key"], name: "index_sessions_on_key", unique: true
-    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "temporary_users", force: :cascade do |t|
+  create_table "temporary_users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "ip_address"
     t.string "session_token"
     t.string "telegram_id"
@@ -275,19 +260,17 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
   end
 
-  create_table "unrsvps", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
+  create_table "unrsvps", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.boolean "paid", default: false
     t.string "status", default: "Unrsvped"
     t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_unrsvps_on_event_id"
-    t.index ["user_id"], name: "index_unrsvps_on_user_id"
+    t.uuid "user_id"
+    t.uuid "event_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "name"
     t.datetime "created_at", null: false
@@ -302,7 +285,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.datetime "authentication_token_created_at"
     t.boolean "verified", default: false
     t.string "email_token"
-    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.string "password_reset_token"
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
@@ -319,36 +301,14 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "vote_type"
     t.string "review_type"
-    t.bigint "user_id"
-    t.bigint "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_votes_on_review_id"
-    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.uuid "user_id"
+    t.uuid "review_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "books", "users"
-  add_foreign_key "club_admin_delegates", "clubs"
-  add_foreign_key "club_admin_delegates", "users"
-  add_foreign_key "club_members", "clubs"
-  add_foreign_key "club_members", "users"
-  add_foreign_key "clubs", "club_admins"
-  add_foreign_key "events", "clubs"
-  add_foreign_key "links", "users"
-  add_foreign_key "professor_courses", "courses"
-  add_foreign_key "professor_courses", "professors"
-  add_foreign_key "reviews", "courses"
-  add_foreign_key "reviews", "professors"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "rsvps", "events"
-  add_foreign_key "rsvps", "users"
-  add_foreign_key "sessions", "users"
-  add_foreign_key "unrsvps", "events"
-  add_foreign_key "unrsvps", "users"
-  add_foreign_key "votes", "reviews"
-  add_foreign_key "votes", "users"
 end
