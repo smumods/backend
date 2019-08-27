@@ -3,12 +3,12 @@ namespace :events do
 
   task populate: :environment do
     puts "Current event count: #{Event.count}"
-    (Time.zone.now.prev_month.to_date..Time.zone.now.to_date).each do |date|
+    (Time.zone.now.prev_month.to_date..Time.zone.now.next_week.to_date).each do |date|
       year = date.year
       month = date.month
       day = date.day
       # Every 7 hours create an event so that each day has only 4 events
-      (0...24).select { |h| h % 24 == 0 }.each do |hour|
+      (0...24).select { |h| h % 12 == 0 }.each do |hour|
         time = Time.new(year, month, day, hour).to_datetime
         file = File.open(File.join(Rails.root, "app/assets/images/smuai.jpeg"))
         Club.all.each do |club|
