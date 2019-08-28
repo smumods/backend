@@ -11,7 +11,7 @@ module Mutations
             field :user, Types::UserType, null: true
 
             # Arguments
-            argument :id, Int, required: true
+            argument :id, String, required: true
 
             def resolve(id:)
                 # Authenticate user

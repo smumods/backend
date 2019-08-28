@@ -4,7 +4,7 @@ module Mutations
             null true
 
             # Arguments
-            argument :id, Int, required: true
+            argument :id, String, required: true
             argument :module_review, String, required: false
             argument :professor_review, String, required: false
             argument :is_anonymous, Boolean, required: false
@@ -14,12 +14,12 @@ module Mutations
             argument :workload_score, Int, required: false
             argument :professor_slug, String, required: false
             argument :type_of_review, String, required: false
-            argument :course_id, Int, required: false
+            argument :course_id, String, required: false
 
             # return type from the mutation
             type Types::ReviewType
 
-            # is_anonymous:, module_review:, course_id:, 
+            # is_anonymous:, module_review:, course_id:,
             def resolve(**args)
                 # Authenticate user
                 current_user = context[:current_user]
@@ -29,7 +29,7 @@ module Mutations
                     raise GraphQL::ExecutionError.new("Please verify your email first!")
                     return
                 end
-                
+
                 # Edit Review Logic
                 review = Review.where(id: args[:id], user_id: current_user).first
                 return if review.nil?

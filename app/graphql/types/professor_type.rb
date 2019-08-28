@@ -28,30 +28,30 @@ module Types
 			end
 			return courses.values.flatten
 		end
-		
+
 		def all_reviews
 			self.object.reviews
 		end
 
 		def review_count
-			all_reviews.length		
+			all_reviews.length
 		end
 
 		def engagement_score
 			engagement_scores = self.object.reviews.collect(&:engagement_score)
 			(engagement_scores.sum.to_f / engagement_scores.length).round(1)
 		end
-		
+
 		def marking_score
 			marking_scores = self.object.reviews.collect(&:marking_score)
 			(marking_scores.sum.to_f / marking_scores.length).round(1)
 		end
-		
+
 		def fairness_score
 			fairness_scores = self.object.reviews.collect(&:fairness_score)
 			(fairness_scores.sum.to_f / fairness_scores.length).round(1)
 		end
-		
+
 		def workload_score
 			workload_scores = self.object.reviews.collect(&:workload_score)
 			(workload_scores.sum.to_f / workload_scores.length).round(1)

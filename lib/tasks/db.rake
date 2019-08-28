@@ -176,6 +176,25 @@ namespace :db do
         ActiveRecord::Base.connection.execute %Q{DROP SEQUENCE IF EXISTS #{table_name}_id_seq CASCADE} rescue nil
       end
     end
+
+    # Migrate Action Table
+    puts "Migrating actions table FKs"
+    ['actions'].each do |table_name|
+      if ActiveRecord::Migration.column_exists?(table_name, :target_id) && ActiveRecord::Migration.column_exists?(table_name, :target_uuid)
+        ActiveRecord::Base.connection.execute %Q{ALTER TABLE #{table_name} DROP CONSTRAINT #{table_name}_pkey CASCADE} rescue nil
+        ActiveRecord::Migration.remove_column(table_name, :target_id)
+        ActiveRecord::Migration.rename_column( table_name, :target_uuid, :target_id) if ActiveRecord::Migration.column_exists?(table_name, :target_uuid)
+        ActiveRecord::Base.connection.execute "ALTER TABLE #{table_name} ADD PRIMARY KEY (id)"
+        ActiveRecord::Base.connection.execute %Q{DROP SEQUENCE IF EXISTS #{table_name}_id_seq CASCADE} rescue nil
+      end
+      if ActiveRecord::Migration.column_exists?(table_name, :user_id) && ActiveRecord::Migration.column_exists?(table_name, :user_uuid)
+        ActiveRecord::Base.connection.execute %Q{ALTER TABLE #{table_name} DROP CONSTRAINT #{table_name}_pkey CASCADE} rescue nil
+        ActiveRecord::Migration.remove_column(table_name, :user_id)
+        ActiveRecord::Migration.rename_column( table_name, :user_uuid, :user_id) if ActiveRecord::Migration.column_exists?(table_name, :user_uuid)
+        ActiveRecord::Base.connection.execute "ALTER TABLE #{table_name} ADD PRIMARY KEY (id)"
+        ActiveRecord::Base.connection.execute %Q{DROP SEQUENCE IF EXISTS #{table_name}_id_seq CASCADE} rescue nil
+      end
+    end
   end
 end
 

@@ -2,8 +2,8 @@ module Queries
     module Events
         class Event < Queries::BaseQuery
             description 'Return ONE Event by id'
-            
-            argument :id, Integer, required: true
+
+            argument :id, String, required: true
 
             type Types::EventType, null: true
 

@@ -21,16 +21,11 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
     t.string "action_type", null: false
     t.string "action_option"
     t.string "target_type"
-    t.integer "target_id"
     t.string "user_type"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "target_uuid"
-    t.uuid "user_uuid"
-    t.index ["action_type", "target_type", "target_id", "user_type", "user_id"], name: "uk_action_target_user", unique: true
-    t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
-    t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
+    t.uuid "target_id"
+    t.uuid "user_id"
   end
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -260,13 +255,13 @@ ActiveRecord::Schema.define(version: 2019_08_26_030343) do
   end
 
   create_table "unrsvps", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "user"
+    t.uuid "event"
     t.boolean "paid", default: false
     t.string "status", default: "Unrsvped"
     t.string "notes", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "user_id"
-    t.uuid "event_id"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

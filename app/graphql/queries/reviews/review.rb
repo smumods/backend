@@ -3,7 +3,7 @@ module Queries
         class Review < Queries::BaseQuery
             description 'Return a Review given an ID'
 
-            argument :id, Int, required: true
+            argument :id, String, required: true
 
             type Types::ReviewType, null: true
 

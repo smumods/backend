@@ -13,12 +13,12 @@ module Mutations
             argument :workload_score, Int, required: false
             argument :professor_slug, String, required: false
             argument :type_of_review, String, required: false
-            argument :course_id, Int, required: false
+            argument :course_id, String, required: false
 
             # return type from the mutation
             type Types::ReviewType
 
-            # is_anonymous:, module_review:, course_id:, 
+            # is_anonymous:, module_review:, course_id:,
             def resolve(**args)
                 current_user = context[:current_user]
                 if current_user.blank?

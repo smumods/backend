@@ -3,7 +3,7 @@ module Mutations
         class Vote < Mutations::BaseMutation
             null true
 
-            argument :review_id, Int, required: true
+            argument :review_id, String, required: true
             argument :review_type, String, required: true
             argument :vote_type, Int, required: true
 
