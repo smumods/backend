@@ -1,6 +1,6 @@
 module Types
 	class EventType < BaseObject
-		global_id_field :id
+		field :id, ID, null: false
 		field :name, String, null: false
 		field :description, String, null: false
 		field :main_image, String, null: false
