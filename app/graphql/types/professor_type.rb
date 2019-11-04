@@ -12,6 +12,8 @@ module Types
 		field :workload_score, Float, null: true
 		field :overall_score, Float, null: true
 		field :reviews_count, Int, null: true
+		field :additional_data, String, null: true
+		field :photo, String, null: true
 
 		def all_courses
 			courses = {}
@@ -64,6 +66,10 @@ module Types
 		def reviews_count
 			return self.object.reviews_count if self.object.respond_to? :reviews_count
 			return 0
+		end
+
+		def photo
+			return self.object.additional_data["photo"]
 		end
 	end
 end

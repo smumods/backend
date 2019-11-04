@@ -19,7 +19,12 @@ module Types
     end
 
     def all_reviews
-      self.object.reviews
+      current_user = context[:current_user]
+      if current_user.nil?
+        self.object.reviews.where(is_anonymous: false)
+      else
+        self.object.reviews.where(is_anonymous: false).or(current_user.reviews)
+      end
     end
 
     def course_bookmarks
