@@ -10,6 +10,10 @@ module Types
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
 
+    def id
+      self.object.uuid
+    end
+
     def books_count
       books.size
     end

@@ -3,12 +3,12 @@ module Queries
         class User < Queries::BaseQuery
             description 'Return an individual user'
             
-            argument :id, Int, required: true
+            argument :id, String, required: true
 
             type Types::UserType, null: false
 
             def resolve(id:)
-                ::User.find(id)
+                ::User.find_by(uuid: id)
             end
         end
     end
