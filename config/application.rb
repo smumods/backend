@@ -22,5 +22,10 @@ module SampleGraphqlProject
          resource '*', :headers => :any, :methods => [:get, :post]
        end
     end
+
+    # Setup timezone for time sensitive queries
+    config.time_zone = 'Singapore'
+    config.active_record.default_timezone = :local
+    config.active_record.time_zone_aware_attributes = false
   end
 end
