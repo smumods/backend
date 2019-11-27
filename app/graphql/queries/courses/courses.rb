@@ -3,7 +3,7 @@ module Queries
         class Courses < Queries::BaseQuery
             description 'Return all Courses'
             
-            type Types::CourseType.connection_type, null: false
+            type [Types::CourseType], null: false
 
             def resolve
                 ::Course.all.order("module_code ASC, name ASC")
