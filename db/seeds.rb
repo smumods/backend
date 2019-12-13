@@ -147,7 +147,7 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
-if (Rails.env.development? and Book.count == 0)
+if (Rails.env.development? and Rails.env.staging? and Book.count == 0)
     User.all.each do |user|
         (0...2).each do |i|
             Book.create(
