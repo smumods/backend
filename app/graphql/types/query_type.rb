@@ -17,5 +17,6 @@ module Types
     field :home_courses, resolver: Queries::Home::Courses
     field :all_announcements, resolver: Queries::Announcements::Announcements
     field :all_books, resolver: Queries::Books::Books
+    field :book, resolver: Queries::Books::Book
   end
 end
