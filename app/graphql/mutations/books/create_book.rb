@@ -49,7 +49,6 @@ module Mutations
                     is_sold: args[:is_sold],
                     course: course
                 })
-                binding.pry
                 book
             end
         end
