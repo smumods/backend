@@ -1,7 +1,7 @@
 module Mutations
     module Users
         class AddTelegram < Mutations::BaseMutation
-            argument :telegram_id, Integer, required: true
+            argument :telegram_id, Integer, required: false
             argument :telegram_username, String, required: false # might not be set by user
             argument :telegram_picture, String, required: false # might not be set by user
 
@@ -16,7 +16,7 @@ module Mutations
                     return
                 end
                 return if current_user.nil?
-                raise GraphQL::ExecutionError.new("You need to specify the telegram ID!") if args[:telegram_id].nil?
+                # raise GraphQL::ExecutionError.new("You need to specify the telegram ID!") if args[:telegram_id].nil?
                 current_user.update({
                     telegram_id: args[:telegram_id],
                     telegram_username: args[:telegram_username],
