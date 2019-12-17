@@ -16,10 +16,22 @@ module Types
     def id
       self.object.uuid
     end
-    
+
     def telegram_id
       current_user = context[:current_user]
       self.object.telegram_id if current_user
+      nil
+    end
+
+    def telegram_name
+      current_user = context[:current_user]
+      self.object.telegram_name if current_user
+      nil
+    end
+    
+    def telegram_photo
+      current_user = context[:current_user]
+      self.object.telegram_photo if current_user
       nil
     end
 
