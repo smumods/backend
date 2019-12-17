@@ -10,7 +10,7 @@ module Types
     field :price, Float, null: false
     field :description, String, null: false
     field :photos, [String], null: false
-    field :is_telegram_contact, String, null: false
+    # field :is_telegram_contact, String, null: false
     field :is_sold, Boolean, null: false
     field :course, Types::CourseType, null: false
     field :created_at, Types::DateTimeType, null: false

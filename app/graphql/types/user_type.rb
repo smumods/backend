@@ -19,20 +19,33 @@ module Types
 
     def telegram_id
       current_user = context[:current_user]
-      self.object.telegram_id if current_user
-      nil
+      # only return this IF 2 conditions are met: (1) user is logged in (2) user object still has books to sell
+      all_user_books_sold = self.object.books.collect(&:is_sold).reduce(&:&)
+      if current_user and not all_user_books_sold
+        self.object.telegram_id
+      else
+        nil
+      end
     end
 
-    def telegram_name
+    def telegram_username
       current_user = context[:current_user]
-      self.object.telegram_name if current_user
-      nil
+      all_user_books_sold = self.object.books.collect(&:is_sold).reduce(&:&)
+      if current_user and not all_user_books_sold
+        self.object.telegram_username
+      else
+        nil
+      end
     end
     
-    def telegram_photo
+    def telegram_picture
       current_user = context[:current_user]
-      self.object.telegram_photo if current_user
-      nil
+      all_user_books_sold = self.object.books.collect(&:is_sold).reduce(&:&)
+      if current_user and not all_user_books_sold
+        self.object.telegram_picture
+      else
+        nil
+      end
     end
 
     def books_count

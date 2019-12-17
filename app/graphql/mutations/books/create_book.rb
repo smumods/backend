@@ -12,7 +12,7 @@ module Mutations
             argument :price, Float, required: true
             argument :description, String, required: true
             argument :photos, String, required: true # TODO: Array
-            argument :is_telegram_contact, Boolean, required: true
+            # argument :is_telegram_contact, Boolean, required: true
             argument :is_sold, Boolean, required: true
 
             # Return Type
