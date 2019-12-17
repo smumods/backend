@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_065509) do
+ActiveRecord::Schema.define(version: 2019_12_17_072436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -203,6 +203,9 @@ ActiveRecord::Schema.define(version: 2019_12_17_065509) do
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
     t.integer "password_token_tries_count", default: 0
+    t.bigint "telegram_id"
+    t.string "telegram_username"
+    t.string "telegram_picture"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true

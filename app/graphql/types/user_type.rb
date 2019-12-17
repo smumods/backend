@@ -3,6 +3,9 @@ module Types
     field :id, ID, null: true
     field :firstName, String, null: true
     field :lastName, String, null: true
+    field :telegram_id, Integer, null: true
+    field :telegram_username, String, null: true
+    field :telegram_picture, String, null: true
     field :books, [Types::BookType], null: true
     field :books_count, Integer, null: true
     field :all_votes, [Types::VoteType], null: true
