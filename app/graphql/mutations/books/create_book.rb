@@ -50,7 +50,8 @@ module Mutations
                     is_telegram_contact: args[:is_telegram_contact],
                     is_sold: args[:is_sold],
                     course: course
-                })
+                    })
+                raise GraphQL::ExecutionError.new("Error creating book: #{book.errors.full_messages.join(" and ")}") if not book.persisted?
                 book
             end
         end
