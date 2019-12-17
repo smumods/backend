@@ -5,7 +5,8 @@ module Mutations
 
             argument :title, String, required: true
             argument :authors, String, required: true # TODO: Must be a Array in string format. Serialize this later using JSON.parse
-            argument :isbn, String, required: true
+            argument :isbn10, String, required: true
+            argument :isbn13, String, required: true
             argument :module_code, String, required: true
             argument :is_used, Boolean, required: true
             argument :price, Float, required: true
@@ -40,7 +41,8 @@ module Mutations
                 book = current_user.books.create({
                     title: args[:title],
                     authors: JSON.parse(args[:authors]),
-                    isbn: args[:isbn],
+                    isbn10: args[:isbn10],
+                    isbn13: args[:isbn13],
                     is_used: args[:is_used],
                     price: args[:price],
                     description: args[:description],

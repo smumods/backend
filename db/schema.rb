@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_142343) do
+ActiveRecord::Schema.define(version: 2019_12_17_065509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_142343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "authors"
-    t.string "isbn"
+    t.string "isbn10"
     t.boolean "is_used"
     t.float "price"
     t.text "description"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_142343) do
     t.boolean "is_telegram_contact"
     t.boolean "is_sold", default: false
     t.bigint "course_id"
+    t.string "isbn13"
     t.index ["course_id"], name: "index_books_on_course_id"
     t.index ["user_id"], name: "index_books_on_user_id"
   end

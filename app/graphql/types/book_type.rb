@@ -4,7 +4,8 @@ module Types
     field :title, String, null: false
     field :user, Types::UserType, null: false
     field :authors, [String], null: false
-    field :isbn, String, null: false
+    field :isbn10, String, null: false
+    field :isbn13, String, null: false
     field :is_used, Boolean, null: false
     field :price, Float, null: false
     field :description, String, null: false
