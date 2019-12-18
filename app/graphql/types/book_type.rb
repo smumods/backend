@@ -1,6 +1,6 @@
 module Types
   class BookType < Types::BaseObject
-    field :id, ID, null: false
+    field :uuid, String, null: false
     field :title, String, null: false
     field :user, Types::UserType, null: false
     field :authors, [String], null: false

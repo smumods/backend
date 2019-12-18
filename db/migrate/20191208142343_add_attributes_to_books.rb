@@ -9,12 +9,6 @@ class AddAttributesToBooks < ActiveRecord::Migration[5.2]
     add_column :books, :is_telegram_contact, :boolean
     add_column :books, :is_sold, :boolean, default: false
     add_reference :books, :course, foreign_key: true
-
     add_column :books, :uuid, :uuid, default: "gen_random_uuid()", null: false
-    change_table :books do |t|
-        t.remove :id
-        t.rename :uuid, :id
-    end
-    execute "ALTER TABLE books ADD PRIMARY KEY (id);"
   end
 end

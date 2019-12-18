@@ -13,6 +13,7 @@ module Types
     field :all_reviews, [Types::ReviewType], null: true
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
+    field :book_bookmarks, [Types::BookType], null: true
 
     def id
       self.object.uuid
@@ -76,6 +77,10 @@ module Types
 
     def professor_bookmarks
       self.object.bookmark_professors
+    end
+    
+    def book_bookmarks
+      self.object.bookmark_books
     end
   end
 end

@@ -20,7 +20,7 @@ module Mutations
                     raise GraphQL::ExecutionError.new("Please verify your email first!")
                     return
                 end
-                book = Book.where(id: uuid).first
+                book = Book.where(uuid: uuid).first
                 if book.nil?
                     raise GraphQL::ExecutionError.new("Caught ya! You are trying to delete an invalid book!")
                 end

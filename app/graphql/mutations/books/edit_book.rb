@@ -3,10 +3,11 @@ module Mutations
         class EditBook < Mutations::BaseMutation
             null true
 
-            argument :id, String, required: true
+            argument :uuid, String, required: true
             argument :title, String, required: false
             argument :authors, String, required: false # TODO: Must be a Array in string format. Serialize this later using JSON.parse
-            argument :isbn, String, required: false
+            argument :isbn10, String, required: false
+            argument :isbn13, String, required: false
             argument :module_code, String, required: false
             argument :is_used, Boolean, required: false
             argument :price, Float, required: false
@@ -32,20 +33,21 @@ module Mutations
                 return if current_user.nil?
                 
                 # Actual Logic
-                return nil if args[:id].empty? #frontend will not be able to do anything if empty
-                book = Book.where(id: args[:id], user_id: current_user).first
+                return nil if args[:uuid].empty? #frontend will not be able to do anything if empty
+                binding.pry
+                book = Book.where(uuid: args[:uuid], user_id: current_user).first
                 return if book.nil?
                 #logic for updating book object
                 book.update({
-                    title: args[:title],
-                    isbn: args[:isbn],
-                    is_used: args[:is_used],
-                    price: args[:price],
-                    description: args[:description],
-                    is_telegram_contact: args[:is_telegram_contact],
-                    is_sold: args[:is_sold],
-                    photos: JSON.parse(args[:photos]),
-                    authors: JSON.parse(args[:authors]),
+                    title: args[:title] || book.title,
+                    isbn10: args[:isbn10] || book.isbn10,
+                    isbn13: args[:isbn13] || book.isbn13,
+                    is_used: args[:is_used] || book.is_used,
+                    price: args[:price] || book.price,
+                    description: args[:description] || book.description,
+                    is_sold: args[:is_sold] || book.is_sold,
+                    photos: JSON.parse(args[:photos]) || book.photos,
+                    authors: JSON.parse(args[:authors]) || book.authors,
                 })
                 book #return book object
             end
