@@ -147,14 +147,15 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
-if (Rails.env.development? and Rails.env.staging? and Book.count == 0)
+if (Rails.env.development? or Rails.env.staging? and Book.count == 0)
     User.all.each do |user|
         (0...2).each do |i|
             Book.create(
                 title: Faker::Book.title,
                 user_id: user.id,
                 authors: [Faker::Book.author, Faker::Book.author],
-                isbn: Faker::Code.isbn,
+                isbn10: "1580117872",
+                isbn13: "978-1580117876",
                 is_used: true,
                 price: 0,
                 description: Faker::Lorem.paragraph_by_chars,
