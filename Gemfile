@@ -22,7 +22,7 @@ gem 'sendgrid-ruby' # for emails
 gem 'activeadmin'
 gem 'activeadmin_addons'
 gem "active_material", github: "vigetlabs/active_material"
-gem 'mailjet'
+gem 'mailjet', github: "gczh/mailjet-gem"
 
 # User Auth
 gem 'devise'

@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/gczh/mailjet-gem.git
+  revision: 77e92ad39ff16ef5c722d3596437b0155e7b638b
+  specs:
+    mailjet (1.5.4)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: 14617c4ef7b89998e98e833ad5d11760e03d9bad
   branch: master
@@ -206,10 +215,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    mailjet (1.5.4)
-      activesupport (>= 3.1.0)
-      rack (>= 1.4.0)
-      rest-client
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
@@ -423,7 +428,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   letter_opener
   listen (>= 3.0.5, < 3.2)
-  mailjet
+  mailjet!
   newrelic_rpm
   pg
   pry-rails
