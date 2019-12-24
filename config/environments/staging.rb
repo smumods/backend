@@ -63,18 +63,11 @@ Rails.application.configure do
     # config.active_job.queue_adapter     = :resque
     # config.active_job.queue_name_prefix = "sample_graphql_project_#{Rails.env}"
   
-    config.action_mailer.perform_caching = false
     # Use SendGrid SMTP API
-    config.action_mailer.smtp_settings = {
-      :user_name => Rails.application.credentials.sendgrid[:username],
-      :password => Rails.application.credentials.sendgrid[:password],
-      :domain => ENV.fetch('SERVER_DOMAIN') { 'smumods.com' },
-      :address => 'smtp.sendgrid.net',
-      :port => 587,
-      :authentication => :plain,
-      :enable_starttls_auto => true
-    }
-    config.action_mailer.default_url_options = { :host => "https://smumods-dev.netlify.com/" }
+    config.action_mailer.perform_caching = false
+    config.action_mailer.delivery_method = :mailjet_api
+    config.action_mailer.default_url_options = { :host => "https://www.smumods.com/" }
+    config.action_mailer.perform_deliveries = true
     
     # Ignore bad email addresses and do not raise email delivery errors.
     # Set this to true and configure the email server for immediate delivery to raise delivery errors.
