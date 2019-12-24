@@ -8,9 +8,7 @@ class UserMailer < ApplicationMailer
     secret_key: Rails.application.credentials.mailjet[:secret_key],
     version: 'v3.1'
   }
-  default bcc: [
-      email: 'hello@smumods.com'
-  ]
+  default bcc: ['hello@smumods.com']
 
   def send_verification_email(user)
     @user = user
