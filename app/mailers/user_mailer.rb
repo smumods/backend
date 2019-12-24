@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   # Defaults
   default from: 'hello@smumods.com',
-          bcc: %("Gabriel from SMUMods", <"gabriel@smumods.com">)
+          bcc: Address.new('Gabriel <gabriel@smumods.com>')
   default delivery_method_options: { 
     api_key: Rails.application.credentials.mailjet[:api_key], 
     secret_key: Rails.application.credentials.mailjet[:secret_key],
