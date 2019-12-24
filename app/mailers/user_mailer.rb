@@ -2,8 +2,7 @@ class UserMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
 
   # Defaults
-  default from: 'hello@smumods.com',
-          bcc: ["Test <gabriel@smumods.com>"]
+  default from: 'hello@smumods.com'
   default delivery_method_options: { 
     api_key: Rails.application.credentials.mailjet[:api_key], 
     secret_key: Rails.application.credentials.mailjet[:secret_key],
@@ -12,16 +11,16 @@ class UserMailer < ApplicationMailer
 
   def send_verification_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Verify Your SMUMods Account')
+    mail(to: @user.email, subject: 'Verify Your SMUMods Account', bcc: ["Test <gabriel@smumods.com>"])
   end
 
   def send_reset_password_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Reset Your SMUMods Account Password')
+    mail(to: @user.email, subject: 'Reset Your SMUMods Account Password', bcc: ["Test <<gabriel@smumods.com>>"])
   end
 
   def send_wrong_user_email(user)
     @user = user
-    mail(to: @user.email, subject: 'SMUMods Forget Password Email')
+    mail(to: @user.email, subject: 'SMUMods Forget Password Email', bcc: "Test <gabriel@smumods.com>")
   end
 end
