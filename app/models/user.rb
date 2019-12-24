@@ -50,9 +50,7 @@ class User < ApplicationRecord
   end
 
   def send_verification_email
-    if Rails.env.production?
-      UserMailer.send_verification_email(self).deliver_now
-    end
+    UserMailer.send_verification_email(self).deliver_nows
   end
 
   def generate_password_reset_token
