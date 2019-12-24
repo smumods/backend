@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   # Defaults
   default from: 'hello@smumods.com',
-          bcc: 'hello@smumods.com'
+          bcc: 'gabriel@smumods.com'
   default delivery_method_options: { 
     api_key: Rails.application.credentials.mailjet[:api_key], 
     secret_key: Rails.application.credentials.mailjet[:secret_key],
@@ -22,6 +22,6 @@ class UserMailer < ApplicationMailer
 
   def send_wrong_user_email(user)
     @user = user
-    mail(to: @user.email, subject: 'SMUMods Forget Password Email')
+    mail(to: @user.email, subject: 'SMUMods Forget Password Email', bcc: ['Gabriel from SMUMods <gabriel@smumods.com>'])
   end
 end
