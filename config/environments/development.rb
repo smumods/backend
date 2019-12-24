@@ -43,8 +43,9 @@ Rails.application.configure do
 
   # Use SendGrid SMTP API
   config.action_mailer.perform_caching = false
-  # config.action_mailer.delivery_method = :mailjet_api
-  # config.action_mailer.default_url_options = { :host => "https://www.smumods.com/" }
+  config.action_mailer.delivery_method = :mailjet_api
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => "https://www.smumods.com/" }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -71,7 +72,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # For opening emails
-  config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => "http://lvh.me:3000/" }
+  # config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.default_url_options = { :host => "http://lvh.me:3000/" }
 end
