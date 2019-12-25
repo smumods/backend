@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## PreRequisites
 
-* Ruby version
+1. Have a working PC (macbook highly preferred)
+2. Have PostgreSQL installed and running
+3. Have Ruby installed 
+4. 
 
-* System dependencies
+## Setup
 
-* Configuration
+1. Clone this repository
+2. Install the ruby version (this might take a while, do this first) specified in `.ruby-version`
+3. Run `bundle install` to install the packages specified in our Gemfile
+4. Run `rails db:create db:migrate db:seed` to create the database, migrate the migrations and alas, seed the database with fake data
+5. Run `rails s` to start the server
+6. Use Insomnia to fiddle around with the development server through our GraphQL API
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Tools

@@ -3,6 +3,7 @@ class Course < ApplicationRecord
     has_many :professor_courses
     has_many :professors, through: :professor_courses
     has_many :reviews
+    has_many :books
 
     # Validations
     validates :term, presence: true

@@ -147,7 +147,30 @@ if ((Rails.env.development? or Rails.env.staging?) and Review.count == 0)
     end
 end
 
-user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
-user.save(validate: false)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?) if AdminUser.count == 0
+if (Rails.env.development? or Rails.env.staging? and Book.count == 0)
+    User.all.each do |user|
+        (0...2).each do |i|
+            Book.create(
+                title: Faker::Book.title,
+                user_id: user.id,
+                authors: [Faker::Book.author, Faker::Book.author],
+                isbn10: "1580117872",
+                isbn13: "978-1580117876",
+                is_used: true,
+                price: 0,
+                description: Faker::Lorem.paragraph_by_chars,
+                photos: ["https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1442375726l/7366._SY475_.jpg", "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1386924417l/201616.jpg"],
+                is_telegram_contact: [true, false].sample,
+                is_sold: [true, false].sample,
+                course_id: Course.first.id
+            )
+        end
+    end
+end
+
+if(Rails.env.development? and User.find_by(email:"hello@smumods.com").nil?)
+    user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
+    user.save(validate: false)
+    AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?) if AdminUser.count == 0
+end
 # AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmation: 'password') if Rails.env.production?
