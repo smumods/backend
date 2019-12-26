@@ -40,7 +40,8 @@ module Mutations
                 begin
                     book.authors = JSON.parse(args[:authors]) if args[:authors].present?
                     book.photos = JSON.parse(args[:photos])  if args[:photos].present?
-                rescue JSON::ParserError 
+                rescue JSON::ParserError
+                    raise GraphQL::ExecutionError.new("Invalid photos/books format")
                 end
                 book.update({
                     title: args[:title] || book.title,
