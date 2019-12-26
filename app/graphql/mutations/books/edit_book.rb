@@ -34,7 +34,6 @@ module Mutations
                 
                 # Actual Logic
                 return nil if args[:uuid].empty? #frontend will not be able to do anything if empty
-                binding.pry
                 book = Book.where(uuid: args[:uuid], user_id: current_user).first
                 return if book.nil?
                 #logic for updating book object
