@@ -47,10 +47,10 @@ module Mutations
                     title: args[:title] || book.title,
                     isbn10: args[:isbn10] || book.isbn10,
                     isbn13: args[:isbn13] || book.isbn13,
-                    is_used: args[:is_used] || book.is_used,
+                    is_used: args[:is_used].nil? ? book.is_used : args[:is_used],
                     price: args[:price] || book.price,
                     description: args[:description] || book.description,
-                    is_sold: args[:is_sold] || book.is_sold,
+                    is_sold: args[:is_sold].nil? ? book.is_sold : args[:is_sold],
                 })
                 book #return book object
             end
