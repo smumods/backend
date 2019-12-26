@@ -31,13 +31,9 @@ module Mutations
 
                 # Actual Logic
                 # Check if course is valid
-                courses_by_mod_code = Course.where(module_code: args[:module_code])
-                if courses_by_mod_code.nil? or courses_by_mod_code.empty?
-                    raise GraphQL::ExecutionError.new("Invalid module code")
-                    return
-                end
-                # TODO: I want to get the latest course (by code) and by term.
-                course = courses_by_mod_code.first
+                course = Course.latest_course(args[:module_code])
+                raise GraphQL::ExecutionError.new("Invalid module code") unless course.present?
+
                 book = current_user.books.create({
                     title: args[:title],
                     authors: JSON.parse(args[:authors]),
