@@ -9,6 +9,5 @@ class AddAttributesToBooks < ActiveRecord::Migration[5.2]
     add_column :books, :is_telegram_contact, :boolean
     add_column :books, :is_sold, :boolean, default: false
     add_reference :books, :course, foreign_key: true
-    add_column :books, :uuid, :uuid, default: "gen_random_uuid()", null: false
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_070133) do
+ActiveRecord::Schema.define(version: 2019_12_26_144003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_070133) do
     t.boolean "is_telegram_contact"
     t.boolean "is_sold", default: false
     t.bigint "course_id"
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "isbn13"
     t.integer "bookmarks_count", default: 0
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["course_id"], name: "index_books_on_course_id"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
