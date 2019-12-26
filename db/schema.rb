@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_144003) do
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["course_id"], name: "index_books_on_course_id"
     t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["uuid"], name: "index_books_on_uuid", unique: true
   end
 
   create_table "courses", force: :cascade do |t|

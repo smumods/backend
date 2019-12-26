@@ -50,9 +50,9 @@ module Mutations
                     is_telegram_contact: args[:is_telegram_contact],
                     is_sold: args[:is_sold],
                     course: course
-                    })
+                })
                 raise GraphQL::ExecutionError.new("Error creating book: #{book.errors.full_messages.join(" and ")}") if not book.persisted?
-                book
+                Book.find(book.id) # TODO: uuid is somehow not generated after creating/saving. Need to find by PK
             end
         end
     end
