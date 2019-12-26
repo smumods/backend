@@ -168,9 +168,11 @@ if (Rails.env.development? or Rails.env.staging? and Book.count == 0)
     end
 end
 
-if(Rails.env.development? and User.find_by(email:"hello@smumods.com").nil?)
+if(Rails.env.development? or Rails.env.staging? and User.find_by(email:"hello@smumods.com").nil?)
     user = User.new(first_name: "Anonymous", last_name: "", email: "hello@smumods.com", password: "superlongpassword", password_confirmation: "superlongpassword", verified: true)
     user.save(validate: false)
+end
+if(Rails.env.development? or Rails.env.staging? and AdminUser.count == 0)
     AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if (Rails.env.development? or Rails.env.staging?) if AdminUser.count == 0
 end
 # AdminUser.create!(email: 'hello@smumods.com', password: '', password_confirmation: 'password') if Rails.env.production?
