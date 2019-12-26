@@ -34,9 +34,15 @@ module Mutations
                 
                 # Actual Logic
                 return nil if args[:uuid].empty? #frontend will not be able to do anything if empty
+                binding.pry
                 book = Book.where(uuid: args[:uuid], user_id: current_user).first
                 return if book.nil?
                 #logic for updating book object
+                begin
+                    book.authors = JSON.parse(args[:authors]) if args[:authors].present?
+                    book.photos = JSON.parse(args[:photos])  if args[:photos].present?
+                rescue JSON::ParserError 
+                end
                 book.update({
                     title: args[:title] || book.title,
                     isbn10: args[:isbn10] || book.isbn10,
@@ -45,8 +51,6 @@ module Mutations
                     price: args[:price] || book.price,
                     description: args[:description] || book.description,
                     is_sold: args[:is_sold] || book.is_sold,
-                    photos: JSON.parse(args[:photos]) || book.photos,
-                    authors: JSON.parse(args[:authors]) || book.authors,
                 })
                 book #return book object
             end
