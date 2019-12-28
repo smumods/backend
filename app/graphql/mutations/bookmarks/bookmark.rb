@@ -18,7 +18,7 @@ module Mutations
                 end
                 
                 return if current_user.nil?
-                return if not ["mod", "prof", "event", "club"].include? bookmark_type
+                return if not ["mod", "prof", "book"].include? bookmark_type
                 case bookmark_type
                 when "mod"
                     course = Course.latest_course(resource_id_or_slug.upcase)
@@ -36,21 +36,13 @@ module Mutations
                     else
                         current_user.create_action(:bookmark, target: professor)
                     end
-                when "event"
-                    event = Event.find(resource_id_or_slug)
-                    return if event.nil?
-                    if current_user.bookmark_event? event
-                        current_user.destroy_action(:bookmark, target: event)
+                when "book"
+                    book = Book.find_by(uuid: resource_id_or_slug)
+                    return if book.nil?
+                    if current_user.bookmark_book? book
+                        current_user.destroy_action(:bookmark, target: book)
                     else
-                        current_user.create_action(:bookmark, target: event)
-                    end
-                when "club"
-                    club = Club.find(resource_id_or_slug)
-                    return if club.nil?
-                    if current_user.bookmark_club? club
-                        current_user.destroy_action(:bookmark, target: club)
-                    else
-                        current_user.create_action(:bookmark, target: club)
+                        current_user.create_action(:bookmark, target: book)
                     end
                 else
                     return

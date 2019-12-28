@@ -35,6 +35,7 @@ gem 'sendgrid-ruby' # for emails
 gem 'activeadmin'
 gem 'activeadmin_addons'
 gem "active_material", github: "vigetlabs/active_material"
+gem 'mailjet'
 
 # User Auth
 gem 'devise'
@@ -46,6 +47,7 @@ gem 'action-store'
 
 # Data Generators
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'fuzzy_match' # used for prof data matching
 
 # Performance
 # gem 'appsignal'

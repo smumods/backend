@@ -22,5 +22,9 @@ module SampleGraphqlProject
          resource '*', :headers => :any, :methods => [:get, :post]
        end
     end
+
+    config.generators do |generator|
+      generator.orm :active_record, primary_key_type: :id
+    end
   end
 end

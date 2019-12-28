@@ -15,6 +15,7 @@ module Types
 		field :academic_group_abbreviation, String, null: false
 		field :module_code_front, String, null: false
 		field :all_reviews, [Types::ReviewType], null: true
+		field :all_books, [Types::BookType], null: true
 		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
 		field :reviews_count, Int, null: true
@@ -31,6 +32,10 @@ module Types
 			module_code = self.object.module_code
 			reviews = Course.where(module_code: module_code).collect(&:reviews).flatten
 			reviews
+		end
+
+		def all_books
+			Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
 		end
 		
 		def review_count

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_070041) do
+ActiveRecord::Schema.define(version: 2019_12_26_144003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,7 +73,21 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "authors"
+    t.string "isbn10"
+    t.boolean "is_used"
+    t.float "price"
+    t.text "description"
+    t.text "photos"
+    t.boolean "is_telegram_contact"
+    t.boolean "is_sold", default: false
+    t.bigint "course_id"
+    t.string "isbn13"
+    t.integer "bookmarks_count", default: 0
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["course_id"], name: "index_books_on_course_id"
     t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["uuid"], name: "index_books_on_uuid", unique: true
   end
 
   create_table "club_admin_delegates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -198,6 +212,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "bookmarks_count", default: 0
+    t.jsonb "additional_data", default: {}
     t.index ["slug"], name: "index_professors_on_slug", unique: true
   end
 
@@ -247,13 +262,6 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.string "client_verifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
-    t.string "email_verification_token"
-    t.boolean "email_verified", default: false
-    t.string "login_token"
-    t.index ["email"], name: "index_temporary_users_on_email", unique: true
-    t.index ["email_verification_token"], name: "index_temporary_users_on_email_verification_token", unique: true
-    t.index ["login_token"], name: "index_temporary_users_on_login_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -272,20 +280,17 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.boolean "verified", default: false
     t.string "email_token"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
-    t.boolean "old_system", default: true
-    t.boolean "old_system_verified", default: false
-    t.string "telegram_email_verification_token"
-    t.integer "telegram_id"
     t.string "password_reset_token"
     t.datetime "password_reset_created_at"
     t.integer "password_reset_tries_count", default: 0
     t.integer "password_token_tries_count", default: 0
+    t.bigint "telegram_id"
+    t.string "telegram_username"
+    t.string "telegram_picture"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_token"], name: "index_users_on_email_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["telegram_email_verification_token"], name: "index_users_on_telegram_email_verification_token", unique: true
-    t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
@@ -299,6 +304,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_070041) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "books", "courses"
   add_foreign_key "books", "users"
   add_foreign_key "club_admin_delegates", "clubs"
   add_foreign_key "club_admin_delegates", "users"
