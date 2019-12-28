@@ -1,9 +1,7 @@
 {
   "name": "sample_graphql_project",
   "private": true,
-  "dependencies": {
-    "autosize": "^4.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "webpack": "^4.32.2",
     "webpack-dev-server": "^3.4.1"

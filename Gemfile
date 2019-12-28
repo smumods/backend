@@ -3,32 +3,19 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
 
-# Core
 gem 'rails', '~> 5.2.3'
 gem 'pg'
 gem 'puma', '~> 3.11'
-
-# Frontend
-gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'slim'
-gem 'slim-rails'
-gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
-# gem "bootstrap_form", ">= 4.2.0"
-gem 'simple_form'
-gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
-gem 'sweet-alert2-rails'
-
 
 # Backend / APIs etc
 gem 'graphql'
-gem 'graphql-batch' # Optimizing GraphQL queries
-gem 'batch-loader'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
