@@ -31,13 +31,9 @@ module Mutations
 
                 # Actual Logic
                 # Check if course is valid
-                courses_by_mod_code = Course.where(module_code: args[:module_code])
-                if courses_by_mod_code.nil? or courses_by_mod_code.empty?
-                    raise GraphQL::ExecutionError.new("Invalid module code")
-                    return
-                end
-                # TODO: I want to get the latest course (by code) and by term.
-                course = courses_by_mod_code.first
+                course = Course.latest_course(args[:module_code])
+                raise GraphQL::ExecutionError.new("Invalid module code") unless course.present?
+
                 book = current_user.books.create({
                     title: args[:title],
                     authors: JSON.parse(args[:authors]),
@@ -50,9 +46,9 @@ module Mutations
                     is_telegram_contact: args[:is_telegram_contact],
                     is_sold: args[:is_sold],
                     course: course
-                    })
+                })
                 raise GraphQL::ExecutionError.new("Error creating book: #{book.errors.full_messages.join(" and ")}") if not book.persisted?
-                book
+                Book.find(book.id) # TODO: uuid is somehow not generated after creating/saving. Need to find by PK
             end
         end
     end

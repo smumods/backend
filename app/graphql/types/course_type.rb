@@ -35,7 +35,7 @@ module Types
 		end
 
 		def all_books
-			self.object.books
+			Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
 		end
 		
 		def review_count
