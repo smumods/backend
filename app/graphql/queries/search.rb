@@ -1,10 +1,10 @@
 module Queries
-    class ReviewsSearch < Queries::BaseQuery
-        description 'Search query for Reviews'
+    class Search < Queries::BaseQuery
+        description 'Search query'
 
         argument :query_string, String, required: true
         
-        type [Types::ReviewSearchResultType], null: true
+        type [Types::SearchResultType], null: true
 
         def resolve(query_string:)
             return if query_string.empty?
