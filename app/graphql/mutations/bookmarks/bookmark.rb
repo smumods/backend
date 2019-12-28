@@ -20,7 +20,7 @@ module Mutations
                 return if current_user.nil?
                 return if not ["mod", "prof", "book"].include? bookmark_type
                 case bookmark_type
-                when "mod"  
+                when "mod"
                     course = Course.latest_course(resource_id_or_slug.upcase)
                     return if course.nil?
                     if current_user.bookmark_course? course

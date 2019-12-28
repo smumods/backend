@@ -1,0 +1,15 @@
+- if @club.errors.any?
+  .alert.alert-danger
+    - @club.errors.full_messages.each do |message|
+      li = message
+
+= simple_form_for(@club) do |f|
+  = f.input :display_picture
+  = f.input :gallery, as: :array
+  
+  button.btn.btn-outline-secondary.add-gallery-button.mb-3 Add 1 More Picture
+
+  = f.input :description
+  = f.input :social_media
+
+  = f.button :submit, class: "btn btn-primary"
