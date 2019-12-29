@@ -51,7 +51,7 @@ module Types
     end
 
     def books_count
-      books.size
+      self.object.books.size
     end
 
     def all_votes
