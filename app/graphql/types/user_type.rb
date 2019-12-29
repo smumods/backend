@@ -8,6 +8,7 @@ module Types
     field :telegram_picture, String, null: true
     field :books, [Types::BookType], null: true
     field :books_count, Integer, null: true
+    field :verified, Boolean, null: true
     field :all_votes, [Types::VoteType], null: true
     field :all_books, [Types::BookType], null: true
     field :all_reviews, [Types::ReviewType], null: true
@@ -51,7 +52,8 @@ module Types
     end
 
     def books_count
-      self.object.books.size
+      current_user = context[:current_user]
+      self.object.books.size if current_user.present?
     end
 
     def all_votes
