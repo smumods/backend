@@ -50,10 +50,16 @@ ActiveAdmin.register User do
 
   show do
     attributes_table do
+      row :id
+      row :uuid
       row :email
       row :first_name
       row :last_name
       row :verified
+      if Rails.env.staging? or Rails.env.development?
+        row :email_token
+        row :verification_count
+      end
       row :password_reset_tries_count
       row :password_token_tries_count
       row :created_at
