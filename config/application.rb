@@ -23,8 +23,8 @@ module SampleGraphqlProject
        end
     end
 
-    config.generators do |generator|
-      generator.orm :active_record, primary_key_type: :id
-    end
+    # config.generators do |generator|
+    #   generator.orm :active_record, primary_key_type: :id
+    # end
   end
 end
