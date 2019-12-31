@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  # CONSTANTS
+  def self.MAX_VERIFICATION_TRIES
+    5
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, 
@@ -11,7 +16,6 @@ class User < ApplicationRecord
   has_many :votes
   has_many :voted_reviews, through: :votes
   has_many :sessions
-
 
   # Validations
   validates :first_name, presence: true
