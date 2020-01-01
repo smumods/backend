@@ -1,0 +1,41 @@
+<div style="padding: 50px">
+    <strong>Book Sales</strong>
+
+    <p>
+        <strong>Date:</strong> <%= Date.today %>
+    </p>
+    <p>
+        <strong>Time:</strong> <%= Time.now.strftime("%I:%M:%S %p %z") %>
+    </p>
+
+    <br/>
+    <span>== COPY BELOW ==</span>
+    <br/>
+    <br/>
+
+
+
+
+    <% categories_with_books.each do |category, books| %>
+        <strong>
+            <a href="https://smumods.com/module/<%= category %>">
+                <%= category %>
+            </a>
+        </strong> 
+        
+        <br/>
+        
+        <% books.each do |book| %>
+            <strong>
+                <span>
+                    <%= book.title %> – $<%= book.price %>
+                </span>
+                <a href="https://smumods.com/book/<%= book.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>/<%= book.isbn10 %>/<%= book.uuid %>">
+                    &nbsp;(Click Here)
+                </a>
+            </strong>
+            <br/>
+        <% end %>
+        <br/>
+    <% end %>
+</div>
