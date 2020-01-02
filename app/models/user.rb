@@ -27,7 +27,7 @@ class User < ApplicationRecord
   action_store :bookmark, :book, counter_cache: true
 
   # Actions
-  before_update { binding.pry }
+  before_save { self.email_token = nil if self.email_token == "" }
   before_save { self.email = self.email.downcase }
   before_create :generate_email_token
   after_create :reload_uuid # make sure its reloaded before sending verification emails
