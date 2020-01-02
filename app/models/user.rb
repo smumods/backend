@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def send_verification_email
-    UserMailer.send_verification_email(self).deliver_now
+    UserMailer.send_verification_email(self.id).deliver_now
   end
 
   def generate_password_reset_token
