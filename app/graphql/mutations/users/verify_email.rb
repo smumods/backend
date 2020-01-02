@@ -4,11 +4,10 @@ module Mutations
             null true
 
             argument :email_token, String, required: true
-            argument :uuid, String, required: true
 
             field :success, String, null: true
 
-            def resolve(email_token:, uuid:)
+            def resolve(email_token:)
                 return unless email_token
                 
                 # Make sure user is logged in
