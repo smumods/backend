@@ -15,8 +15,8 @@ class UserMailer < ApplicationMailer
     }
   }
 
-  def send_verification_email(user)
-    @user = user
+  def send_verification_email(user_id)
+    @user = User.find(user_id)
     mail(to: @user.email, subject: 'Verify Your SMUMods Account')
   end
 
