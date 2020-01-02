@@ -4,22 +4,17 @@ module Mutations
             null true
 
             argument :email_token, String, required: true
-            argument :uuid, String, required: true
 
             field :success, String, null: true
 
-            def resolve(email_token:, uuid:)
+            def resolve(email_token:)
                 return unless email_token
                 
                 # Make sure user is logged in
                 current_user = context[:current_user]
-                if current_user.blank?
+                if current_user.blank? or current_user.nil?
                     raise GraphQL::ExecutionError.new("Authentication required")
-                elsif not current_user.verified
-                    raise GraphQL::ExecutionError.new("Please verify your email first!")
-                    return
                 end
-                return { success: false } if current_user.nil?
 
                 # If user is logged in and already verified, return success
                 return { success: true } if current_user.present? and current_user.verified
