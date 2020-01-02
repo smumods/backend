@@ -27,8 +27,11 @@ class User < ApplicationRecord
   action_store :bookmark, :book, counter_cache: true
 
   # Actions
-  before_save { self.email = email.downcase }
+  before_save { self.email = self.email.downcase }
   before_create :generate_email_token
+  after_create :reload_uuid # make sure its reloaded before sending verification emails
+
+  # Email Actions
   after_create :send_verification_email
 
   def self.validate_email_format(email)
@@ -75,5 +78,11 @@ class User < ApplicationRecord
   def increment_password_token_tries_count
     self.password_token_tries_count += 1
     self.save
+  end
+
+  def reload_uuid
+    if self.attributes.has_key? 'uuid'
+      self[:uuid] = self.class.where(id: id).pluck(:uuid).first
+    end
   end
 end
