@@ -8,7 +8,8 @@ module Mutations
 
             field :success, String, null: true
 
-            def resolve(email_token:)
+            def resolve(**args)
+                email_token = args[:email_token]
                 return unless email_token
                 
                 # Make sure user is logged in
@@ -21,7 +22,7 @@ module Mutations
                 return { success: true } if current_user.present? and current_user.verified
                 
                 # Too many tries
-                raise GraphQL::ExecutionError.new("You have attempted to verify your account too many times wrongly. Contact @smumods on Telegram for help") if user.verification_count > User.MAX_VERIFICATION_TRIES
+                raise GraphQL::ExecutionError.new("You have attempted to verify your account too many times wrongly. Contact @smumods on Telegram for help") if current_user.verification_count > User.MAX_VERIFICATION_TRIES
                 
                 # Valid email token
                 if current_user.email_token != email_token
