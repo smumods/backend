@@ -150,7 +150,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources and pages from here.
   #
-  # config.before_action :do_something_awesome
+  config.before_action :set_admin_timezone
 
   # == Attribute Filters
   #
@@ -312,4 +312,9 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+
+  private
+  def set_admin_timezone
+    Time.zone = 'Singapore'
+  end
 end

@@ -27,7 +27,8 @@ class User < ApplicationRecord
   action_store :bookmark, :book, counter_cache: true
 
   # Actions
-  before_create :generate_email_token, if: Proc.new { |user| not user.verified }
+  before_save { self.email = email.downcase }
+  before_create :generate_email_token
   after_create :send_verification_email
 
   def self.validate_email_format(email)
@@ -54,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def send_verification_email
-    UserMailer.send_verification_email(self).deliver_now
+    UserMailer.send_verification_email(self.id).deliver_now
   end
 
   def generate_password_reset_token

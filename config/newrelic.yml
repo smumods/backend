@@ -3,20 +3,20 @@
 # .NET, PHP, Python, Node, and Go applications with deep visibility and low
 # overhead.  For more information, visit www.newrelic.com.
 #
-# Generated June 29, 2019
+# Generated January 02, 2020
 #
-# This configuration file is custom generated for app138144678@heroku.com
+# This configuration file is custom generated for Lever Labs Pte Ltd
 #
 # For full documentation of agent configuration options, please refer to
 # https://docs.newrelic.com/docs/agents/ruby-agent/installation-configuration/ruby-agent-configuration
 
 common: &default_settings
   # Required license key associated with your New Relic account.
-  license_key: 1113be2b9d53775c3f89c0c05b15865b89a8ba26
+  license_key: 2f885f05eade0a1a0b81d99d293b8b4634eb27f1
 
   # Your application name. Renaming here affects where data displays in New
   # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
-  app_name: My Application
+  app_name: SMUMods
 
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
@@ -30,7 +30,7 @@ common: &default_settings
 # If your application has other named environments, configure them here.
 development:
   <<: *default_settings
-  app_name: My Application (Development)
+  app_name: SMUMods (Development)
 
 test:
   <<: *default_settings
@@ -39,7 +39,7 @@ test:
 
 staging:
   <<: *default_settings
-  app_name: My Application (Staging)
+  app_name: SMUMods (Staging)
 
 production:
   <<: *default_settings

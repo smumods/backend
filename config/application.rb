@@ -18,13 +18,18 @@ module SampleGraphqlProject
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-         origins '*'
-         resource '*', :headers => :any, :methods => [:get, :post]
-       end
+        # Regex should match all subdomains and domain for *.smumods.com/*/* 
+        # as well as localhost or 127.0.0.1 and all ports
+        origins /\A.*[(localhost)?(127.0.0.1)?]:.*\z/, 
+                /\A[0-9a-z.]*(smumods.com){1}\/(.)*\z/
+        resource '*', :headers => :any, :methods => [:get, :post]
+      end
     end
 
-    # config.generators do |generator|
-    #   generator.orm :active_record, primary_key_type: :id
-    # end
+    # Set timezone
+    config.time_zone = 'Singapore'
+    # config.active_record.default_timezone = :local
+    # config.active_record.time_zone_aware_attributes = false
+    # config.active_record.time_zone_aware_types = [:datetime, :time]
   end
 end
