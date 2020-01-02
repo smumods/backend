@@ -27,7 +27,7 @@ class User < ApplicationRecord
   action_store :bookmark, :book, counter_cache: true
 
   # Actions
-  before_save { self.email = email.downcase }
+  before_save { self.email = self.email.downcase }
   before_create :generate_email_token
   after_create :reload_uuid # make sure its reloaded before sending verification emails
 
@@ -81,7 +81,6 @@ class User < ApplicationRecord
   end
 
   def reload_uuid
-    binding.pry
     if self.attributes.has_key? 'uuid'
       self[:uuid] = self.class.where(id: id).pluck(:uuid).first
     end
