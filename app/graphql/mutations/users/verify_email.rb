@@ -26,12 +26,13 @@ module Mutations
                 
                 # Valid email token
                 if current_user.email_token != email_token
-                    current_user.update(verification_count: current_user.verification_count + 1)
+                    current_user.update_attributes(verification_count: current_user.verification_count + 1)
                     raise GraphQL::ExecutionError.new("Invalid token or it has expired")
                     return { success: false }
                 end
 
-                user_updated = current_user.update(verified: true, email_token: nil, verification_count: 0)
+                user_updated = current_user.update_attributes(verified: true, email_token: nil, verification_count: 0)
+                binding.pry
                 raise GraphQL::ExecutionError.new("There was an issue verifying your user account. Please contact an admin!):") unless user_updated
 
                 return { success: true }
