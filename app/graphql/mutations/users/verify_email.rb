@@ -4,6 +4,7 @@ module Mutations
             null true
 
             argument :email_token, String, required: true
+            argument :uuid, String, required: false
 
             field :success, String, null: true
 
