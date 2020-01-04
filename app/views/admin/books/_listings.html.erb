@@ -27,7 +27,7 @@
             
             <% books.each_with_index do |book, index| %>
                 <span>
-                    <%= index + 1 %>. <%= book.title %>
+                    <strong><%= index + 1 %>.</strong> <%= book.title %>
                 </span>
                 <a href="<%= BooksHelper.get_book_url(book) %>">
                     &nbsp;(link)
