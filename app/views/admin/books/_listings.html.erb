@@ -9,33 +9,35 @@
     </p>
 
     <br/>
-    <span>== COPY BELOW ==</span>
+    <button id="clipboardjs-btn" data-clipboard-target="clipboardjs-target">COPY BELOW</button>
     <br/>
     <br/>
 
 
 
-
-    <% categories_with_books.each do |category, books| %>
-        <strong>
-            <a href="https://smumods.com/module/<%= category %>">
-                <%= category %>
-            </a>
-        </strong> 
-        
-        <br/>
-        
-        <% books.each do |book| %>
+    <div id="clipboardjs-target">
+        <% categories_with_books.each do |category, books| %>
             <strong>
-                <span>
-                    <%= book.title %> – $<%= book.price %>
-                </span>
-                <a href="https://smumods.com/book/<%= book.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') %>/<%= book.isbn10 %>/<%= book.uuid %>">
-                    &nbsp;(Click Here)
+                <a href="https://smumods.com/module/<%= category %>">
+                    <%= category %>
                 </a>
-            </strong>
+            </strong> 
+            
+            <br/>
+            
+            <% books.each_with_index do |book, index| %>
+                <span>
+                    <%= index + 1 %>. <%= book.title %>
+                </span>
+                <a href="<%= BooksHelper.get_book_url(book) %>">
+                    &nbsp;(link)
+                </a>
+                <span>
+                    💰 $<%= book.price %>
+                </span>
+                <br/>
+            <% end %>
             <br/>
         <% end %>
-        <br/>
-    <% end %>
+    </div>
 </div>
