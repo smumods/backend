@@ -62,6 +62,10 @@ class User < ApplicationRecord
     UserMailer.send_verification_email(self.id).deliver_now
   end
 
+  def resend_verification_email
+    UserMailer.resend_verification_email(self.id).deliver_now
+  end
+
   def generate_password_reset_token
     if self.password_reset_token.nil? and self.password_reset_tries_count <= 3
       self.password_reset_token = loop do
