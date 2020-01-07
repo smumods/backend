@@ -43,14 +43,16 @@
         <p>
             <strong>PS2:</strong> If you still run into issues, pm us at @SMUMods and we will get back to you asap!
         </p>
+        <br/>
         
         <p>
             <strong>Browse books for your modules here:</strong>
         </p>
         <br/>
-        
+
         <% categories_with_books.each do |category, books| %>
             <strong>
+                <% if %>
                 <a href="https://smumods.com/module/<%= category %>">
                     <%= category %>&nbsp;   
                 </a>   (<%= books.size %>) | &nbsp;
