@@ -13,7 +13,52 @@
     <br/>
     <br/>
 
+    <div>
+        <p>
+            <strong>📚 Looking to BUY & SELL your textbooks? 📚</strong>
+        </p>
+        <br/>
 
+        <p>
+            💰 We have <strong>over <%= Book.count %> books</strong> listed!
+        </p>
+
+        <p>
+            🛒 <strong>More than <%= Book.where(is_sold: true).count %> books</strong> have been purchased!
+        </p>
+
+        <p>
+            🌟 <strong>It’s easy. It’s free.</strong> Just go to SMUMods.com/book and signup now to list in < 5mins
+        </p>
+
+        <p>
+            <strong>PS:</strong> Check your SMU email + Junk folder (help us to unflag it as spam pleasee 🙏) and click on the verification link
+        </p>
+
+        
+        <p>
+            <strong>PS2:</strong> If you still run into issues, pm us at @SMUMods and we will get back to you asap!
+        </p>
+        <br/>
+        
+        <p>
+            <strong>Browse books for your modules here:</strong>
+        </p>
+        <% categories_with_books.each do |category, books| %>
+            <strong>
+                <a href="https://smumods.com/module/<%= category %>">
+                    <%= category %>&nbsp;   
+                </a>   (<%= books.size %>) | &nbsp;
+            </strong>
+        <% end %>
+    </div>
+    <br/>
+    <br/>
+
+
+    <strong> == COPY BELOW == <strong>
+    <br/>
+    <br/>
 
     <div id="clipboardjs-target">
         <% categories_with_books.each do |category, books| %>
