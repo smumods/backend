@@ -16,6 +16,7 @@ module Types
 		field :module_code_front, String, null: false
 		field :all_reviews, [Types::ReviewType], null: true
 		field :all_books, [Types::BookType], null: true
+		field :books_count, Int, null: true
 		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
 		field :reviews_count, Int, null: true
@@ -50,6 +51,10 @@ module Types
 		def reviews_count
 			return self.object.reviews_count if self.object.respond_to? :reviews_count
 			return nil
+		end
+
+		def books_count
+			all_books.size
 		end
 	end
 end
