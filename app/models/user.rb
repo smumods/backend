@@ -19,7 +19,7 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :email, format: { with:  /([A-Z0-9._%a-z-]+@(sis|mitb|business|mba|mtsc|mwm|mqf|gmf|maf|mi|mim|mcm|mhcl|emba|economics|mse|msfe|mf|socsc|accountancy|mcfo|mpa|msa|law|llm|jd){1}.smu.edu.sg)/ }
+  validates :email, format: { with:  /([A-Z0-9._%a-z-]+@(sis|mitb|mais|business|mba|mtsc|mwm|mqf|gmf|maf|mi|mim|mcm|mhcl|emba|economics|exchange|mse|msfe|mf|socsc|accountancy|mcfo|mpa|msa|law|llm|jd){1}.smu.edu.sg)/ }
 
   # Bookmarks/Likes/Etc
   action_store :bookmark, :professor, counter_cache: true
@@ -34,6 +34,10 @@ class User < ApplicationRecord
 
   # Email Actions
   after_create :send_verification_email
+
+  def self.validate_email_format(email)
+    email =~ /([A-Z0-9._%a-z-]+@(sis|mitb|mais|business|mba|mtsc|mwm|mqf|gmf|maf|mi|mim|mcm|mhcl|emba|economics|exchange|mse|msfe|mf|socsc|accountancy|mcfo|mpa|msa|law|llm|jd){1}.smu.edu.sg)/
+  end
 
   def self.validate_reset_token_and_update_password(uuid, token, password)
     user = User.find_by(uuid: uuid, password_reset_token: token)
