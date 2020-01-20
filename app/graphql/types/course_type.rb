@@ -17,7 +17,6 @@ module Types
 		field :all_reviews, [Types::ReviewType], null: true
 		field :all_books, [Types::BookType], null: true
 		field :books_count, Int, null: true
-		field :review_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
 		field :reviews_count, Int, null: true
 		field :average_marking_score, Float, null: true
@@ -30,31 +29,24 @@ module Types
 		# Others
 
 		def all_reviews
-			module_code = self.object.module_code
-			reviews = Course.where(module_code: module_code).collect(&:reviews).flatten
-			reviews
+			::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: nil)
 		end
 
 		def all_books
-			Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
+			::Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
 		end
 		
-		def review_count
-			all_reviews.length		
-		end
-
 		def all_professors
 			module_code = self.object.module_code
 			::Course.where(module_code: module_code).includes(:professors).collect(&:professors).flatten.uniq
 		end
 
 		def reviews_count
-			return self.object.reviews_count if self.object.respond_to? :reviews_count
-			return nil
+			all_reviews.size
 		end
 
 		def books_count
-			all_books.size
+			all_books.where(is_sold: false).size
 		end
 	end
 end
