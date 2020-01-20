@@ -18,7 +18,7 @@ module Types
 		field :all_books, [Types::BookType], null: true
 		field :books_count, Int, null: true
 		field :all_professors, [Types::ProfessorType], null: true
-		field :reviews_count, Int, null: true
+		field :review_count, Int, null: true
 		field :average_marking_score, Float, null: true
 		field :average_engagement_score, Float, null: true
 		field :average_fairness_score, Float, null: true
@@ -41,7 +41,7 @@ module Types
 			::Course.where(module_code: module_code).includes(:professors).collect(&:professors).flatten.uniq
 		end
 
-		def reviews_count
+		def review_count
 			all_reviews.size
 		end
 
