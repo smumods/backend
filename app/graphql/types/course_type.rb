@@ -29,7 +29,7 @@ module Types
 		# Others
 
 		def all_reviews
-			::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: nil)
+			::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: [nil, ''])
 		end
 
 		def all_books
