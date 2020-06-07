@@ -1,25 +1,24 @@
 module Mutations
-    module Reviews
-        class CreateReview < Mutations::BaseMutation
-            null true
+	module Reviews
+		class CreateReview < Mutations::BaseMutation
+			null true
 
-            # Arguments
-            argument :module_review, String, required: false
-            argument :professor_review, String, required: false
-            argument :is_anonymous, Boolean, required: false
-            argument :marking_score, Int, required: false
-            argument :engagement_score, Int, required: false
-            argument :fairness_score, Int, required: false
-            argument :workload_score, Int, required: false
-            argument :professor_slug, String, required: false
-            argument :type_of_review, String, required: false
-            argument :course_id, Int, required: false
+			# Arguments
+			argument :module_review, String, required: false
+			argument :professor_review, String, required: false
+			argument :is_anonymous, Boolean, required: false
+			argument :marking_score, Int, required: false
+			argument :engagement_score, Int, required: false
+			argument :fairness_score, Int, required: false
+			argument :workload_score, Int, required: false
+			argument :professor_slug, String, required: false
+			argument :type_of_review, String, required: false
+			argument :course_id, Int, required: false
 
-            # return type from the mutation
-            type Types::ReviewType
+			# return type from the mutation
+			type Types::ReviewType
 
-            # is_anonymous:, module_review:, course_id:, 
-            def resolve(**args)
+			def resolve(**args)
                 current_user = context[:current_user]
                 if current_user.blank?
                     raise GraphQL::ExecutionError.new("Authentication required")
@@ -61,10 +60,11 @@ module Mutations
                             workload_score: args[:workload_score],
                             professor: Professor.friendly.find(args[:professor_slug])
                         })
-                    end
-                end
+					end
+				end
+				raise GraphQL::ExecutionError.new("#{review.errors.messages.values.flatten.join(" and ")}") if not review.persisted?
                 review
             end
-        end
-    end
+		end
+	end
 end
