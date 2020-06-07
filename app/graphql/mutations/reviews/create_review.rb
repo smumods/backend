@@ -18,64 +18,53 @@ module Mutations
 			# return type from the mutation
 			type Types::ReviewType
 
-			# is_anonymous:, module_review:, course_id:, 
 			def resolve(**args)
-				#list of bad words
-				vulgarities_list = ['fuck', 'cock', 'pussy', 'asshole', 'cunt', 'pig', 'dick', 'wanker', 'chi bai', 'cb']
-				current_user = context[:current_user]
-				if current_user.blank?
-					raise GraphQL::ExecutionError.new("Authentication required")
-				elsif not current_user.verified
-					raise GraphQL::ExecutionError.new("Please verify your email first!")
-					return
-				#check vulgarities filter
-				elsif vulgarities_list.any? { |s| args[:module_review].include? s }
-					raise GraphQL::ExecutionError.new("No vulgarities in module review please! let's keep it civil")
-					return 
-				elsif vulgarities_list.any? { |s| args[:professor_review].include? s }
-					raise GraphQL::ExecutionError.new("No vulgatiries in prof review please! let's keep it civil")
-					return
-			end
-				
-				
-				review = Review.create_with({
-					is_anonymous: args[:is_anonymous],
-					user: current_user,
-					type_of_review: args[:type_of_review]
-					})
-					if args[:professor_slug].nil? or args[:professor_slug].empty?
-						# Normal Review
-						review = review.create({
-							module_review: args[:module_review],
-							course_id: args[:course_id],
-							})
-						else
-							# With Professor Review
-							if args[:course_id] < 0
-								review = review.create({
-									professor_review: args[:professor_review],
-									module_review: args[:module_review],
-									marking_score: args[:marking_score],
-									engagement_score: args[:engagement_score],
-									fairness_score: args[:fairness_score],
-									workload_score: args[:workload_score],
-									professor: Professor.friendly.find(args[:professor_slug])
-									})
-								else
-									review = review.create({
-										professor_review: args[:professor_review],
-										module_review: args[:module_review],
-										course_id: args[:course_id],
-										marking_score: args[:marking_score],
-										engagement_score: args[:engagement_score],
-										fairness_score: args[:fairness_score],
-										workload_score: args[:workload_score],
-										professor: Professor.friendly.find(args[:professor_slug])
-										})
-									end
-								end
-								review
-							end
+                current_user = context[:current_user]
+                if current_user.blank?
+                    raise GraphQL::ExecutionError.new("Authentication required")
+                elsif not current_user.verified
+                    raise GraphQL::ExecutionError.new("Please verify your email first!")
+                    return
+                end
+                review = Review.create_with({
+                    is_anonymous: args[:is_anonymous],
+                    user: current_user,
+                    type_of_review: args[:type_of_review]
+                })
+                if args[:professor_slug].nil? or args[:professor_slug].empty?
+                    # Normal Review
+                    review = review.create({
+                        module_review: args[:module_review],
+                        course_id: args[:course_id],
+                    })
+                else
+                    # With Professor Review
+                    if args[:course_id] < 0
+                        review = review.create({
+                            professor_review: args[:professor_review],
+                            module_review: args[:module_review],
+                            marking_score: args[:marking_score],
+                            engagement_score: args[:engagement_score],
+                            fairness_score: args[:fairness_score],
+                            workload_score: args[:workload_score],
+                            professor: Professor.friendly.find(args[:professor_slug])
+                        })
+                    else
+                        review = review.create({
+                            professor_review: args[:professor_review],
+                            module_review: args[:module_review],
+                            course_id: args[:course_id],
+                            marking_score: args[:marking_score],
+                            engagement_score: args[:engagement_score],
+                            fairness_score: args[:fairness_score],
+                            workload_score: args[:workload_score],
+                            professor: Professor.friendly.find(args[:professor_slug])
+                        })
+					end
+				end
+				raise GraphQL::ExecutionError.new("#{review.errors.messages.values.flatten.join(" and ")}") if not review.persisted?
+                review
+            end
 		end
 	end
 end
