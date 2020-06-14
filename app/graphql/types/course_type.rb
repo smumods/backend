@@ -38,7 +38,11 @@ module Types
 		
 		def all_professors
 			module_code = self.object.module_code
-			::Course.where(module_code: module_code).includes(:professors).collect(&:professors).flatten.uniq
+			::Professor.joins(:courses)
+						.where("courses.module_code = ?", module_code)
+						.where("professors.name NOT LIKE '%INSTRUCTOR%'")
+						.where("professors.name NOT LIKE '%INTRUCTOR%'")
+						.distinct
 		end
 
 		def review_count
