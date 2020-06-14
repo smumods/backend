@@ -21,7 +21,7 @@ module SampleGraphqlProject
         # Regex should match all subdomains and domain for *.smumods.com/*/* 
         # as well as localhost or 127.0.0.1 and all ports
         origins /\A.*[(localhost)?(127.0.0.1)?]:.*\z/, 
-                /\A[0-9a-z.]*(smumods.com){1}\/(.)*\z/
+                /\A(.)*(smumods.com){1}(.)*\z/
         resource '*', :headers => :any, :methods => [:get, :post]
       end
     end
