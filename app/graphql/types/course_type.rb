@@ -38,10 +38,9 @@ module Types
 		
 		def all_professors
 			module_code = self.object.module_code
-			::Professor.joins(:courses)
-						.where("courses.module_code = ?", module_code)
-						.where("professors.name NOT LIKE '%INSTRUCTOR%'")
-						.where("professors.name NOT LIKE '%INTRUCTOR%'")
+			professors = Professor.joins(:courses)
+			professors.where("courses.module_code = ?", module_code)
+						.where("professors.name NOT LIKE '%INSTRUCTOR%' AND professors.name NOT LIKE '%INTRUCTOR%'"))
 						.distinct
 		end
 
