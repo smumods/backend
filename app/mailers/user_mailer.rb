@@ -1,13 +1,12 @@
 class UserMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
 
+  # Attributes
+  attr_reader :delivery_method_options
+
   # Defaults
   default from: 'hello@smumods.com'
-  default delivery_method_options: { 
-    api_key: Rails.application.credentials.mailjet[:api_key], 
-    secret_key: Rails.application.credentials.mailjet[:secret_key],
-    version: 'v3.1'
-  }
+  default delivery_method_options: @delivery_method_options
   default mail_settings: {
     bcc: {
       enable: true,
@@ -28,5 +27,14 @@ class UserMailer < ApplicationMailer
   def send_wrong_user_email(user)
     @user = user
     mail(to: @user.email, subject: 'SMUMods Forget Password Email')
+  end
+
+  def delivery_method_options
+    return {} unless Rails.env.production?
+    return { 
+      api_key: Rails.application.credentials.mailjet[:api_key], 
+      secret_key: Rails.application.credentials.mailjet[:secret_key],
+      version: 'v3.1'
+    }
   end
 end
