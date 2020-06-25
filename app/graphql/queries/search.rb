@@ -15,10 +15,7 @@ module Queries
 
             Course.where("name ilike ? OR module_code ilike ?", "%#{query_string}%", "%#{query_string}%").each do |course|
                 course_module_code = course.module_code
-                if courses[course_module_code].nil?
-                    courses[course_module_code] = Array.new
-                end
-                courses[course_module_code].push course
+                courses[course_module_code] = courses.fetch(course_module_code, Array.new).push course
             end
 
             courses.values.flatten.each do |course|
@@ -31,10 +28,7 @@ module Queries
                 professors.add professor
                 professor.courses.each do |course|
                     course_module_code = course.module_code
-                    if courses[course_module_code].nil?
-                        courses[course_module_code] = Array.new
-                    end
-                    courses[course_module_code].push course
+                    courses[course_module_code] = courses.fetch(course_module_code, Array.new).push course
                 end
             end
             
