@@ -9,7 +9,7 @@ class Professor < ApplicationRecord
     has_many :reviews
 
     # Scopes
-    default_scope { where("professors.name NOT LIKE '%INSTRUCTOR%' AND professors.name NOT LIKE '%INTRUCTOR%'") }
+    # default_scope { where("professors.name NOT LIKE '%INSTRUCTOR%' AND professors.name NOT LIKE '%INTRUCTOR%'") }
 
     # Bookmarks/Likes/Etc
     # has_many :like_by_users
