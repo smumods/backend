@@ -1,0 +1,9 @@
+<div style="padding: 50px">
+    <strong>Leaderboard</strong>
+
+    <br/><br/>
+
+    <% users.each do |user, count| %>
+        <%= user.email %>: <%= count %> <br/>
+    <% end %>
+</div>
