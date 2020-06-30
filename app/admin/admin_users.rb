@@ -1,4 +1,12 @@
 ActiveAdmin.register AdminUser do
+  before_action :check_if_admin
+  
+  controller do
+    def check_if_admin
+      redirect_back(fallback_location: admin_root_path, notice: "You have to be an admin to see this page") unless current_admin_user.admin?
+    end
+  end
+
   permit_params :email, :password, :password_confirmation
 
   index do
