@@ -6,7 +6,11 @@ class UserMailer < ApplicationMailer
 
   # Defaults
   default from: 'hello@smumods.com'
-  default delivery_method_options: @delivery_method_options
+  default delivery_method_options: { 
+    api_key: Rails.application.credentials.mailjet[:api_key], 
+    secret_key: Rails.application.credentials.mailjet[:secret_key],
+    version: 'v3.1'
+  }
   default mail_settings: {
     bcc: {
       enable: true,
