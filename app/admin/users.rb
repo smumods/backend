@@ -4,7 +4,8 @@ ActiveAdmin.register User do
   else
     permit_params :password_reset_tries_count, :password_token_tries_count
   end
-  index do
+  
+  index download_links: proc{ current_admin_user.admin? } do
     selectable_column
     id_column
     column :uuid
