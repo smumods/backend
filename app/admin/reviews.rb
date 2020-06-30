@@ -1,18 +1,24 @@
 ActiveAdmin.register Review do
-    # See permitted parameters documentation:
-    # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-    #
-    # permit_params :list, :of, :attributes, :on, :model
-    #
-    # or
-    #
-    # permit_params do
-    #   permitted = [:permitted, :attributes]
-    #   permitted << :other if params[:action] == 'create' && current_user.admin?
-    #   permitted
-    # end
-
     permit_params :user_id, :course_id, :professor_id, :professor_review, :module_review, :type_of_review, :is_anonymous, :marking_score, :engagement_score, :fairness_score, :workload_score
+
+    # Prevent non admins from deleting users
+    disallowed_actions = [:edit]
+    actions :all, except: disallowed_actions
+
+    index download_links: proc{ current_admin_user.admin? } do
+        column :user
+        column :course
+        column :professor
+        column :professor_review
+        column :module_review
+        column :type_of_review
+        column :is_anonymous
+        column :marking_score
+        column :engagement_score
+        column :fairness_score
+        column :workload_score
+        actions
+    end
 
     form do |f|
         f.inputs do
