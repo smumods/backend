@@ -33,7 +33,7 @@ class User < ApplicationRecord
   after_create :reload_uuid # make sure its reloaded before sending verification emails
 
   # Email Actions
-  after_create :send_verification_email
+  after_commit :send_verification_email
 
   def self.validate_email_format(email)
     email =~ /\A([A-Z0-9._%a-z-]+@(exchange|sis|mitb|business|mais|mba|mtsc|mwm|mqf|gmf|maf|mi|mim|mcm|mhcl|emba|economics|mse|msfe|mf|socsc|accountancy|mcfo|mpa|msa|law|llm|jd|ddptechmgt){1}.smu.edu.sg)\z/
