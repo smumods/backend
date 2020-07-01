@@ -32,7 +32,7 @@
             <th>Account Created On</th>
             <th>Actions</th>
         </tr>
-        <% users.sort_by { |k,v| k.created_at }.each do |user, count| %>
+        <% all_users.sort_by { |k,v| k.created_at }.each do |user, count| %>
             <tr>
                 <td> <%= user.id %></td>
                 <td> <%= user.first_name + " " + user.last_name %></td>
@@ -55,7 +55,7 @@
             <th>Account Created On</th>
             <th>Actions</th>
         </tr>
-        <% users.sort_by { |k,v| k.created_at }.each do |user, count| %>
+        <% filtered_users.sort_by { |k,v| k.created_at }.each do |user, count| %>
             <% if count >= 3 %>
                 <tr>
                     <td> <%= user.id %></td>
