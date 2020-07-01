@@ -2,8 +2,8 @@ ActiveAdmin.register_page "Leaderboard" do
     content do
         render 'users', { 
             users: Review.select(:user).group(:user).count,
-            reviews: Review,
-            books: Book
+            reviews_count: Review.count,
+            books_count: Book.count
         }
 
     end
