@@ -1,9 +1,48 @@
 <div style="padding: 50px">
-    <strong>Leaderboard</strong>
+    <strong>Marketing Dashboard</strong>
+    <br> 
+    <br>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 
-    <br/><br/>
+    <strong>Overall Stats</strong>
+    <table>
+        <tr>
+            <th> Total Number of reviews </th>
+            <th> Total Number of books </th>
+        </tr>
+        <tr>
+            <th> <%= reviews_count %></th>
+            <th> <%= books_count %></th>
+        </tr>
+    </table>
+    <br>  
+    <br>  
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Telegram Handle</th>
+            <th>No.Reviews</th>
+            <th>Account Created On</th>
+        </tr>
+        <% users.each do |user, count| %>
+            <tr>
+                <td> <%= user.id %></td>
+                <td> <%= user.first_name + " " + user.last_name %></td>
+                <td> <%= user.email %> </td>
+                <td> <%= user.telegram_username %> </td>
+                <td> <%= count %> </td>
+                <td> <%= user.created_at %> </td>
+            </tr>
+        <% end %>
+    </table>
 
-    <% users.each do |user, count| %>
-        <%= user.email %>: <%= count %> <br/>
-    <% end %>
+
+
 </div>
