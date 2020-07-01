@@ -26,19 +26,19 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Email</th>
             <th>Telegram Handle</th>
             <th>No.Reviews</th>
             <th>Account Created On</th>
+            <th>Actions</th>
         </tr>
         <% users.each do |user, count| %>
             <tr>
                 <td> <%= user.id %></td>
                 <td> <%= user.first_name + " " + user.last_name %></td>
-                <td> <%= user.email %> </td>
                 <td> <%= user.telegram_username %> </td>
                 <td> <%= count %> </td>
-                <td> <%= user.created_at %> </td>
+                <td> <%= user.created_at.strftime("%m/%d/%Y %T") %> </td>
+                <td> <%= link_to "View User", admin_user_path(user) %> </td>
             </tr>
         <% end %>
     </table>
