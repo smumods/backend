@@ -1,8 +1,8 @@
 module Types
   class UserType < Types::BaseObject
     field :id, ID, null: true
-    field :firstName, String, null: true
-    field :lastName, String, null: true
+    field :first_name, String, null: true
+    field :last_name, String, null: true
     field :telegram_id, Integer, null: true
     field :telegram_username, String, null: true
     field :telegram_picture, String, null: true
