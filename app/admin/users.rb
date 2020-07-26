@@ -1,10 +1,15 @@
 ActiveAdmin.register User do
+  # Prevent non admins from deleting users
+  disallowed_actions = [:destroy]
+  actions :all, except: disallowed_actions
+
   if Rails.env.staging? or Rails.env.development?
     permit_params :password_reset_tries_count, :password_token_tries_count, :verified
   else
     permit_params :password_reset_tries_count, :password_token_tries_count
   end
-  index do
+
+  index download_links: proc{ current_admin_user.admin? } do
     selectable_column
     id_column
     column :uuid

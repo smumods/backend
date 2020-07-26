@@ -3,4 +3,7 @@ class AdminUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
+
+  # User Roles
+  enum role: { marketing_team: 1, admin: 999 }
 end
