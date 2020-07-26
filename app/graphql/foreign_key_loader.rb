@@ -16,7 +16,6 @@ class ForeignKeyLoader < GraphQL::Batch::Loader
     
     def perform(foreign_ids)
         # find all the records
-        binding.pry
         scope = model.where(foreign_key => foreign_ids)
         scope = scope.merge(merge) if merge.present?
         records = scope.to_a
