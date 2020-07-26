@@ -20,7 +20,7 @@ gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.
 gem 'sendgrid-ruby' # for emails
 gem 'activeadmin'
 gem 'activeadmin_addons'
-gem "active_material", github: "vigetlabs/active_material"
+gem 'active_material', github: "vigetlabs/active_material"
 gem 'mailjet'
 gem 'graphql-batch'
 
@@ -41,6 +41,7 @@ gem 'fuzzy_match' # used for prof data matching
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
 gem 'newrelic_rpm'
+gem 'skylight'
 
 group :development, :test do
   gem 'rspec-rails'
