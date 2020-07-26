@@ -32,7 +32,7 @@ module Types
 			# module_code = self.object.module_code
 			# ::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: [nil, ''])
 			ForeignKeyLoader
-				.for(Review, :course_id)
+				.for(Review, :course_id, merge: -> { where.not(module_review: [nil, '']) })
 				.load(object.id)
 		end
 
