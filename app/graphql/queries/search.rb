@@ -13,28 +13,11 @@ module Queries
             professors = Set.new
             courses = {}
 
-            Course.where("name ilike ? OR module_code ilike ?", "%#{query_string}%", "%#{query_string}%").each do |course|
+            Course.eager_load(:professor_courses, :professors).where("lower(courses.name) like ? OR lower(courses.module_code) like ? OR lower(professors.name) like ?", "%#{query_string.downcase}%", "%#{query_string.downcase}%", "%#{query_string.downcase}%").each do |course|
                 course_module_code = course.module_code
-                if courses[course_module_code].nil?
-                    courses[course_module_code] = Array.new
-                end
-                courses[course_module_code].push course
-            end
-
-            courses.values.flatten.each do |course|
+                courses[course_module_code] = courses.fetch(course_module_code) { |c| Array.new }.push(course)
                 course.professors.each do |professor|
                     professors.add professor
-                end
-            end
-
-            Professor.where("name ilike ?", "%#{query_string}%").each do |professor|
-                professors.add professor
-                professor.courses.each do |course|
-                    course_module_code = course.module_code
-                    if courses[course_module_code].nil?
-                        courses[course_module_code] = Array.new
-                    end
-                    courses[course_module_code].push course
                 end
             end
             
@@ -45,6 +28,7 @@ module Queries
 
             # Return a merged array
             professors.to_a + courses.values.flatten
+
         end
 
         private
