@@ -29,11 +29,18 @@ module Types
 		# Others
 
 		def all_reviews
-			::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: [nil, ''])
+			# module_code = self.object.module_code
+			# ::Review.joins(:course).where("module_code = ? AND reviews.course_id = courses.id", self.object.module_code).where.not(module_review: [nil, ''])
+			ForeignKeyLoader
+				.for(Review, :course_id)
+				.load(object.id)
 		end
 
 		def all_books
-			::Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
+			# ::Book.joins(:course).where("module_code = ? AND books.course_id = courses.id", self.object.module_code)
+			ForeignKeyLoader
+				.for(Book, :course_id, merge: -> { where(is_sold: false) } )
+				.load(object.id)
 		end
 		
 		def all_professors
@@ -43,11 +50,15 @@ module Types
 		end
 
 		def review_count
-			all_reviews.size
+			all_reviews.then do |review|
+				review.count
+			end
 		end
 
 		def books_count
-			all_books.where(is_sold: false).size
+			all_books.then do |book|
+				book.count
+			end
 		end
 	end
 end
