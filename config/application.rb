@@ -34,5 +34,8 @@ module SampleGraphqlProject
     # config.active_record.default_timezone = :local
     # config.active_record.time_zone_aware_attributes = false
     # config.active_record.time_zone_aware_types = [:datetime, :time]
+
+    # Skylight Instrumentation
+    config.skylight.probes += %w(redis graphql)
   end
 end
