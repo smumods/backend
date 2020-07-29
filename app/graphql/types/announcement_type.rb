@@ -1,6 +1,7 @@
 module Types
   class AnnouncementType < Types::BaseObject
     field :title, String, null: true
+    field :order, Integer, null: true
     field :description, String, null: true
     field :main_image, String, null: true
     field :additional_images, [String], null: true

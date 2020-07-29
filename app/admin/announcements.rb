@@ -1,10 +1,11 @@
 ActiveAdmin.register Announcement do
-  permit_params :title, :description, :main_image, :valid_from, :expires_on, :additional_images
+  permit_params :title, :order, :description, :main_image, :valid_from, :expires_on, :additional_images
 
   index do
     selectable_column
     id_column
     column :title
+    column :order
     column :valid_from
     column :expires_on
     column :created_at
@@ -20,6 +21,7 @@ ActiveAdmin.register Announcement do
   form do |f|
     f.inputs do
       f.input :title
+      f.input :order
       f.input :description
       f.input :main_image
       f.input :additional_images, as: :tags
@@ -33,6 +35,7 @@ ActiveAdmin.register Announcement do
     def create
       @announcement = Announcement.new({
         title: params[:announcement][:title],
+        order: params[:announcement][:order],
         description: params[:announcement][:description],
         main_image: params[:announcement][:main_image],
         valid_from: params[:announcement][:valid_from],
@@ -51,6 +54,7 @@ ActiveAdmin.register Announcement do
       @announcement = Announcement.find(permitted_params[:id])
       @announcement.assign_attributes({
         title: params[:announcement][:title],
+        order: params[:announcement][:order],
         description: params[:announcement][:description],
         main_image: params[:announcement][:main_image],
         valid_from: params[:announcement][:valid_from],
