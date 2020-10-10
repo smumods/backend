@@ -47,6 +47,6 @@ class Review < ApplicationRecord
   end
 
   def set_module_code_for_course_review
-    self.module_code = self.course.module_code
+    self.module_code = self.course.module_code if self.type_of_review == 'mod'
   end
 end
