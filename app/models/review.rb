@@ -21,6 +21,9 @@ class Review < ApplicationRecord
   # Bookmarks/Likes/Etc
   # has_many :like_by_users
 
+  # Callbacks
+  before_save :set_module_code_for_course_review
+
   def total_vote_score
     self.votes.sum("vote_type")
   end
@@ -41,5 +44,9 @@ class Review < ApplicationRecord
     if VULGARITIES_LIST.any? { |s| module_review.include? s }
       errors.add(:module_review, "No profanity allowed in Module Review")
     end
+  end
+
+  def set_module_code_for_course_review
+    self.module_code = self.course.module_code
   end
 end
