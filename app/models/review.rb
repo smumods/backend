@@ -38,10 +38,10 @@ class Review < ApplicationRecord
 
   private
   def no_profanities
-    if VULGARITIES_LIST.any? { |s| professor_review.include? s }
+    if professor_review and VULGARITIES_LIST.any? { |s| professor_review.include? s }
       errors.add(:professor_review, "No profanity allowed in Professor Review")
     end
-    if VULGARITIES_LIST.any? { |s| module_review.include? s }
+    if module_review and VULGARITIES_LIST.any? { |s| module_review.include? s }
       errors.add(:module_review, "No profanity allowed in Module Review")
     end
   end
