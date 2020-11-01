@@ -43,6 +43,7 @@ gem 'goldiloader'
 gem 'newrelic_rpm'
 gem 'skylight'
 gem 'barnes'
+gem 'rails_autoscale_agent'
 
 group :development, :test do
   gem 'rspec-rails'
