@@ -42,6 +42,7 @@ gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
 gem 'newrelic_rpm'
 gem 'skylight'
+gem 'barnes'
 
 group :development, :test do
   gem 'rspec-rails'
