@@ -33,11 +33,10 @@ preload_app!
 # Tips from Elijah
 before_fork do
     ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
-  end
-  
-  on_worker_boot do
+end
+
+on_worker_boot do
     ActiveRecord::Base.establish_connection
-  end
 end
 
 # Allow puma to be restarted by `rails restart` command.
