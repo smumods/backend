@@ -4,11 +4,12 @@ ActiveAdmin.register Announcement do
   # Orderable
   include ActiveAdmin::SortableTable
   config.sort_order = 'position_asc'
-
+  
   index do
     handle_column
     selectable_column
-    id_column
+    column :position
+    column :status
     column :title
     column :is_direct_link
     column :target_link
@@ -18,7 +19,13 @@ ActiveAdmin.register Announcement do
     column :updated_at
     actions
   end
-
+  
+  # Scopes
+  scope :active
+  scope :unstarted
+  scope :expired
+  
+  # Filters
   filter :valid_from
   filter :expires_on
   filter :created_at

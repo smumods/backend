@@ -38,7 +38,8 @@ gem 'activeadmin'
 gem 'activeadmin_addons'
 gem 'active_material', github: "vigetlabs/active_material"
 gem 'acts_as_list' # needed for activeadmin_sortable_table
-gem "activeadmin_sortable_table"
+gem 'activeadmin_sortable_table'
+gem 'arbre'
 
 # Performance
 # gem 'appsignal'
