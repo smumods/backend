@@ -407,6 +407,7 @@ DEPENDENCIES
   activeadmin_addons
   activeadmin_sortable_table
   acts_as_list
+  arbre
   barnes
   bcrypt
   bootsnap
