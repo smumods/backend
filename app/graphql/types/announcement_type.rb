@@ -1,7 +1,7 @@
 module Types
   class AnnouncementType < Types::BaseObject
     field :title, String, null: true
-    field :order, Integer, null: true
+    field :position, Integer, null: true
     field :target_link, Integer, null: true
     field :is_direct_link, Integer, null: true
     field :description, String, null: true
