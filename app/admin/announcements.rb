@@ -1,11 +1,18 @@
 ActiveAdmin.register Announcement do
-  permit_params :title, :order, :description, :main_image, :valid_from, :expires_on, :additional_images
+  permit_params :title, :order, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link
+
+  # Orderable
+  include ActiveAdmin::SortableTable
+  config.sort_order = 'order_asc'
 
   index do
+    handle_column
     selectable_column
     id_column
     column :title
     column :order
+    column :is_direct_link
+    column :target_link
     column :valid_from
     column :expires_on
     column :created_at
@@ -22,6 +29,8 @@ ActiveAdmin.register Announcement do
     f.inputs do
       f.input :title
       f.input :order
+      f.input :is_direct_link
+      f.input :target_link
       f.input :description
       f.input :main_image
       f.input :additional_images, as: :tags
@@ -36,6 +45,8 @@ ActiveAdmin.register Announcement do
       @announcement = Announcement.new({
         title: params[:announcement][:title],
         order: params[:announcement][:order],
+        is_direct_link: params[:announcement][:is_direct_link],
+        target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
         main_image: params[:announcement][:main_image],
         valid_from: params[:announcement][:valid_from],
@@ -55,6 +66,8 @@ ActiveAdmin.register Announcement do
       @announcement.assign_attributes({
         title: params[:announcement][:title],
         order: params[:announcement][:order],
+        is_direct_link: params[:announcement][:is_direct_link],
+        target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
         main_image: params[:announcement][:main_image],
         valid_from: params[:announcement][:valid_from],
