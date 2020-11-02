@@ -1,7 +1,12 @@
 ActiveAdmin.register Announcement do
   permit_params :title, :order, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link
 
+  # Orderable
+  include ActiveAdmin::SortableTable
+  config.sort_order = 'order_asc'
+
   index do
+    handle_column
     selectable_column
     id_column
     column :title

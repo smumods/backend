@@ -18,9 +18,6 @@ gem 'graphql'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
-gem 'activeadmin'
-gem 'activeadmin_addons'
-gem 'active_material', github: "vigetlabs/active_material"
 gem 'mailjet'
 gem 'graphql-batch'
 
@@ -35,6 +32,13 @@ gem 'action-store'
 # Data Generators
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'fuzzy_match' # used for prof data matching
+
+# ActiveAdmin & Addons
+gem 'activeadmin'
+gem 'activeadmin_addons'
+gem 'active_material', github: "vigetlabs/active_material"
+gem 'acts_as_list' # needed for activeadmin_sortable_table
+gem "activeadmin_sortable_table"
 
 # Performance
 # gem 'appsignal'
