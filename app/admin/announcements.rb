@@ -3,7 +3,7 @@ ActiveAdmin.register Announcement do
 
   # Orderable
   include ActiveAdmin::SortableTable
-  config.sort_order = 'order_asc'
+  config.sort_order = 'position_asc'
 
   index do
     handle_column
