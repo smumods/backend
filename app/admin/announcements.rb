@@ -1,5 +1,5 @@
 ActiveAdmin.register Announcement do
-  permit_params :title, :order, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link
+  permit_params :title, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link
 
   # Orderable
   include ActiveAdmin::SortableTable
@@ -10,7 +10,6 @@ ActiveAdmin.register Announcement do
     selectable_column
     id_column
     column :title
-    column :order
     column :is_direct_link
     column :target_link
     column :valid_from
@@ -28,7 +27,6 @@ ActiveAdmin.register Announcement do
   form do |f|
     f.inputs do
       f.input :title
-      f.input :order
       f.input :is_direct_link
       f.input :target_link
       f.input :description
@@ -44,7 +42,6 @@ ActiveAdmin.register Announcement do
     def create
       @announcement = Announcement.new({
         title: params[:announcement][:title],
-        order: params[:announcement][:order],
         is_direct_link: params[:announcement][:is_direct_link],
         target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
@@ -65,7 +62,6 @@ ActiveAdmin.register Announcement do
       @announcement = Announcement.find(permitted_params[:id])
       @announcement.assign_attributes({
         title: params[:announcement][:title],
-        order: params[:announcement][:order],
         is_direct_link: params[:announcement][:is_direct_link],
         target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
