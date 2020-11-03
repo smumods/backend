@@ -12,6 +12,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', require: false
+gem 'redis'
 
 # Backend / APIs etc
 gem 'graphql'
@@ -20,6 +21,7 @@ gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.
 gem 'sendgrid-ruby' # for emails
 gem 'mailjet'
 gem 'graphql-batch'
+gem 'graphql-cache'
 
 # User Auth
 gem 'devise'
