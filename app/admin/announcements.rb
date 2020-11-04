@@ -35,7 +35,7 @@ ActiveAdmin.register Announcement do
   form do |f|
     f.inputs do
       f.input :title
-      f.input :is_long_durations
+      f.input :is_long_duration
       f.input :is_direct_link
       f.input :target_link
       f.input :description
