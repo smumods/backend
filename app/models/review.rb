@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
   # Constants
   VULGARITIES_LIST = ['fuck', 'cock', 'pussy', 'asshole', 'cunt', 'pig', 'dick', 'wanker', 'chi bai', 'cb']
+  TRUNCATE_LENGTH = 100
 
   # Relationships
   belongs_to :user

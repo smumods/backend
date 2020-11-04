@@ -20,6 +20,20 @@ module Types
         field :created_at, Types::DateTimeType, null: false
         field :updated_at, Types::DateTimeType, null: false
 
+        def module_review
+            review = self.object.module_review
+            return nil unless review
+            return review.truncate(Review::TRUNCATE_LENGTH) unless context[:current_user]
+            return review
+        end
+
+        def professor_review
+            review = self.object.professor_review
+            return nil unless review
+            return review.truncate(Review::TRUNCATE_LENGTH) unless context[:current_user]
+            return review
+        end
+
         def overall_score
             score_array = ["marking_score", "engagement_score", "fairness_score", "workload_score"].collect { |score| self.object[score.to_sym] }
             return if score_array.include? nil
