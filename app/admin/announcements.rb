@@ -27,6 +27,7 @@ ActiveAdmin.register Announcement do
   scope :expired
   
   # Filters
+  # filter :is_long_duration, as: :select
   filter :valid_from
   filter :expires_on
   filter :created_at

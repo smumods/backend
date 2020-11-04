@@ -76,6 +76,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => "http://lvh.me:3000/" }
 
   # Allow lvh.me
-  config.hosts << "lvh.me"
-  config.hosts << "api.lvh.me"
+  config.hosts.clear
+  config.hosts = nil
 end
