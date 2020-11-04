@@ -1,5 +1,5 @@
 ActiveAdmin.register Announcement do
-  permit_params :title, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link
+  permit_params :title, :description, :main_image, :valid_from, :expires_on, :additional_images, :is_direct_link, :target_link, :position, :is_long_duration
 
   # Orderable
   include ActiveAdmin::SortableTable
@@ -11,6 +11,7 @@ ActiveAdmin.register Announcement do
     column :position
     column :status
     column :title
+    column :is_long_duration
     column :is_direct_link
     column :target_link
     column :valid_from
@@ -34,6 +35,7 @@ ActiveAdmin.register Announcement do
   form do |f|
     f.inputs do
       f.input :title
+      f.input :is_long_durations
       f.input :is_direct_link
       f.input :target_link
       f.input :description
@@ -49,6 +51,7 @@ ActiveAdmin.register Announcement do
     def create
       @announcement = Announcement.new({
         title: params[:announcement][:title],
+        is_long_duration: params[:announcement][:is_long_duration],
         is_direct_link: params[:announcement][:is_direct_link],
         target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
@@ -69,6 +72,7 @@ ActiveAdmin.register Announcement do
       @announcement = Announcement.find(permitted_params[:id])
       @announcement.assign_attributes({
         title: params[:announcement][:title],
+        is_long_duration: params[:announcement][:is_long_duration],
         is_direct_link: params[:announcement][:is_direct_link],
         target_link: params[:announcement][:target_link],
         description: params[:announcement][:description],
