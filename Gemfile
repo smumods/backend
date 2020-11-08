@@ -52,6 +52,9 @@ gem 'skylight'
 gem 'barnes'
 gem 'rails_autoscale_agent'
 
+# Analytics
+gem 'ahoy_matey'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'

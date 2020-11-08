@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   # Constants
   VULGARITIES_LIST = ['fuck', 'cock', 'pussy', 'asshole', 'cunt', 'pig', 'dick', 'wanker', 'chi bai', 'cb']
-  TRUNCATE_LENGTH = 10
+  TRUNCATE_LENGTH = ENV["TRUNCATED_REVIEW_LENGTH"] || 100
 
   # Relationships
   belongs_to :user, touch: true
