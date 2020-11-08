@@ -4,7 +4,7 @@ class Review < ApplicationRecord
   TRUNCATE_LENGTH = 10
 
   # Relationships
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :professor, required: false
   belongs_to :course, required: true
   has_many :votes, dependent: :destroy
