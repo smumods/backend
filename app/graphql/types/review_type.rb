@@ -24,7 +24,7 @@ module Types
             review = self.object.module_review
             return nil unless review
 
-            @_current_user = context[:current_user]
+            @_current_user ||= context[:current_user]
             return review.truncate(Review::TRUNCATE_LENGTH) unless @_current_user and @_current_user.can_read_review?
             return review
         end
@@ -32,8 +32,8 @@ module Types
         def professor_review
             review = self.object.professor_review
             return nil unless review
-            
-            @_current_user = context[:current_user]
+
+            @_current_user ||= context[:current_user]
             return review.truncate(Review::TRUNCATE_LENGTH) unless @_current_user && @_current_user.can_read_review?
             return review
         end
