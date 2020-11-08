@@ -51,18 +51,16 @@ class User < ApplicationRecord
   end
 
   def can_read_review?
-    binding.pry
     reviews_count = Rails.cache.fetch([self, "reviews_count"]) { reviews.count }
-    reviews_count > 2
+    reviews_count >= 2
   end
   
   def read_permissions
-    binding.pry
     reviews_count = Rails.cache.fetch([self, "reviews_count"]) { reviews.count }
-    min_reviews_count = ENV['MIN_REVIEWs_COUNT'].to_i || 2
+    min_reviews_count = ENV['MIN_REVIEWS_COUNT'].to_i || 2
     
     permissions = []
-    permissions += ['reviews', 'analytics'] if reviews_count >= min_reviews_count
+    permissions += ['reviews', 'analytics'] if can_read_review?
 
     permissions
   end
