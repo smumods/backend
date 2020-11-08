@@ -37,6 +37,10 @@ class Review < ApplicationRecord
     self.votes.where(review_type: "mod").sum("vote_type")
   end
 
+  def has_read_more
+    (self.module_review && self.module_review.length > TRUNCATE_LENGTH) || (self.professor_review && self.professor_review.length > TRUNCATE_LENGTH)
+  end
+
   private
   def no_profanities
     if professor_review and VULGARITIES_LIST.any? { |s| professor_review.include? s }
