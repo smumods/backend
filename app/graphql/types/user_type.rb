@@ -15,6 +15,7 @@ module Types
     field :course_bookmarks, [Types::CourseType], null: true
     field :professor_bookmarks, [Types::ProfessorType], null: true
     field :book_bookmarks, [Types::BookType], null: true
+    field :read_permissions, [String], null: true
 
     def id
       self.object.uuid
