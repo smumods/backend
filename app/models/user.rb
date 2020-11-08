@@ -8,6 +8,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable, password_length: 8..128
 
+  # Analytics
+  has_many :visits, class_name: "Ahoy::Visit"
+
   # Relationships
   has_many :books, dependent: :destroy
   has_many :links, dependent: :destroy
