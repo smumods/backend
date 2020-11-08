@@ -59,6 +59,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'graphiql-rails'
   gem 'pry-theme'
+  gem 'dotenv-rails'
 end
 
 group :development do

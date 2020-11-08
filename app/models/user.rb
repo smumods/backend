@@ -50,6 +50,23 @@ class User < ApplicationRecord
     end
   end
 
+  def can_read_review?
+    binding.pry
+    reviews_count = Rails.cache.fetch([self, "reviews_count"]) { reviews.count }
+    reviews_count > 2
+  end
+  
+  def read_permissions
+    binding.pry
+    reviews_count = Rails.cache.fetch([self, "reviews_count"]) { reviews.count }
+    min_reviews_count = ENV['MIN_REVIEWs_COUNT'].to_i || 2
+    
+    permissions = []
+    permissions += ['reviews', 'analytics'] if reviews_count >= min_reviews_count
+
+    permissions
+  end
+
   private
   def generate_email_token
       self.email_token = loop do
