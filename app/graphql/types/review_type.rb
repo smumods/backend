@@ -3,6 +3,7 @@ module Types
         field :id, ID, null: false
         field :professor_review, String, null: true
         field :module_review, String, null: true
+        field :has_read_more, Boolean, null: true
         field :is_anonymous, Boolean, null: true
         field :marking_score, Int, null: true
         field :engagement_score, Int, null: true
