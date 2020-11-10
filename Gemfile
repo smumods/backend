@@ -45,6 +45,7 @@ gem 'arbre'
 
 # Performance
 # gem 'appsignal'
+gem 'jemalloc'
 gem 'honeybadger', '~> 4.0'
 gem 'goldiloader'
 gem 'newrelic_rpm'
