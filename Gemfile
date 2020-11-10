@@ -13,6 +13,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', require: false
 gem 'redis'
+gem 'redis-store'
 
 # Backend / APIs etc
 gem 'graphql'
