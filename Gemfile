@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', require: false
 gem 'redis'
 gem 'redis-store'
+gem 'redis-rails'
 
 # Backend / APIs etc
 gem 'graphql'
