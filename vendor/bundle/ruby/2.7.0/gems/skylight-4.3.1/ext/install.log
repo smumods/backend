@@ -1,0 +1,11 @@
+I, [2020-12-11T09:40:30.808383 #61056]  INFO -- : SKYLIGHT_HDR_PATH=/Users/yash/Documents/github/smumods/backend/vendor/bundle/ruby/2.7.0/gems/skylight-4.3.1/ext; SKYLIGHT_LIB_PATH=/Users/yash/Documents/github/smumods/backend/vendor/bundle/ruby/2.7.0/gems/skylight-4.3.1/lib/skylight/native/x86_64-darwin
+I, [2020-12-11T09:40:30.809633 #61056]  INFO -- : [SKYLIGHT] fetching native ext; curr-platform=x86_64-darwin; requested-arch=x86_64-darwin; version=4.1.0-46806f5
+I, [2020-12-11T09:40:30.809864 #61056]  INFO -- : [SKYLIGHT] attempting to fetch from remote; uri=https://s3.amazonaws.com/skylight-agent-packages/skylight-native/4.1.0-46806f5/skylight_x86_64-darwin.tar.gz
+I, [2020-12-11T09:40:33.553697 #61056]  INFO -- : [SKYLIGHT] successfully downloaded native ext; out=/Users/yash/Documents/github/smumods/backend/vendor/bundle/ruby/2.7.0/gems/skylight-4.3.1/ext/skylight_x86_64-darwin.tar.gz
+I, [2020-12-11T09:40:33.608681 #61056]  INFO -- : [SKYLIGHT] tar xzvf /Users/yash/Documents/github/smumods/backend/vendor/bundle/ruby/2.7.0/gems/skylight-4.3.1/ext/skylight_x86_64-darwin.tar.gz
+I, [2020-12-11T09:40:33.608763 #61056]  INFO -- : [SKYLIGHT] x skylightd
+x libskylight.dylib
+x skylight.h
+x skylight_dlopen.h
+x skylight_dlopen.c
+
