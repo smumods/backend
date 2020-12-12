@@ -34,6 +34,8 @@ class User < ApplicationRecord
   before_save { self.email = self.email.downcase }
   before_create :generate_email_token
   after_create :reload_uuid # make sure its reloaded before sending verification emails
+  
+  
 
   # Email Actions
   # after_create :send_verification_email
