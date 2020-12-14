@@ -64,10 +64,14 @@ class User < ApplicationRecord
   def read_permissions
     permissions = []
     permissions += ['reviews', 'analytics'] if can_read_review?
-
+    
     permissions
   end
-
+  
+  def send_verification_email
+    UserMailer.send_verification_email(self.id).deliver_now unless self.verified
+  end
+  
   private
   def generate_email_token
       self.email_token = loop do
@@ -76,9 +80,6 @@ class User < ApplicationRecord
       end
   end
 
-  def send_verification_email
-    UserMailer.send_verification_email(self.id).deliver_now unless self.verified
-  end
 
   def generate_password_reset_token
     if self.password_reset_token.nil? and self.password_reset_tries_count <= 3

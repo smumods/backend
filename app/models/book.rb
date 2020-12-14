@@ -18,7 +18,7 @@ class Book < ApplicationRecord
 
   # Callbacks
   after_create :reload_uuid # make sure its reloaded before sending telegram notifications
-  after_create :notify_smumods_telegram_of_listing
+  # after_create :notify_smumods_telegram_of_listing
   after_update :notify_smumods_telegram_of_event
 
   private
