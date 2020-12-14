@@ -107,6 +107,9 @@ module ActionMailer
         @mailer, @params = mailer, params
       end
 
+      def encode_with coder # https://github.com/collectiveidea/delayed_job/issues/349 bugfix?
+      end
+
       private
         def method_missing(method_name, *args)
           if @mailer.action_methods.include?(method_name.to_s)
