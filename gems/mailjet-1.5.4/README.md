@@ -140,7 +140,7 @@ config.action_mailer.delivery_method = :mailjet
 Or if you prefer sending messages through [Mailjet Send API](http://dev.mailjet.com/guides/#send-transactional-email):
 ```ruby
 # application.rb
-config.action_mailer.delivery_method = :mailjet_api
+config.action_mailer.delivery_method = :mailgun_api
 ```
 
 You can use mailjet specific options with `delivery_method_options` as detailed in the official [ActionMailer doc](http://guides.rubyonrails.org/action_mailer_basics.html#sending-emails-with-dynamic-delivery-options):

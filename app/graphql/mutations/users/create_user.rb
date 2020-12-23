@@ -19,6 +19,7 @@ module Mutations
                         password: password,
                         telegram_username: telegram_username.present? ? telegram_username : nil
                     )
+                    # binding.pry
                     user.save
                     raise GraphQL::ExecutionError.new("#{user.errors.full_messages.join(", ")}") unless user.persisted?
                     user

@@ -20,7 +20,8 @@ gem 'graphql'
 gem 'rack-cors'
 gem 'friendly_id', '~> 5.2.4' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'sendgrid-ruby' # for emails
-gem 'mailjet'
+gem 'mailgun-ruby', '~>1.1.6' # mailjet broken use mailgun
+# gem 'mailjet'
 gem 'graphql-batch'
 gem 'graphql-cache'
 
