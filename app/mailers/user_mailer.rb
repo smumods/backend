@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
   
   
   def send_verification_email(user_id)
-    mg_client = Mailgun::Client.new '27c77a9d50ad861c05482e765abbc251-b6190e87-a5532af3' # how do i use api_key var here
+    # mg_client = Mailgun::Client.new '27c77a9d50ad861c05482e765abbc251-b6190e87-a5532af3' # how do i use api_key var here
     @user = User.find(user_id)  
     # binding.pry
     mail(to: @user.email, subject: 'Verify Your SMUMods Account')
