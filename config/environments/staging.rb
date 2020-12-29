@@ -65,7 +65,6 @@ Rails.application.configure do
   
     # Use SendGrid SMTP API
     config.action_mailer.perform_caching = false
-    # config.action_mailer.delivery_method = :mailjet_api
     config.action_mailer.delivery_method = :mailgun
     config.action_mailer.default_url_options = { :host => "https://www.smumods.com/" }
     config.action_mailer.perform_deliveries = true
