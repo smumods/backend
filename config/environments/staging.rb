@@ -71,7 +71,7 @@ Rails.application.configure do
     config.action_mailer.perform_deliveries = true
     config.action_mailer.mailgun_settings = {
       api_key: Rails.application.credentials.dig(:mailgun, :api_key),
-      domain: 'sandbox4a45f53f28fa4e9a84ebc9e44956a39b.mailgun.org',
+      domain: 'mail.smumods.com',
       # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
     }
 

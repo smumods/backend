@@ -67,6 +67,7 @@ module ActionMailer
     #   class AccountRegistrationMailer < ApplicationMailer
     #     self.delivery_job = RegistrationDeliveryJob
     #   end
+    
     def deliver_later!(options = {})
       enqueue_delivery :deliver_now!, options
     end
