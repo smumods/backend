@@ -20,11 +20,11 @@ module Mutations
                         # They should contact us if their account keeps running into problems
                         token_created = user.send(:generate_password_reset_token)
                         if token_created == true
-                            UserMailer.send_reset_password_email(user).deliver_now
+                            UserMailer.send_reset_password_email(user).deliver
                         end
                     else
                         # Send an email stating that we couldn't find an email with this address
-                        UserMailer.send_wrong_user_email(User.new(email: email)).deliver_now
+                        UserMailer.send_wrong_user_email(User.new(email: email)).deliver
                     end
                     return { success: true }
                 end
