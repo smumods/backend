@@ -68,7 +68,7 @@ class User < ApplicationRecord
   end
   
   def send_verification_email
-    UserMailer.send_verification_email(self.id).deliver_now unless self.verified
+    UserMailer.send_verification_email(self.id).deliver unless self.verified
   end
   
   private

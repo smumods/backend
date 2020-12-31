@@ -43,13 +43,12 @@ Rails.application.configure do
 
   # Use SendGrid SMTP API
   config.action_mailer.perform_caching = false
-  # config.action_mailer.delivery_method = :mailjet_api
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.default_url_options = { :host => "https://www.smumods.com/" }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.mailgun_settings = {
     api_key: Rails.application.credentials.dig(:mailgun, :api_key),
-    domain: 'sandbox4a45f53f28fa4e9a84ebc9e44956a39b.mailgun.org',
+    domain: 'mail.smumods.com',
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
   }
 

@@ -90,3 +90,4 @@ staging:
 
 production:
   <<: *default
+  database: sample_graphql_project_production

@@ -21,7 +21,6 @@ module Mutations
             type Types::BookType #update something, what you get back is what you changed data object
 
             def resolve(**args)
-                # binding.pry breakpoint for debugging
                 #Validate if the user is logged in
                 current_user = context[:current_user]
                 if current_user.blank?
