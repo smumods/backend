@@ -30,7 +30,6 @@ ActiveAdmin.register Review do
         column :professor_review
         column :course
         column :course_id
-        column :course_name
         column :module_review
         column :type_of_review
         column :is_anonymous
