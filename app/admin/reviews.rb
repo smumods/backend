@@ -6,6 +6,7 @@ ActiveAdmin.register Review do
     actions :all, except: disallowed_actions
 
     index download_links: proc{ current_admin_user.admin? } do
+        column :professor_id
         column :user
         column :user_id
         column :course
