@@ -19,9 +19,15 @@ ActiveAdmin.register Review do
         column :engagement_score
         column :fairness_score
         column :workload_score
-        column :professor_id
         column :course_id
         actions
+    end
+    
+    csv do
+        column :professor_id
+        column :user
+        column :user_id
+        column :course
     end
 
     form do |f|
