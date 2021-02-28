@@ -24,7 +24,6 @@ ActiveAdmin.register Review do
     end
     
     csv do
-        column :user.id
         column :user_id
         column :professor_id
         column :professor
@@ -32,8 +31,6 @@ ActiveAdmin.register Review do
         column :course
         column :course_id
         column :course_name
-        column :course.id
-        column :couse.name
         column :module_review
         column :type_of_review
         column :is_anonymous
