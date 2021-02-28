@@ -7,7 +7,6 @@ ActiveAdmin.register Review do
 
     index download_links: proc{ current_admin_user.admin? } do
         column :professor_id
-        column :user
         column :user_id
         column :course
         column :professor
@@ -20,14 +19,30 @@ ActiveAdmin.register Review do
         column :fairness_score
         column :workload_score
         column :course_id
+        column :created_at
         actions
     end
     
     csv do
-        column :professor_id
-        column :user
+        column :user.id
         column :user_id
+        column :professor_id
+        column :professor
+        column :professor_review
         column :course
+        column :course_id
+        column :course_name
+        column :course.id
+        column :couse.name
+        column :module_review
+        column :type_of_review
+        column :is_anonymous
+        column :marking_score
+        column :engagement_score
+        column :fairness_score
+        column :workload_score
+        column :created_at
+        
     end
 
     form do |f|
