@@ -17,6 +17,7 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :verified
+    column :telegram_username
     if Rails.env.staging? or Rails.env.development?
       column :email_token
       column :verification_count
