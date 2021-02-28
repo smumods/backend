@@ -7,6 +7,7 @@ ActiveAdmin.register Review do
 
     index download_links: proc{ current_admin_user.admin? } do
         column :user
+        column :user_id
         column :course
         column :professor
         column :professor_review
@@ -17,6 +18,8 @@ ActiveAdmin.register Review do
         column :engagement_score
         column :fairness_score
         column :workload_score
+        column :professor_id
+        column :course_id
         actions
     end
 
