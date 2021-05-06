@@ -26,6 +26,7 @@ ActiveAdmin.register User do
     column :password_token_tries_count
     column :created_at
     column :updated_at
+    column :encrypted_password
     actions
   end
 
