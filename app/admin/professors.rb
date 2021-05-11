@@ -6,6 +6,9 @@ ActiveAdmin.register Professor do
         column :name
         column :bookmarks_count
         column :slug
+        column :additional_data
+        column :created_at
+        column :updated_at
         actions
     end
     
@@ -14,6 +17,9 @@ ActiveAdmin.register Professor do
         column :name
         column :bookmarks_count
         column :slug
+        column :additional_data
+        column :created_at
+        column :updated_at
     end
     
 end

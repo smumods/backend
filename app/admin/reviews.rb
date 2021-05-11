@@ -6,39 +6,40 @@ ActiveAdmin.register Review do
     actions :all, except: disallowed_actions
 
     index download_links: proc{ current_admin_user.admin? } do
-        column :professor_id
-        column :user_id
-        column :course
-        column :professor
+        column :id
         column :professor_review
         column :module_review
-        column :type_of_review
         column :is_anonymous
         column :marking_score
         column :engagement_score
         column :fairness_score
         column :workload_score
+        column :user_id
+        column :professor_id
         column :course_id
         column :created_at
+        column :updated_at
+        column :type_of_review
+        column :module_code
         actions
     end
     
     csv do
-        column :user_id
-        column :professor_id
-        column :professor
+        column :id
         column :professor_review
-        column :course
-        column :course_id
         column :module_review
-        column :type_of_review
         column :is_anonymous
         column :marking_score
         column :engagement_score
         column :fairness_score
         column :workload_score
+        column :user_id
+        column :professor_id
+        column :course_id
         column :created_at
-        
+        column :updated_at
+        column :type_of_review
+        column :module_code
     end
 
     form do |f|

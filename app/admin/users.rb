@@ -12,22 +12,59 @@ ActiveAdmin.register User do
   index download_links: proc{ current_admin_user.admin? } do
     selectable_column
     id_column
-    column :uuid
     column :email
+    column :name
+    column :created_at
+    column :updated_at
+    column :encrypted_password
+    column :reset_password_token
+    column :reset_password_sent_at
+    column :remember_created_at
     column :first_name
     column :last_name
+    column :authentication_token
+    column :authentication_token_created_at
     column :verified
-    column :telegram_username
     if Rails.env.staging? or Rails.env.development?
       column :email_token
       column :verification_count
     end
+    column :uuid
+    column :password_reset_token
+    column :password_reset_token
     column :password_reset_tries_count
     column :password_token_tries_count
+    column :telegram_id
+    column :telegram_username
+    column :telegram_picture
+    actions
+  end
+
+  csv do 
+    column :id
+    column :email
+    column :name
     column :created_at
     column :updated_at
     column :encrypted_password
-    actions
+    column :reset_password_token
+    column :reset_password_sent_at
+    column :remember_created_at
+    column :first_name
+    column :last_name
+    column :authentication_token
+    column :authentication_token_created_at
+    column :verified
+    column :email_token
+    column :uuid
+    column :password_reset_token
+    column :password_reset_token
+    column :password_reset_tries_count
+    column :password_token_tries_count
+    column :telegram_id
+    column :telegram_username
+    column :telegram_picture
+    column :verification_count
   end
 
   filter :email
